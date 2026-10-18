@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hệ Thống Luyện Thi Tiếng Anh 12 Giữa Kì 1 | Ms. Duyên</title>
+  <meta name="description" content="Hệ thống đề cương ôn tập Tiếng Anh 12 Giữa Kì 1 Global Success hoàn chỉnh của cô Duyên (12A1 & 12A4). Tích hợp 16 đề luyện thi tương tác: Listening, Reading, Vocabulary Lab và audio gốc MP3. Hoạt động 24/24 trên Render.">
+  
+  <link rel="stylesheet" href="assets/css/portal.css">
+</head>
+<body>
+
+  <div class="portal-wrapper">
+    <!-- HERO HEADER -->
+    <header class="hero-header">
+      <div class="hero-tag">
+        <span>✨</span>
+        <span>ENGLISH 12 · GLOBAL SUCCESS · HKI REVISION (12A1 & 12A4)</span>
+      </div>
+      <h1 class="hero-title">HỆ THỐNG LUYỆN THI TRỰC TUYẾN</h1>
+      <div class="hero-teacher">Giáo viên thiết kế: Ms. Duyên</div>
+      <p class="hero-subtitle">
+        Trọn bộ 16 chuyên đề và đề thi Giữa Kì 1 chuẩn chương trình mới. Tích hợp sẵn toàn bộ tệp nghe gốc MP3, phòng luyện từ vựng thông minh (Vocabulary Lab), chấm điểm tự động và cấp Giấy chứng nhận hoàn thành.
+      </p>
+    </header>
+
+    <!-- STUDENT PROFILE BAR -->
+    <section class="student-bar-card" aria-label="Thông tin học sinh">
+      <div class="student-bar-info">
+        <div class="student-avatar">🎓</div>
+        <div>
+          <div style="font-size:12px;color:#94a3b8;font-weight:700;text-transform:uppercase">Hồ sơ học sinh</div>
+          <div id="portalStudentDisplay" style="font-size:15px;color:#f8fafc;font-weight:600">
+            Đang tải thông tin...
+          </div>
+        </div>
+      </div>
+      <div class="student-bar-form">
+        <input type="text" id="portalStudentName" class="student-input" placeholder="Nhập họ và tên..." maxlength="80">
+        <select id="portalStudentClass" class="student-input" style="max-width:130px;">
+          <option value="">Chọn lớp</option>
+          <option value="12A1">12A1</option>
+          <option value="12A4">12A4</option>
+        </select>
+        <button id="btnSaveStudent" class="btn-save-student" type="button">💾 Lưu thông tin</button>
+      </div>
+    </section>
+
+    <!-- STATS OVERVIEW -->
+    <section class="stats-grid" aria-label="Thống kê tổng quan">
+      <div class="stat-card">
+        <div class="stat-icon" style="color:#60a5fa">📚</div>
+        <div>
+          <div class="stat-value" id="statTotal">16</div>
+          <div class="stat-label">Tổng số bài học & đề thi</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="color:#34d399">✅</div>
+        <div>
+          <div class="stat-value" id="statCompleted">0</div>
+          <div class="stat-label">Bài đã hoàn thành</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="color:#fbbf24">🏆</div>
+        <div>
+          <div class="stat-value" id="statPercent">0%</div>
+          <div class="stat-label">Tiến độ tổng thể</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="color:#a78bfa">⚡</div>
+        <div>
+          <div class="stat-value" style="font-size:20px;color:#c4b5fd">Render 24/7</div>
+          <div class="stat-label">Hoạt động liên tục</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- OVERALL PROGRESS BAR -->
+    <section class="overall-progress-box">
+      <div class="progress-header">
+        <span>Tiến độ hoàn thành đề cương Tiếng Anh 12:</span>
+        <span id="progressText" style="color:#38bdf8">0/16 bài đã hoàn thành (0%)</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </section>
+
+    <!-- FILTER TABS -->
+    <nav class="filters-bar" aria-label="Bộ lọc đề thi">
+      <button class="filter-btn active" data-filter="all" type="button">
+        <span>🌟</span>
+        <span>Tất cả (16 bài)</span>
+      </button>
+      <button class="filter-btn" data-filter="listening" type="button">
+        <span>🎧</span>
+        <span>Nghe hiểu - Listening (4)</span>
+      </button>
+      <button class="filter-btn" data-filter="vocab" type="button">
+        <span>🗂</span>
+        <span>Từ vựng - Vocabulary Lab (4)</span>
+      </button>
+      <button class="filter-btn" data-filter="reading" type="button">
+        <span>📖</span>
+        <span>Đọc hiểu & Đọc điền (8)</span>
+      </button>
+    </nav>
+
+    <!-- TESTS CONTAINER -->
+    <main id="testsContainer"></main>
+
+    <!-- RENDER 24/7 BANNER -->
+    <section class="render-banner">
+      <div class="render-banner-left">
+        <div class="render-icon">🌐</div>
+        <div>
+          <h3>Hệ thống Tiếng Anh 12 sẵn sàng đưa lên Render hoạt động 24/24!</h3>
+          <p>Đã cấu hình trọn bộ <code>package.json</code>, <code>server.js</code>, <code>render.yaml</code> và tự động đồng bộ lên GitHub.</p>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <a href="#results" class="render-btn" style="background:#3b82f6;border-color:#3b82f6">🏆 Xem bảng điểm</a>
+        <a href="RENDER_HUONG_DAN.md" target="_blank" class="render-btn">📖 Xem hướng dẫn Render</a>
+      </div>
+    </section>
+
+    <!-- RESULTS TABLE SECTION -->
+    <section id="results" class="overall-progress-box" style="margin-top:40px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px">
+        <div>
+          <h2 style="font-size:22px;font-weight:800;color:#f8fafc">🏆 Bảng Vàng Kết Quả & Lịch Sử Làm Bài (Khối 12)</h2>
+          <p style="font-size:13.5px;color:#94a3b8">Kết quả được tự động lưu trên trình duyệt sau mỗi lần học sinh nộp bài.</p>
+        </div>
+        <button id="btnResetProgress" type="button" style="background:rgba(239,68,68,0.2);color:#fca5a5;border:1px solid rgba(239,68,68,0.35);padding:8px 14px;border-radius:8px;font-weight:600;font-size:13px;cursor:pointer">
+          ↻ Làm lại toàn bộ từ đầu
+        </button>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;text-align:left;font-size:13.5px">
+          <thead>
+            <tr style="border-bottom:1px solid rgba(255,255,255,0.15);color:#94a3b8">
+              <th style="padding:10px 12px">#</th>
+              <th style="padding:10px 12px">Tên bài học / đề thi</th>
+              <th style="padding:10px 12px">Điểm số</th>
+              <th style="padding:10px 12px">Thời gian hoàn thành</th>
+              <th style="padding:10px 12px">Thao tác</th>
+            </tr>
+          </thead>
+          <tbody id="resultsTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="portal-footer">
+      <p>📚 <strong>English 12 · Global Success · Đề cương Giữa Kì 1</strong></p>
+      <p style="margin-top:4px">Chuyên môn & Thiết kế nội dung: <strong>Ms. Duyên (12A1 & 12A4)</strong></p>
+      <p style="margin-top:8px;color:#64748b;font-size:12px">
+        Hệ thống web hoàn chỉnh tối ưu hóa cho nền tảng đám mây Render · Hoạt động 24/7 · Tương thích hoàn hảo mọi thiết bị
+      </p>
+    </footer>
+  </div>
+
+  <script src="assets/js/portal.js"></script>
+</body>
+</html>

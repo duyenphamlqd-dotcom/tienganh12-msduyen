@@ -1,0 +1,725 @@
+﻿
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test 01 – Reading Q14-18 | Ms.Duyen</title>
+<style>
+:root{
+  --bg:#edf4ff;--card:#fff;--ink:#172b4d;
+  --muted:#52647b;--accent:#2858c7;
+  --soft:#e8efff;--border:#cdd9ed;
+  --good:#166534;--bad:#a12335;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font:16px/1.65 "Segoe UI",Arial,sans-serif;
+ transition:background .3s,color .3s}
+body[data-theme="mint"]{
+ --bg:#e8f7ef;--card:#fff;--ink:#143b30;
+ --muted:#365d51;--accent:#087c63;
+ --soft:#d6f4e6;--border:#b7d9ca}
+body[data-theme="cream"]{
+ --bg:#fff5e6;--card:#fffdf8;--ink:#47351e;
+ --muted:#68553b;--accent:#96571a;
+ --soft:#ffebcc;--border:#e6cfaa}
+body[data-theme="dark"]{
+ --bg:#111827;--card:#1f2937;--ink:#f8fafc;
+ --muted:#d1d5db;--accent:#a5b4fc;
+ --soft:#374151;--border:#566173;
+ --good:#86efac;--bad:#fda4af}
+button,input,select{font:inherit}
+button{cursor:pointer;border-radius:12px;padding:10px 15px;
+ border:1px solid var(--border);background:var(--soft);
+ color:var(--ink);font-weight:650}
+button:hover:not(:disabled){filter:brightness(.96)}
+button:focus-visible,input:focus-visible,select:focus-visible{
+ outline:3px solid var(--accent);outline-offset:2px}
+button:disabled{opacity:.55;cursor:not-allowed}
+.primary{background:var(--accent);color:white;border:0}
+body[data-theme="dark"] .primary{color:#111827}
+header{padding:14px 4%;display:flex;gap:12px;
+ align-items:center;justify-content:space-between;
+ background:var(--card);border-bottom:1px solid var(--border);
+ flex-wrap:wrap}
+.brand{font-weight:800}
+.themebar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+select,input{padding:12px;border:1px solid var(--border);
+ border-radius:10px;background:var(--card);color:var(--ink)}
+main{max-width:1250px;margin:auto;padding:20px}
+.screen{display:none;animation:enter .35s ease}
+.screen.active{display:block}
+@keyframes enter{from{opacity:0;transform:translateY(10px)}
+ to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{animation:none!important;transition:none!important}
+}
+.hero{text-align:center;max-width:760px;margin:40px auto;
+ background:var(--card);border:1px solid var(--border);
+ padding:35px 25px;border-radius:26px;box-shadow:0 10px 35px #0000000b}
+.script{font-family:"Brush Script MT","Segoe Script",cursive;
+ font-size:clamp(35px,6vw,65px);line-height:1.3;
+ color:var(--accent);margin:12px 0}
+.subtitle{font-size:20px;font-weight:700}
+.motto{font-style:italic;color:var(--muted)}
+.formfields{display:grid;gap:12px;max-width:420px;
+ margin:24px auto;text-align:left}
+.formfields label{font-weight:700}
+.formfields input{width:100%}
+.stats{display:flex;gap:12px;flex-wrap:wrap;align-items:center;
+ justify-content:space-between;margin-bottom:15px}
+.pill{padding:8px 14px;border-radius:30px;
+ background:var(--card);border:1px solid var(--border)}
+.progress{height:10px;border-radius:20px;background:var(--border);
+ overflow:hidden;margin-bottom:20px}
+#bar{height:100%;width:0;background:var(--accent);transition:width .25s}
+.layout{display:grid;grid-template-columns:1.12fr 1fr;gap:18px}
+.panel{background:var(--card);padding:23px;border-radius:20px;
+ border:1px solid var(--border);min-width:0}
+.panel h2{margin-top:0;font-size:21px}
+.passage{font-size:17px;line-height:1.9}
+.passage p{text-align:justify;margin:14px 0}
+.blank{font-weight:800;color:var(--accent)}
+.option{display:block;text-align:left;width:100%;
+ margin:10px 0;white-space:normal;overflow-wrap:anywhere;
+ background:var(--card);line-height:1.55}
+.option.selected{border:2px solid var(--accent);
+ background:var(--soft)}
+.option.correct{border:2px solid var(--good)}
+.option.wrong{border:2px solid var(--bad)}
+.option small{display:block;color:var(--muted);
+ font-weight:400;margin-top:5px}
+.feedback{margin:14px 0;padding:13px;border-radius:12px;
+ background:var(--soft)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.explanation{margin-top:16px;border-left:4px solid var(--accent);
+ padding:12px 16px;background:var(--soft);border-radius:8px}
+.explanation p{margin:9px 0}
+.translation{white-space:pre-line;background:var(--soft);
+ padding:16px;border-radius:12px;margin-top:15px}
+.study{margin-top:22px}
+.study h2{margin-bottom:8px}
+.matchgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.matchrow{display:contents}
+.matchgrid select{width:100%;min-width:0}
+.flashcard{background:var(--soft);padding:26px;
+ border-radius:18px;min-height:200px;text-align:center;
+ display:flex;align-items:center;justify-content:center;
+ flex-direction:column;gap:8px}
+.flashword{font-size:25px;font-weight:800}
+.muted{color:var(--muted)}
+.hidden{display:none!important}
+.certificate{max-width:760px;margin:24px auto;
+ background:var(--card);padding:32px;border:7px double var(--accent);
+ text-align:center;border-radius:14px}
+.certificate h2{font-family:"Brush Script MT","Segoe Script",cursive;
+ font-size:clamp(30px,5vw,48px);color:var(--accent)}
+.signature{font-family:"Segoe Script",cursive;
+ font-size:27px;font-weight:700}
+.resultscore{font-size:45px;font-weight:800;color:var(--accent)}
+footer{text-align:center;padding:20px;color:var(--muted)}
+@media(max-width:800px){
+ .layout{grid-template-columns:1fr}
+ main{padding:12px}
+ .panel{padding:16px}
+ .matchgrid{grid-template-columns:1fr}
+ .matchrow{display:block;padding:8px 0}
+ .matchrow select{margin-top:6px}
+}
+@media print{
+ header,.noprint,footer{display:none!important}
+ body{background:white;color:black}
+ main{padding:0}
+ #start,#quiz,#study,#results>.noprint{display:none!important}
+ #results{display:block!important}
+ #certificate{display:block!important;border-color:#222;
+ color:black;box-shadow:none}
+}
+</style>
+  <link rel="stylesheet" href="../assets/css/shared-nav.css">
+</head>
+<body data-theme="blue">
+<header class="noprint">
+ <div class="brand">📚 Ms.Duyen · English Learning Studio</div>
+ <div class="themebar">
+  <label for="theme">🎨 Màu nền</label>
+  <select id="theme" aria-label="Chọn màu nền">
+   <option value="blue">Xanh dương</option>
+   <option value="mint">Xanh bạc hà</option>
+   <option value="cream">Kem ấm</option>
+   <option value="dark">Tối tương phản</option>
+  </select>
+  <button id="soundBtn" type="button">🔊 Âm thanh: Bật</button>
+ </div>
+</header>
+
+<main>
+<section id="start" class="screen active">
+ <div class="hero">
+  <div style="font-size:46px">🌿 ⚡ 🚘</div>
+  <h1 class="script">Test 01 – Reading Q14-18</h1>
+  <div class="subtitle">ÔN TẬP GIỮA HỌC KỲ I · LỚP 12A1, 12A4</div>
+  <p class="motto">“Kiểm tra mà như chơi – chơi mà vẫn học được!”</p>
+  <p>5 câu hỏi · 50 phút · Học từ vựng và ngữ pháp qua từng đáp án</p>
+  <div class="formfields">
+   <label for="student">Họ và tên</label>
+   <input id="student" maxlength="80" placeholder="Nhập họ và tên" autocomplete="name">
+   <label for="classroom">Lớp</label>
+   <input id="classroom" maxlength="30" placeholder="Ví dụ: 12A1">
+  </div>
+  <button class="primary" id="startBtn">🚀 Bắt đầu thử thách</button>
+  <p class="muted" id="startError" role="alert"></p>
+  <p>Giáo viên thiết kế: <b>Ms.Duyen</b></p>
+ </div>
+</section>
+
+<section id="quiz" class="screen">
+ <div class="stats">
+  <span class="pill" id="studentInfo"></span>
+  <span class="pill" id="counter">Câu 14/18</span>
+  <span class="pill" id="answered">Đã làm: 0/5</span>
+  <span class="pill" id="timer" aria-live="off">⏱ 50:00</span>
+ </div>
+ <div class="progress"><div id="bar"></div></div>
+ <div class="layout">
+  <article class="panel">
+   <h2>📖 Reading Passage</h2>
+   <p><b>Read the following text and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks.</b></p>
+   <h3>Switching to VinFast Electric Vehicles for a Green Lifestyle</h3>
+   <div id="passage" class="passage"></div>
+   <div class="actions">
+    <button id="translateBtn">🇻🇳 Dịch bài đọc sang tiếng Việt</button>
+   </div>
+   <div id="translation" class="translation hidden"></div>
+  </article>
+
+  <article class="panel">
+   <h2 id="questionTitle">Question 14</h2>
+   <p class="muted">Chọn một phương án. Nhấn vào phương án để xem nghĩa tiếng Việt.</p>
+   <div id="options"></div>
+   <div id="feedback" class="feedback" aria-live="polite">
+    🌟 Mỗi câu hỏi là một cơ hội để tiến bộ!
+   </div>
+   <div class="actions">
+    <button class="primary" id="checkOne">Check answer</button>
+    <button id="correctBtn">📘 Correct Answer</button>
+    <button id="prevBtn">← Câu trước</button>
+    <button id="nextBtn">Câu tiếp →</button>
+   </div>
+   <div id="explanation" class="explanation hidden"></div>
+   <div class="actions">
+    <button class="primary" id="finishBtn">✅ Check My Answers</button>
+    <button id="resetBtn">↻ Reset Test</button>
+   </div>
+  </article>
+ </div>
+</section>
+
+<section id="results" class="screen">
+ <div class="hero noprint">
+  <h1 class="script">Wonderful Progress!</h1>
+  <h2>🎉 Kết quả luyện tập</h2>
+  <div id="score" class="resultscore"></div>
+  <p id="comment"></p>
+  <p id="resultDetail"></p>
+  <div class="actions" style="justify-content:center">
+   <button class="primary" id="studyBtn">📚 Ôn tập 10 cụm từ</button>
+   <button id="reviewBtn">🔎 Xem lại bài</button>
+   <button id="restartBtn">↻ Làm lại bài</button>
+  </div>
+ </div>
+ <div id="certificate" class="certificate hidden">
+  <div style="font-size:36px">🏆</div>
+  <h2>Certificate of Completion</h2>
+  <h3>GIẤY CHỨNG NHẬN HOÀN THÀNH</h3>
+  <p>Trân trọng chứng nhận học sinh</p>
+  <h2 id="certName"></h2>
+  <p id="certClass"></p>
+  <p>Đã hoàn thành xuất sắc thử thách</p>
+  <h3>Test 01 – Reading Q14-18</h3>
+  <p id="certScore"></p>
+  <p id="certDate"></p>
+  <p><b>Giáo viên thiết kế: Ms.Duyen</b></p>
+  <p>Chữ ký giáo viên</p>
+  <div class="signature">Ms.Duyên</div>
+ </div>
+ <div class="actions noprint" style="justify-content:center">
+  <button id="printBtn" class="hidden">🖨 In / Lưu PDF giấy chứng nhận</button>
+ </div>
+</section>
+
+<section id="study" class="screen">
+ <div class="panel">
+  <h1 class="script" style="text-align:center">Vocabulary Adventure</h1>
+  <p>10 cụm danh từ và cụm động từ lấy từ bài đọc. Phần luyện tập này không tính vào điểm bài kiểm tra.</p>
+  <div class="study">
+   <h2>🧩 Matching Challenge – Nối nghĩa</h2>
+   <p>Chọn nghĩa tiếng Việt tương ứng cho từng cụm từ.</p>
+   <div id="matching" class="matchgrid"></div>
+   <div class="actions">
+    <button class="primary" id="checkMatch">Kiểm tra nối nghĩa</button>
+    <button id="resetMatch">Làm lại phần nối nghĩa</button>
+   </div>
+   <div id="matchResult" role="status"></div>
+  </div>
+  <div class="study">
+   <h2>🃏 Flashcards – Ôn luyện B1</h2>
+   <p class="muted">Nhấn “Lật thẻ” để xem IPA, nghĩa và từ gần nghĩa/trái nghĩa.</p>
+   <div id="flashcard" class="flashcard"></div>
+   <p id="flashIndex" style="text-align:center"></p>
+   <div class="actions" style="justify-content:center">
+    <button id="flashPrev">← Trước</button>
+    <button class="primary" id="flipBtn">Lật thẻ</button>
+    <button id="flashNext">Tiếp →</button>
+   </div>
+  </div>
+  <div class="actions">
+   <button id="backResult">← Trở về kết quả</button>
+   <button id="studyRestart">↻ Làm lại bài kiểm tra</button>
+  </div>
+ </div>
+</section>
+</main>
+
+<footer>Made for 12A1 & 12A4 · Giáo viên thiết kế: Ms.Duyen</footer>
+
+<script>
+"use strict";
+
+/* ORIGINAL PASSAGE: retained verbatim */
+const originalPassage = [
+`Switching to electric vehicles, like those made by VinFast, (14) ________. More eco-friendly than traditional gasoline-powered cars, electric vehicles significantly reduce our carbon footprint and improve air quality. In addition, more energy-efficient, they help conserve natural resources by wasting less energy. If more people start choosing electric vehicles, the environment will benefit greatly.`,
+`VinFast, a Vietnamese electric vehicle company, offers a variety of electric cars (15) ________. Equipped with advanced technology, (16) ________. As the demand for electric cars grows, more countries are implementing policies to encourage their use, such as offering subsidies for buyers and building more charging stations. despite people becoming more aware of the impact of gasoline-powered vehicles on the environment. (17) ________.`,
+`Electric cars also have the advantage of being cheaper to maintain since they don’t require frequent oil changes or complex mechanical repairs. In addition, electric cars are much quieter, contributing to less noise pollution in urban areas. (18) ________.`
+];
+
+const questions = [
+{
+ n:14,answer:2,
+ options:[
+ "which plays a vital role in advancing environmental sustainability",
+ "being a crucial step for promoting a greener future",
+ "has become a crucial step in promoting a greener future",
+ "having become a key action in reducing environmental damage"
+ ],
+ vi:[
+ "điều đóng vai trò quan trọng trong việc thúc đẩy tính bền vững môi trường",
+ "việc là một bước quan trọng để thúc đẩy tương lai xanh hơn",
+ "đã trở thành một bước quan trọng trong việc thúc đẩy tương lai xanh hơn",
+ "sau khi đã trở thành một hành động then chốt trong việc giảm thiệt hại môi trường"
+ ],
+ explain:"C đúng vì chủ ngữ 'Switching to electric vehicles' là cụm danh động từ, cần một động từ chính 'has become' để hoàn thành mệnh đề. Thì hiện tại hoàn thành diễn tả sự thay đổi có ý nghĩa đến hiện tại.",
+ wrong:[
+ "A: Mệnh đề quan hệ 'which...' không thể thay thế vị ngữ chính của câu.",
+ "B: 'being...' là cụm phân từ, thiếu động từ chia thì.",
+ "C: Chủ ngữ + has become + bổ ngữ, cấu trúc hoàn chỉnh.",
+ "D: 'having become...' là cụm phân từ hoàn thành, không phải vị ngữ chính."
+ ],
+ phrases:"play a vital role in; a crucial step in; promote a greener future; environmental sustainability",
+ grammar:"Gerund phrase làm chủ ngữ; present perfect: has/have + past participle."
+},
+{
+ n:15,answer:1,
+ options:[
+ "which meet the needs of eco-conscious consumers",
+ "which are designed with sustainability in mind",
+ "designing their vehicles with sustainability in mind by focusing on energy efficiency",
+ "are becoming increasingly popular worldwide"
+ ],
+ vi:[
+ "những chiếc xe đáp ứng nhu cầu của người tiêu dùng có ý thức bảo vệ môi trường",
+ "những chiếc xe được thiết kế với sự chú trọng đến tính bền vững",
+ "thiết kế xe của họ với sự chú trọng đến tính bền vững bằng cách tập trung vào hiệu quả năng lượng",
+ "đang ngày càng trở nên phổ biến trên toàn thế giới"
+ ],
+ explain:"Theo đáp án tài liệu, B là lựa chọn phù hợp: mệnh đề quan hệ 'which are designed...' bổ nghĩa cho 'electric cars', nhấn mạnh thiết kế hướng đến tính bền vững. Lưu ý về biên tập đề: A cũng đúng về mặt ngữ pháp và phù hợp nghĩa, nên câu này có độ mơ hồ nhất định.",
+ wrong:[
+ "A: Mệnh đề quan hệ đúng ngữ pháp, nội dung cũng hợp lý; không thể bác bỏ hoàn toàn nếu chỉ dựa vào đoạn văn.",
+ "B: Đáp án được cung cấp; mệnh đề quan hệ bị động mô tả đặc điểm thiết kế của xe.",
+ "C: Cụm V-ing có chủ thể thực hiện hành động không rõ ràng và cách dùng 'their vehicles' không phù hợp.",
+ "D: Thiếu đại từ quan hệ để nối với 'offers a variety of electric cars'."
+ ],
+ phrases:"a variety of; with sustainability in mind; energy efficiency; eco-conscious consumers",
+ grammar:"Relative clause: which + verb; passive voice: are + past participle."
+},
+{
+ n:16,answer:3,
+ options:[
+ "are providing a smooth and efficient driving experience",
+ "these vehicles to provide a smooth and efficient driving experience",
+ "VinFast has provided a smooth and efficient driving experience for years",
+ "these vehicles provide a smooth and efficient driving experience"
+ ],
+ vi:[
+ "đang mang lại trải nghiệm lái xe êm ái và hiệu quả",
+ "những chiếc xe này để mang lại trải nghiệm lái xe êm ái và hiệu quả",
+ "VinFast đã mang lại trải nghiệm lái xe êm ái và hiệu quả trong nhiều năm",
+ "những chiếc xe này mang lại trải nghiệm lái xe êm ái và hiệu quả"
+ ],
+ explain:"D đúng. Cụm phân từ 'Equipped with advanced technology' bổ nghĩa hợp lý cho chủ ngữ 'these vehicles'. Sau đó là động từ chính 'provide'.",
+ wrong:[
+ "A: Thiếu chủ ngữ cho động từ 'are providing'.",
+ "B: Có chủ ngữ nhưng chỉ có dạng 'to provide', thiếu động từ chính.",
+ "C: Cấu trúc câu có thể hình thành nhưng cụm mở đầu 'Equipped...' sẽ gắn với 'VinFast', không phù hợp bằng 'these vehicles'.",
+ "D: Chủ ngữ 'these vehicles' và động từ 'provide' tạo mệnh đề hoàn chỉnh, đồng thời phù hợp nghĩa."
+ ],
+ phrases:"equipped with; advanced technology; a smooth and efficient driving experience",
+ grammar:"Past participle clause: Equipped with..., + subject + main verb. Tránh dangling modifier."
+},
+{
+ n:17,answer:0,
+ options:[
+ "as people become more aware of the environmental impacts of gasoline-powered vehicles",
+ "governments encourage the development of electric cars and reduce emissions globally.",
+ "are becoming aware about the environmental impacts of gasoline-powered vehicles",
+ "despite people becoming more aware of the impact of gasoline-powered vehicles on the environment"
+ ],
+ vi:[
+ "khi mọi người ngày càng nhận thức rõ hơn về tác động môi trường của xe chạy bằng xăng",
+ "các chính phủ khuyến khích phát triển xe điện và giảm lượng khí thải trên toàn cầu",
+ "đang trở nên nhận thức về các tác động môi trường của xe chạy bằng xăng",
+ "mặc dù mọi người ngày càng nhận thức rõ hơn về tác động của xe chạy bằng xăng đối với môi trường"
+ ],
+ explain:"Đáp án tài liệu là A. 'as + subject + verb' có thể chỉ lý do hoặc sự thay đổi diễn ra đồng thời. Tuy nhiên, bản đề có một câu bắt đầu bằng 'despite...' bị lặp ngay trước chỗ trống (17), và A đứng riêng sau dấu chấm cũng là mệnh đề phụ chưa hoàn chỉnh. Vì vậy, vị trí này có lỗi biên tập; không thể coi câu hoàn chỉnh là đúng ngữ pháp nếu giữ nguyên văn bản.",
+ wrong:[
+ "A: Đáp án được cung cấp; diễn đạt ý thức môi trường gia tăng, nhưng cần gắn vào mệnh đề chính.",
+ "B: Là một mệnh đề độc lập đúng ngữ pháp nhưng không phải đáp án theo tài liệu.",
+ "C: Thiếu chủ ngữ; 'aware of' là kết hợp tự nhiên hơn 'aware about'.",
+ "D: 'despite + noun/V-ing' đúng về cấu trúc riêng lẻ, nhưng lặp ý và không tạo câu độc lập hoàn chỉnh."
+ ],
+ phrases:"become aware of; environmental impacts; gasoline-powered vehicles; reduce emissions",
+ grammar:"As + clause; despite + noun/V-ing. Chú ý phân biệt mệnh đề phụ và câu hoàn chỉnh."
+},
+{
+ n:18,answer:3,
+ options:[
+ "Many people believe that electric cars will eventually replace public transport in big cities because they offer greater convenience",
+ "Electric cars are popular among drivers who need to travel long distances daily for work or leisure",
+ "Some experts claim that the manufacturing process of electric cars is not environmentally friendly",
+ "By choosing VinFast electric vehicles, people can make a positive impact on both the environment and their daily lives"
+ ],
+ vi:[
+ "Nhiều người tin rằng xe điện cuối cùng sẽ thay thế phương tiện giao thông công cộng ở các thành phố lớn vì chúng tiện lợi hơn",
+ "Xe điện phổ biến với những người lái xe cần di chuyển quãng đường dài hằng ngày để làm việc hoặc giải trí",
+ "Một số chuyên gia cho rằng quá trình sản xuất xe điện không thân thiện với môi trường",
+ "Bằng cách lựa chọn xe điện VinFast, mọi người có thể tạo ra tác động tích cực đối với cả môi trường lẫn cuộc sống hằng ngày"
+ ],
+ explain:"D đúng vì tổng kết được hai lợi ích chính của đoạn: bảo vệ môi trường và nâng cao chất lượng cuộc sống. Đây là câu kết phù hợp với chủ đề lối sống xanh.",
+ wrong:[
+ "A: Đưa ra dự đoán thay thế giao thông công cộng mà bài không phát triển.",
+ "B: Chuyển sang nhu cầu đi đường dài, không khái quát các ý chính.",
+ "C: Đưa vào ý trái chiều về sản xuất, không phù hợp vai trò kết luận tích cực.",
+ "D: Tóm tắt lợi ích môi trường và đời sống, liên kết chặt với chủ đề."
+ ],
+ phrases:"make a positive impact on; daily lives; noise pollution; cheaper to maintain",
+ grammar:"By + V-ing diễn tả phương thức; both...and... liên kết hai thành phần song song."
+}
+];
+
+const translations = [
+`Việc chuyển sang sử dụng xe điện, chẳng hạn như xe do VinFast sản xuất, đã trở thành một bước quan trọng trong việc thúc đẩy tương lai xanh hơn. Thân thiện với môi trường hơn so với xe chạy bằng xăng truyền thống, xe điện làm giảm đáng kể lượng khí thải carbon của chúng ta và cải thiện chất lượng không khí. Ngoài ra, nhờ sử dụng năng lượng hiệu quả hơn, chúng giúp bảo tồn tài nguyên thiên nhiên bằng cách giảm lãng phí năng lượng. Nếu nhiều người bắt đầu lựa chọn xe điện hơn, môi trường sẽ được hưởng lợi rất lớn.`,
+`VinFast, một công ty xe điện của Việt Nam, cung cấp nhiều loại ô tô điện được thiết kế với sự chú trọng đến tính bền vững. Được trang bị công nghệ tiên tiến, những chiếc xe này mang lại trải nghiệm lái xe êm ái và hiệu quả. Khi nhu cầu về ô tô điện tăng lên, ngày càng nhiều quốc gia thực hiện các chính sách khuyến khích sử dụng chúng, chẳng hạn như trợ cấp cho người mua và xây dựng thêm trạm sạc. [Bản gốc có câu bị lặp và chưa hoàn chỉnh về ngữ pháp tại vị trí này.] Khi mọi người ngày càng nhận thức rõ hơn về tác động môi trường của xe chạy bằng xăng.`,
+`Xe điện còn có ưu điểm là chi phí bảo dưỡng thấp hơn vì không cần thay dầu thường xuyên hoặc sửa chữa cơ khí phức tạp. Ngoài ra, xe điện hoạt động yên tĩnh hơn nhiều, góp phần giảm ô nhiễm tiếng ồn ở khu vực đô thị. Bằng cách lựa chọn xe điện VinFast, mọi người có thể tạo ra tác động tích cực đối với cả môi trường và cuộc sống hằng ngày.`
+];
+
+const vocabulary = [
+ ["carbon footprint","/ˈkɑːbən ˈfʊtprɪnt/","lượng khí thải carbon","Related: carbon emissions"],
+ ["air quality","/eə ˈkwɒləti/","chất lượng không khí","Opposite idea: air pollution"],
+ ["natural resources","/ˈnætʃrəl rɪˈzɔːsɪz/","tài nguyên thiên nhiên","Related: resources"],
+ ["charging stations","/ˈtʃɑːdʒɪŋ ˈsteɪʃənz/","các trạm sạc","Related: charging points"],
+ ["noise pollution","/nɔɪz pəˈluːʃən/","ô nhiễm tiếng ồn","Opposite idea: a quiet environment"],
+ ["electric vehicles","/ɪˈlektrɪk ˈviːəklz/","xe điện","Related: electric cars"],
+ ["advanced technology","/ədˈvɑːnst tekˈnɒlədʒi/","công nghệ tiên tiến","Synonym: modern technology"],
+ ["reduce our carbon footprint","/rɪˈdjuːs aʊə ˈkɑːbən ˈfʊtprɪnt/","giảm lượng khí thải carbon của chúng ta","Related: cut emissions"],
+ ["conserve natural resources","/kənˈsɜːv ˈnætʃrəl rɪˈzɔːsɪz/","bảo tồn tài nguyên thiên nhiên","Synonym: preserve natural resources"],
+ ["make a positive impact on","/meɪk ə ˈpɒzətɪv ˈɪmpækt ɒn/","tạo tác động tích cực đến","Related: benefit"]
+];
+
+const $=id=>document.getElementById(id);
+const letters=["A","B","C","D"];
+const encouragement=[
+ "🌱 Mỗi câu trả lời giúp bạn hiểu bài hơn!",
+ "✨ Bạn đang xây dựng kỹ năng đọc hiểu!",
+ "💡 Chú ý cấu trúc câu và ngữ cảnh nhé!",
+ "🌟 Học từ lỗi sai cũng là tiến bộ!",
+ "🚀 Bạn đã gần hoàn thành thử thách!"
+];
+let index=0,answers=Array(5).fill(null),
+ checked=Array(5).fill(false);
+let seconds=3000,interval=null,started=false,ended=false;
+let student="",classroom="",soundOn=true,audioContext=null;
+let flashIndex=0,flipped=false;
+const safe=s=>String(s).replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",
+ '"':"&quot;","'":"&#39;"
+})[c]);
+
+function show(id){
+ document.querySelectorAll(".screen").forEach(e=>e.classList.remove("active"));
+ $(id).classList.add("active");
+ window.scrollTo(0,0);
+}
+function playSound(ok=true){
+ if(!soundOn)return;
+ try{
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC)return;
+  if(!audioContext)audioContext=new AC();
+  if(audioContext.state==="suspended")audioContext.resume();
+  const o=audioContext.createOscillator(),g=audioContext.createGain();
+  o.connect(g);g.connect(audioContext.destination);
+  o.type="sine";o.frequency.value=ok?660:330;
+  g.gain.setValueAtTime(.035,audioContext.currentTime);
+  g.gain.exponentialRampToValueAtTime(.001,audioContext.currentTime+.18);
+  o.start();o.stop(audioContext.currentTime+.19);
+ }catch(e){}
+}
+function timeText(){
+ return String(Math.floor(seconds/60)).padStart(2,"0")+":"+
+ String(seconds%60).padStart(2,"0");
+}
+function tick(){
+ if(ended)return;
+ seconds=Math.max(0,seconds-1);
+ $("timer").textContent="⏱ "+timeText();
+ if(seconds===0)finish(true);
+}
+function startTimer(){
+ clearInterval(interval);
+ interval=setInterval(tick,1000);
+}
+function buildPassage(){
+ $("passage").innerHTML=originalPassage.map(p=>
+ "<p>"+safe(p).replace(/\((1[4-8])\) ________/g,
+ '<span class="blank">($1) ________</span>')+"</p>"
+ ).join("");
+}
+function updateStats(){
+ $("counter").textContent="Câu "+questions[index].n+"/18";
+ $("answered").textContent="Đã làm: "+answers.filter(x=>x!==null).length+"/5";
+ $("bar").style.width=(answers.filter(x=>x!==null).length/5*100)+"%";
+ $("timer").textContent="⏱ "+timeText();
+}
+function renderQuestion(){
+ const q=questions[index];
+ $("questionTitle").textContent="Question "+q.n;
+ $("options").innerHTML="";
+ q.options.forEach((op,i)=>{
+  const b=document.createElement("button");
+  b.type="button";b.className="option";
+  if(answers[index]===i)b.classList.add("selected");
+  if(checked[index]){
+   if(i===q.answer)b.classList.add("correct");
+   if(answers[index]===i&&i!==q.answer)b.classList.add("wrong");
+  }
+  b.innerHTML="<b>"+letters[i]+".</b> "+safe(op)+
+   (answers[index]===i?
+    "<small>🇻🇳 "+safe(q.vi[i])+"</small>":"");
+  b.disabled=ended||checked[index];
+  b.onclick=()=>selectAnswer(i);
+  $("options").appendChild(b);
+ });
+ $("feedback").innerHTML=checked[index]?
+  (answers[index]===q.answer?
+   "✅ Chính xác! "+encouragement[index]:
+   "📘 Chưa đúng. Đáp án theo tài liệu: <b>"+letters[q.answer]+
+   "</b>. Hãy xem phần giải thích nhé!"):
+  encouragement[index];
+ $("explanation").classList.add("hidden");
+ $("explanation").innerHTML="";
+ $("checkOne").disabled=ended||checked[index]||answers[index]===null;
+ $("correctBtn").disabled=!checked[index];
+ $("prevBtn").disabled=index===0;
+ $("nextBtn").disabled=index===4;
+ $("nextBtn").textContent="Câu tiếp →";
+ updateStats();
+}
+function selectAnswer(i){
+ if(ended||checked[index])return;
+ answers[index]=i;
+ renderQuestion();
+}
+function checkCurrent(){
+ if(ended||checked[index]||answers[index]===null)return;
+ checked[index]=true;
+ playSound(answers[index]===questions[index].answer);
+ renderQuestion();
+}
+function revealExplanation(){
+ if(!checked[index])return;
+ const q=questions[index];
+ $("explanation").innerHTML=
+ "<h3>📘 Correct Answer: "+letters[q.answer]+"</h3>"+
+ "<p><b>Giải thích:</b> "+safe(q.explain)+"</p>"+
+ "<h4>Phân tích và dịch nghĩa 4 phương án</h4>"+
+ q.options.map((o,i)=>
+ "<p><b>"+letters[i]+". "+safe(o)+"</b><br>"+
+ "🇻🇳 "+safe(q.vi[i])+"<br>"+
+ safe(q.wrong[i])+"</p>").join("")+
+ "<p><b>📌 Cụm từ cần học:</b> "+safe(q.phrases)+"</p>"+
+ "<p><b>🧠 Ngữ pháp cần nhớ:</b> "+safe(q.grammar)+"</p>";
+ $("explanation").classList.remove("hidden");
+ $("explanation").scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function finish(timeout=false){
+ if(ended)return;
+ if(!timeout&&answers.some(x=>x===null)){
+  const count=answers.filter(x=>x===null).length;
+  if(!confirm("Bạn còn "+count+
+   " câu chưa trả lời. Các câu này được tính là chưa đúng. Nộp bài nhé?"))return;
+ }
+ ended=true;clearInterval(interval);
+ checked=Array(5).fill(true);
+ const correct=questions.filter((q,i)=>answers[i]===q.answer).length;
+ const percent=correct/5*100;
+ $("score").textContent=correct+"/5 · "+(correct*2).toFixed(2)+"/10";
+ $("comment").textContent=correct===5?
+  "🌟 Tuyệt vời! Bạn đã vận dụng rất tốt kỹ năng đọc hiểu.":
+  correct>=4?
+  "🎉 Kết quả rất tốt! Hãy tiếp tục duy trì phong độ.":
+  correct>=2?
+  "🌱 Bạn đang tiến bộ! Hãy xem lại các cấu trúc cần ghi nhớ.":
+  "💪 Mỗi lần luyện tập là một cơ hội học thêm điều mới. Hãy thử lại nhé!";
+ $("resultDetail").textContent=
+  "Số câu đúng: "+correct+"/5 · Tỷ lệ: "+percent+"%"+
+  (timeout?" · Đã hết 50 phút.":"");
+ const awarded=percent>70;
+ $("certificate").classList.toggle("hidden",!awarded);
+ $("printBtn").classList.toggle("hidden",!awarded);
+ if(awarded){
+  $("certName").textContent=student;
+  $("certClass").textContent="Lớp: "+classroom;
+  $("certScore").textContent="Kết quả: "+correct+"/5 câu · "+percent+"%";
+  $("certDate").textContent="Ngày hoàn thành: "+
+   new Date().toLocaleDateString("vi-VN");
+ }
+ show("results");
+ playSound(true);
+}
+function resetTest(){
+ if(!confirm("Bạn muốn làm lại bài kiểm tra từ đầu?"))return;
+ clearInterval(interval);
+ index=0;answers=Array(5).fill(null);
+ checked=Array(5).fill(false);
+ seconds=3000;ended=false;started=false;
+ $("translation").classList.add("hidden");
+ $("translation").textContent="";
+ $("translateBtn").textContent="🇻🇳 Dịch bài đọc sang tiếng Việt";
+ show("start");
+}
+function renderMatching(){
+ const meanings=vocabulary.map((v,i)=>({id:i,text:v[2]}));
+ // Fixed shuffled order, so the exercise remains stable offline.
+ const order=[6,2,9,0,7,4,1,8,3,5];
+ $("matching").innerHTML=vocabulary.map((v,i)=>
+ '<div class="matchrow"><label for="match'+i+'"><b>'+
+ (i+1)+'. '+safe(v[0])+'</b></label>'+
+ '<select id="match'+i+'"><option value="">-- Chọn nghĩa --</option>'+
+ order.map(id=>'<option value="'+id+'">'+
+ safe(meanings[id].text)+'</option>').join("")+
+ '</select></div>').join("");
+ $("matchResult").textContent="";
+}
+function checkMatching(){
+ let count=0;
+ vocabulary.forEach((v,i)=>{
+  const el=$("match"+i),correct=Number(el.value)===i&&el.value!=="";
+  if(correct)count++;
+  el.style.borderColor=correct?"var(--good)":"var(--bad)";
+ });
+ $("matchResult").textContent="🧩 Bạn nối đúng "+count+
+ "/10 cụm từ. "+(count===10?"Xuất sắc!":"Hãy thử điều chỉnh các cặp chưa đúng nhé!");
+ playSound(count===10);
+}
+function renderFlash(){
+ const v=vocabulary[flashIndex];
+ $("flashIndex").textContent="Thẻ "+(flashIndex+1)+"/10";
+ $("flashcard").innerHTML=flipped?
+ '<div class="flashword">'+safe(v[0])+'</div>'+
+ '<div>'+safe(v[1])+'</div>'+
+ '<div><b>'+safe(v[2])+'</b></div>'+
+ '<div class="muted">'+safe(v[3])+'</div>':
+ '<div class="flashword">'+safe(v[0])+'</div>'+
+ '<div class="muted">Bạn nhớ nghĩa của cụm từ này không?</div>';
+ $("flipBtn").textContent=flipped?"Úp thẻ":"Lật thẻ";
+}
+function moveFlash(step){
+ flashIndex=(flashIndex+step+vocabulary.length)%vocabulary.length;
+ flipped=false;renderFlash();
+}
+
+$("theme").onchange=e=>{
+ document.body.dataset.theme=e.target.value;
+ try{localStorage.setItem("msduyen-theme",e.target.value)}catch(err){}
+};
+try{
+ const saved=localStorage.getItem("msduyen-theme");
+ if(["blue","mint","cream","dark"].includes(saved)){
+  $("theme").value=saved;document.body.dataset.theme=saved;
+ }
+}catch(e){}
+$("soundBtn").onclick=()=>{
+ soundOn=!soundOn;
+ $("soundBtn").textContent=soundOn?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+};
+$("startBtn").onclick=()=>{
+ student=$("student").value.trim();
+ classroom=$("classroom").value.trim();
+ if(!student||!classroom){
+  $("startError").textContent="Vui lòng nhập đầy đủ họ tên và lớp.";
+  return;
+ }
+ $("startError").textContent="";
+ $("studentInfo").textContent=student+" · "+classroom;
+ if(!started){started=true;startTimer();}
+ renderQuestion();show("quiz");
+};
+$("checkOne").onclick=checkCurrent;
+$("correctBtn").onclick=revealExplanation;
+$("prevBtn").onclick=()=>{if(index>0){index--;renderQuestion();}};
+$("nextBtn").onclick=()=>{if(index<4){index++;renderQuestion();}};
+$("finishBtn").onclick=()=>finish(false);
+$("resetBtn").onclick=resetTest;
+$("restartBtn").onclick=resetTest;
+$("studyRestart").onclick=resetTest;
+$("reviewBtn").onclick=()=>{index=0;renderQuestion();show("quiz");};
+$("translateBtn").onclick=()=>{
+ const box=$("translation");
+ const opening=box.classList.contains("hidden");
+ if(opening){
+  box.textContent=translations.join("\n\n");
+  box.classList.remove("hidden");
+ }else box.classList.add("hidden");
+ $("translateBtn").textContent=opening?
+  "Ẩn bản dịch tiếng Việt":"🇻🇳 Dịch bài đọc sang tiếng Việt";
+};
+$("studyBtn").onclick=()=>{renderMatching();renderFlash();show("study");};
+$("backResult").onclick=()=>show("results");
+$("checkMatch").onclick=checkMatching;
+$("resetMatch").onclick=renderMatching;
+$("flashPrev").onclick=()=>moveFlash(-1);
+$("flashNext").onclick=()=>moveFlash(1);
+$("flipBtn").onclick=()=>{flipped=!flipped;renderFlash();};
+$("flashcard").onclick=()=>{flipped=!flipped;renderFlash();};
+$("printBtn").onclick=()=>window.print();
+
+document.addEventListener("keydown",e=>{
+ if(!$("quiz").classList.contains("active")||ended)return;
+ if(["INPUT","TEXTAREA","SELECT"].includes(document.activeElement.tagName))return;
+ const k=e.key.toUpperCase();
+ if(["A","B","C","D"].includes(k)){
+  selectAnswer(letters.indexOf(k));
+ }else if(k==="ENTER"){
+  if(!checked[index])checkCurrent();
+  else if(index<4){index++;renderQuestion();}
+ }
+});
+buildPassage();
+renderMatching();
+renderFlash();
+</script>
+  <script src="../assets/js/shared-nav.js"></script>
+</body>
+</html>
+

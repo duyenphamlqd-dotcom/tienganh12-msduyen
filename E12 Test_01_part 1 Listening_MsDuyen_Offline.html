@@ -1,0 +1,862 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Test 01 – Listening – Part 1 | Ms.Duyen</title>
+<style>
+:root{
+ --bg:#edf3ff;--panel:#fff;--ink:#172747;
+ --muted:#52627c;--accent:#3459d5;--soft:#e8eeff;
+ --border:#cbd6ed;--good:#126b45;--bad:#a43737;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:Arial,"Segoe UI",sans-serif;line-height:1.65;
+ transition:background .3s,color .3s}
+body[data-theme="mint"]{--bg:#e7f5ef;--panel:#fff;
+ --ink:#153c34;--muted:#42665b;--accent:#116b54;
+ --soft:#d7f1e5;--border:#badbcd}
+body[data-theme="peach"]{--bg:#fff0e7;--panel:#fffdfb;
+ --ink:#492b26;--muted:#79554b;--accent:#a34634;
+ --soft:#ffe0d2;--border:#e9c4b4}
+body[data-theme="dark"]{--bg:#101a30;--panel:#202e48;
+ --ink:#f5f7ff;--muted:#c5d2e7;--accent:#a9c1ff;
+ --soft:#334563;--border:#61718d;--good:#7ce2b0;
+ --bad:#ffaaaa}
+body[data-theme="lavender"]{--bg:#f2ecff;--panel:#fff;
+ --ink:#302451;--muted:#625477;--accent:#6945b5;
+ --soft:#ebe1ff;--border:#d6c5ef}
+button,input,select{font:inherit}
+button{cursor:pointer;border:1px solid var(--border);
+ border-radius:12px;padding:10px 15px;font-weight:700;
+ background:var(--soft);color:var(--ink)}
+button:hover:not(:disabled){filter:brightness(.94)}
+button:disabled{opacity:.5;cursor:not-allowed}
+button.primary{background:var(--accent);color:#fff;border:0}
+body[data-theme="dark"] button.primary{color:#101a30}
+button:focus-visible,input:focus-visible,select:focus-visible{
+ outline:3px solid #ed9c31;outline-offset:3px}
+input,select{background:var(--panel);color:var(--ink);
+ border:1px solid var(--border);padding:11px;border-radius:10px;
+ max-width:100%}
+h1,h2,h3{line-height:1.35}
+h1,.calligraphy{font-family:"Brush Script MT","Segoe Script",
+ "Times New Roman",serif;font-style:italic}
+h1{font-size:clamp(38px,6vw,70px);margin:10px 0}
+h2{font-size:clamp(23px,3vw,32px)}
+p{margin:9px 0}
+.small{font-size:14px;color:var(--muted)}
+.hidden{display:none!important}
+.container{max-width:1100px;margin:auto;padding:18px}
+.card{background:var(--panel);border:1px solid var(--border);
+ border-radius:20px;padding:23px;margin:17px 0;
+ box-shadow:0 7px 24px #182d5010}
+.hero{text-align:center;padding:45px 20px;
+ background:linear-gradient(145deg,var(--soft),var(--panel))}
+.hero .star{font-size:46px}
+.pill{display:inline-block;padding:5px 13px;border-radius:99px;
+ background:var(--soft);font-weight:bold;margin:4px}
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+.between{justify-content:space-between}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.field{display:flex;flex-direction:column;gap:5px}
+.field label{font-weight:bold}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}
+.progress{height:13px;background:var(--soft);border-radius:20px;
+ overflow:hidden;margin:12px 0}
+.progress>div{height:100%;background:var(--accent);
+ width:0;transition:width .3s}
+#timer{font-size:25px;font-weight:800;font-variant-numeric:tabular-nums}
+#timer.warning{color:var(--bad)}
+.player{position:sticky;top:0;z-index:10;background:var(--panel);
+ border-bottom:2px solid var(--border);padding:12px}
+.player audio{width:100%;margin-top:7px}
+.player .container{padding:0 12px}
+.option{display:block;text-align:left;width:100%;margin:10px 0;
+ padding:14px;background:var(--panel);border:2px solid var(--border)}
+.option.selected{border-color:var(--accent);background:var(--soft)}
+.option.correct{border-color:var(--good)}
+.option.wrong{border-color:var(--bad)}
+.option .translation{display:none;margin-top:6px;font-weight:normal;
+ color:var(--muted)}
+.option.show-translation .translation{display:block}
+.sentence{display:block;text-align:left;width:100%;margin:7px 0;
+ font-weight:normal;line-height:1.7}
+.sentence span{display:none;color:var(--muted);
+ border-top:1px solid var(--border);margin-top:5px;padding-top:5px}
+.sentence.open span{display:block}
+.notice{padding:12px;border-left:4px solid var(--accent);
+ background:var(--soft);border-radius:8px;margin:12px 0}
+.good{color:var(--good);font-weight:bold}
+.bad{color:var(--bad);font-weight:bold}
+.translation-block{white-space:pre-wrap}
+.flashcard{min-height:210px;display:flex;flex-direction:column;
+ justify-content:center;align-items:center;text-align:center;
+ background:var(--soft);border:2px solid var(--border);
+ border-radius:18px;padding:24px;cursor:pointer}
+.flashcard .word{font-size:26px;font-weight:800}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.match-item{width:100%;margin:5px 0;text-align:left}
+.match-item.active{outline:3px solid var(--accent)}
+.match-item.matched{border-color:var(--good);opacity:.65}
+#certificate{border:7px double var(--accent);padding:25px;
+ text-align:center;background:var(--panel)}
+#certificate h2{font-family:"Brush Script MT","Segoe Script",serif;
+ font-style:italic;font-size:40px}
+.signature{font-family:"Brush Script MT","Segoe Script",serif;
+ font-size:34px;font-style:italic}
+footer{text-align:center;padding:22px;color:var(--muted)}
+@media(max-width:650px){
+ .grid{grid-template-columns:1fr}
+ .card{padding:16px}
+ .player{position:relative}
+ .match-grid{gap:6px}
+ button{font-size:15px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{animation:none!important;transition:none!important}
+}
+@media print{
+ body{background:white;color:black}
+ header,.player,.no-print,#startScreen,#quizScreen,
+ #studyScreen,#resultSummary{display:none!important}
+ #resultScreen,#certificate{display:block!important}
+ #certificate{border:5px double #333;color:black}
+}
+</style>
+</head>
+<body data-theme="blue">
+
+<header class="container no-print">
+ <div class="row between">
+  <strong>🎧 English Listening Lab • Grade 12</strong>
+  <div class="row">
+   <label for="theme">🎨 Màu nền</label>
+   <select id="theme" aria-label="Chọn màu nền">
+    <option value="blue">Xanh dương</option>
+    <option value="mint">Xanh lá</option>
+    <option value="peach">Cam đào</option>
+    <option value="lavender">Tím</option>
+    <option value="dark">Tối</option>
+   </select>
+   <button id="soundBtn">🔊 Âm thanh: Bật</button>
+  </div>
+ </div>
+</header>
+
+<section id="startScreen" class="container">
+ <div class="card hero">
+  <div class="star">🎧 ✨ 🏆</div>
+  <div class="pill">ÔN TẬP GIỮA HỌC KỲ I • 12A1 & 12A4</div>
+  <h1>Test 01 – Listening – Part 1</h1>
+  <h2>Walt Disney's Life</h2>
+  <p>Kiểm tra mà như chơi – chơi mà vẫn học được!</p>
+  <p><strong>Giáo viên thiết kế: Ms.Duyen</strong></p>
+  <div class="grid" style="max-width:620px;margin:24px auto">
+   <div class="field">
+    <label for="studentName">Họ và tên</label>
+    <input id="studentName" placeholder="Nhập họ và tên" maxlength="80">
+   </div>
+   <div class="field">
+    <label for="studentClass">Lớp</label>
+    <select id="studentClass">
+     <option value="">Chọn lớp</option>
+     <option>12A1</option><option>12A4</option>
+    </select>
+   </div>
+  </div>
+  <div class="row" style="justify-content:center">
+   <span class="pill">4 câu hỏi</span>
+   <span class="pill">50 phút</span>
+   <span class="pill">10 điểm</span>
+   <span class="pill">Chứng nhận: trên 70%</span>
+  </div>
+  <div class="actions" style="justify-content:center">
+   <button class="primary" id="startBtn">🚀 Bắt đầu thử thách</button>
+  </div>
+  <p class="small">Chọn đáp án, kiểm tra kết quả, sau đó mở phần giải thích để tự học.</p>
+ </div>
+</section>
+
+<div id="appArea" class="hidden">
+ <div class="player no-print">
+  <div class="container">
+   <div class="row between">
+    <strong>🎵 Listening Media Controller</strong>
+    <span id="timer">50:00</span>
+   </div>
+   <audio id="audio" controls preload="metadata"></audio>
+   <div class="row">
+    <label for="audioFile">Tệp nghe gốc:</label>
+    <input id="audioFile" type="file" accept="audio/*">
+    <button id="ttsBtn">🗣 Đọc transcript</button>
+    <button id="stopAudioBtn">⏹ Dừng</button>
+   </div>
+   <p id="mediaStatus" class="small" role="status">
+    Chưa tải tệp nghe gốc. Có thể sử dụng giọng đọc tiếng Anh của thiết bị.
+   </p>
+   <details>
+    <summary>Thiết lập đoạn nghe chứa đáp án (giáo viên)</summary>
+    <p class="small">Nhập mốc bắt đầu/kết thúc theo giây trong file nghe gốc.
+     Nếu chưa có mốc, nút tự học sẽ đọc nguyên câu bằng chứng.</p>
+    <div id="clipEditor"></div>
+    <button id="saveClips">Lưu mốc nghe</button>
+   </details>
+  </div>
+ </div>
+
+ <main class="container">
+  <div id="quizScreen">
+   <div class="card">
+    <div class="row between">
+     <strong id="studentInfo"></strong>
+     <strong id="questionCounter"></strong>
+    </div>
+    <div class="progress"><div id="progressFill"></div></div>
+    <div id="motivation" class="notice"></div>
+   </div>
+   <div class="card" id="questionCard">
+    <p class="pill">Task 1 • Listen to a talk about Walt Disney's life.</p>
+    <h2 id="questionText"></h2>
+    <div id="options"></div>
+    <div class="actions">
+     <button class="primary" id="checkBtn">✓ Check my answer</button>
+     <button id="correctBtn" disabled>📖 Correct answer</button>
+     <button id="clipBtn" disabled>🎧 Listening for self-study</button>
+    </div>
+    <div id="feedback" role="status" aria-live="polite"></div>
+    <div id="explanation" class="hidden"></div>
+    <div class="actions">
+     <button id="prevBtn">← Câu trước</button>
+     <button class="primary" id="nextBtn">Câu tiếp theo →</button>
+    </div>
+   </div>
+   <div class="card">
+    <h3>📜 Listening transcript • Tra cứu câu</h3>
+    <p class="small">Nhấn từng câu để xem nghĩa tiếng Việt.
+     Bản dịch toàn bài có thể mở ở phần cuối.</p>
+    <div id="sentences"></div>
+    <div class="actions">
+     <button id="fullAudioBtn">🎧 Bài nghe hoàn chỉnh</button>
+     <button id="fullTranslationBtn">🇻🇳 Dịch bài nghe sang tiếng Việt</button>
+    </div>
+    <div id="fullTranslation" class="hidden translation-block"></div>
+   </div>
+   <div class="card">
+    <h3>🎯 Nộp bài</h3>
+    <p>Hãy kiểm tra các câu trả lời trước khi hoàn thành.</p>
+    <button class="primary" id="finishBtn">🏁 Hoàn thành & xem kết quả</button>
+   </div>
+  </div>
+
+  <section id="resultScreen" class="hidden">
+   <div class="card hero" id="resultSummary">
+    <div style="font-size:50px">🏆</div>
+    <h1>Congratulations!</h1>
+    <h2 id="resultTitle"></h2>
+    <div id="resultDetails"></div>
+    <p id="resultMessage"></p>
+    <div class="actions no-print" style="justify-content:center">
+     <button id="reviewBtn">📖 Xem lại đáp án</button>
+     <button class="primary" id="studyBtn">🧠 Luyện tập bổ trợ</button>
+     <button id="restartBtn">↻ Làm lại</button>
+    </div>
+   </div>
+   <div id="certificate" class="hidden">
+    <p>✦ ENGLISH LEARNING ACHIEVEMENT ✦</p>
+    <h2>Certificate of Completion</h2>
+    <p>Chứng nhận hoàn thành bài luyện nghe</p>
+    <h2 id="certName"></h2>
+    <p id="certClass"></p>
+    <h3>Test 01 – Listening – Part 1</h3>
+    <p>Walt Disney's Life</p>
+    <h3 id="certScore"></h3>
+    <p id="certDate"></p>
+    <p>Đã hoàn thành bài luyện nghe với kết quả trên 70%.</p>
+    <p><strong>Giáo viên thiết kế: Ms.Duyen</strong></p>
+    <p>Chữ ký giáo viên</p>
+    <div class="signature">Ms.Duyên</div>
+    <p class="small" id="certCode"></p>
+   </div>
+   <div class="actions no-print" id="printActions">
+    <button id="printBtn" class="hidden">🖨 In / Lưu PDF chứng nhận</button>
+   </div>
+  </section>
+
+  <section id="studyScreen" class="hidden">
+   <div class="card">
+    <h2>🧩 Matching Challenge</h2>
+    <p>Nối 10 cụm từ tiếng Anh với nghĩa tiếng Việt.
+     Tất cả cụm từ đều xuất hiện trong bài nghe.</p>
+    <div id="matching" class="match-grid"></div>
+    <p id="matchStatus" role="status"></p>
+    <button id="resetMatch">↻ Chơi lại phần nối nghĩa</button>
+   </div>
+   <div class="card">
+    <h2>🃏 Flashcards • B1 Vocabulary</h2>
+    <p>Nhấn thẻ để lật xem nghĩa, IPA và ghi chú từ vựng.</p>
+    <div id="flashcard" class="flashcard" tabindex="0"
+      role="button" aria-label="Lật flashcard"></div>
+    <p id="flashCounter" class="small"></p>
+    <div class="actions">
+     <button id="flashPrev">← Thẻ trước</button>
+     <button id="flashFlip">Lật thẻ</button>
+     <button id="flashNext">Thẻ tiếp →</button>
+    </div>
+   </div>
+   <button id="backResults">← Quay về kết quả</button>
+  </section>
+ </main>
+</div>
+
+<footer>Made for 12A1 & 12A4 • Giáo viên thiết kế: Ms.Duyen</footer>
+
+<script>
+"use strict";
+
+/* NỘI DUNG GỐC: GIỮ NGUYÊN 4 CÂU HỎI VÀ ĐÁP ÁN */
+const questions=[
+{
+ q:"Walt Disney moved to Hollywood because ____________.",
+ vi:"Walt Disney chuyển đến Hollywood vì ____________.",
+ opts:[
+  "his parents moved to work there",
+  "he wanted to start his career again",
+  "his company became very successful"
+ ],
+ vis:[
+  "bố mẹ ông ấy chuyển đến làm việc ở đó",
+  "ông ấy muốn bắt đầu lại sự nghiệp của mình",
+  "công ty của ông ấy đã trở nên rất thành công"
+ ],
+ answer:1,
+ evidence:"When he set up his own film company, it was not very profitable. So, Disney chose to move to Hollywood to start a new career.",
+ evidenceVi:"Khi ông thành lập công ty điện ảnh của riêng mình, nó không mang lại nhiều lợi nhuận. Vì vậy, Disney đã chọn chuyển đến Hollywood để bắt đầu sự nghiệp mới.",
+ grammar:"When + mệnh đề quá khứ đơn; chose to + V nguyên mẫu.",
+ vocab:"set up his own film company; profitable; start a new career.",
+ reason:"Công ty ban đầu không mang lại nhiều lợi nhuận nên Disney đến Hollywood để bắt đầu sự nghiệp mới. B đúng; A và C không phù hợp với thông tin bài nghe."
+},
+{
+ q:"Which is true about Mickey Mouse?",
+ vi:"Điều nào đúng về chuột Mickey?",
+ opts:[
+  "It was based on a real pet.",
+  "It was first voiced by a famous actor.",
+  "It was not very popular."
+ ],
+ vis:[
+  "Chuột Mickey được dựa trên một thú cưng có thật.",
+  "Lần đầu tiên Chuột Mickey được lồng tiếng bởi một diễn viên nổi tiếng.",
+  "Chuột Mickey không phổ biến lắm."
+ ],
+ answer:0,
+ evidence:"There, he developed a character based on a pet mouse he once had, under the name of Mickey Mouse. He even gave the mouse his own voice. Soon, Mickey Mouse became the world's most popular cartoon character and Disney was very popular worldwide.",
+ evidenceVi:"Ở đó, ông đã phát triển một nhân vật dựa trên con chuột cưng mà ông từng nuôi, dưới cái tên Chuột Mickey. Ông ấy thậm chí còn cho con chuột giọng nói của chính mình. Chẳng bao lâu, chuột Mickey đã trở thành nhân vật hoạt hình nổi tiếng nhất thế giới và Disney cũng rất nổi tiếng trên toàn thế giới.",
+ grammar:"based on + danh từ; so sánh nhất: the world's most popular.",
+ vocab:"based on a pet mouse; gave the mouse his own voice; cartoon character.",
+ reason:"Mickey Mouse dựa trên một con chuột cưng có thật. Disney tự lồng tiếng và nhân vật trở nên rất nổi tiếng. Vì vậy A đúng, B và C sai."
+},
+{
+ q:"What is NOT mentioned as an achievement of Snow White and the Seven Dwarfs?",
+ vi:"Điều gì KHÔNG được đề cập đến như một thành tựu của Bạch Tuyết và bảy chú lùn?",
+ opts:[
+  "It earned more than 400 million dollars.",
+  "It won several Oscars.",
+  "It was the best movie in the film industry."
+ ],
+ vis:[
+  "Bộ phim kiếm được hơn 400 triệu đô la.",
+  "Bộ phim đã giành được nhiều giải Oscar.",
+  "Đó là bộ phim hay nhất trong ngành điện ảnh."
+ ],
+ answer:2,
+ evidence:"He went on to produce his first feature-length animated film Snow White and the Seven Dwarfs. The film became a huge success, earning more than 400 million dollars since its release and eight Oscars, the top award in the film industry.",
+ evidenceVi:"Ông tiếp tục sản xuất bộ phim hoạt hình dài tập đầu tiên Bạch Tuyết và bảy chú lùn. Bộ phim đã thành công rực rỡ, thu về hơn 400 triệu đô la kể từ khi phát hành và 8 giải Oscar, giải thưởng cao nhất trong ngành điện ảnh.",
+ grammar:"go on to + V; earning là phân từ hiện tại bổ sung thông tin về kết quả.",
+ vocab:"feature-length animated film; a huge success; since its release.",
+ reason:"Bài nghe đề cập doanh thu trên 400 triệu đô la và tám giải Oscar. Không nói đây là bộ phim hay nhất ngành điện ảnh. C là thông tin KHÔNG được nhắc đến."
+},
+{
+ q:"What is true about Disney's achievements?",
+ vi:"Điều gì đúng về thành tựu của Disney?",
+ opts:[
+  "He created the first animated cartoon.",
+  "He holds the record for the most Oscars in history.",
+  "He designed all the Disneyland theme parks."
+ ],
+ vis:[
+  "Ông ấy đã tạo ra bộ phim hoạt hình đầu tiên.",
+  "Ông ấy giữ kỷ lục giành được nhiều giải Oscar nhất trong lịch sử.",
+  "Ông ấy đã thiết kế tất cả các công viên giải trí của Disneyland."
+ ],
+ answer:1,
+ evidence:"Throughout his career, Disney won or received 26 Oscars - a record in history.",
+ evidenceVi:"Trong suốt sự nghiệp của mình, Disney đã giành hoặc nhận được 26 giải Oscar - một kỷ lục trong lịch sử.",
+ grammar:"Quá khứ đơn: won / received; throughout + cụm danh từ.",
+ vocab:"throughout his career; received 26 Oscars; a record in history.",
+ reason:"Disney giành hoặc nhận 26 giải Oscar, một kỷ lục trong lịch sử. A không được khẳng định và C không đúng vì bài nghe chỉ nói ông sáng lập công viên Disneyland đầu tiên."
+}
+];
+
+const transcript=[
+["Walt Disney was one of the most admired people in the film industry.","Walt Disney là một trong những người được ngưỡng mộ nhất trong ngành điện ảnh."],
+["Many of the films created by his company are very popular with both children and adults.","Nhiều bộ phim do công ty của ông sản xuất rất được trẻ em và người lớn yêu thích."],
+["However, success did not come early for Disney.","Tuy nhiên, thành công không đến sớm với Disney."],
+["When he set up his own film company, it was not very profitable.","Khi ông thành lập công ty điện ảnh của riêng mình, nó không mang lại nhiều lợi nhuận."],
+["So, Disney chose to move to Hollywood to start a new career.","Vì vậy, Disney đã chọn chuyển đến Hollywood để bắt đầu sự nghiệp mới."],
+["There, he developed a character based on a pet mouse he once had, under the name of Mickey Mouse.","Ở đó, ông đã phát triển một nhân vật dựa trên con chuột cưng mà ông từng nuôi, dưới cái tên Chuột Mickey."],
+["He even gave the mouse his own voice.","Ông ấy thậm chí còn cho con chuột giọng nói của chính mình."],
+["Soon, Mickey Mouse became the world's most popular cartoon character and Disney was very popular worldwide.","Chẳng bao lâu, chuột Mickey đã trở thành nhân vật hoạt hình nổi tiếng nhất thế giới và Disney cũng rất nổi tiếng trên toàn thế giới."],
+["But Disney did not stop there.","Nhưng Disney không dừng lại ở đó."],
+["He went on to produce his first feature-length animated film Snow White and the Seven Dwarfs.","Ông tiếp tục sản xuất bộ phim hoạt hình dài tập đầu tiên Bạch Tuyết và bảy chú lùn."],
+["The film became a huge success, earning more than 400 million dollars since its release and eight Oscars, the top award in the film industry.","Bộ phim đã thành công rực rỡ, thu về hơn 400 triệu đô la kể từ khi phát hành và 8 giải Oscar, giải thưởng cao nhất trong ngành điện ảnh."],
+["Throughout his career, Disney won or received 26 Oscars - a record in history.","Trong suốt sự nghiệp của mình, Disney đã giành hoặc nhận được 26 giải Oscar - một kỷ lục trong lịch sử."],
+["Besides making films, Disney was also the creator of the first Disneyland theme park which opened in 1955.","Bên cạnh việc làm phim, Disney còn là người sáng tạo ra công viên giải trí Disneyland đầu tiên mở cửa vào năm 1955."],
+["Nowadays, there are 12 Disney parks around the world where people can meet Disney cartoon characters and see live shows of their magical stories.","Ngày nay, có 12 công viên Disney trên khắp thế giới nơi mọi người có thể gặp gỡ các nhân vật hoạt hình Disney và xem các chương trình trực tiếp về những câu chuyện kỳ diệu của họ."],
+["After his death, The Walt Disney Studios continued to make high-quality live-action and animated films, such as The Little Mermaid, Beauty and the Beast, and The Lion King.","Sau khi ông qua đời, Walt Disney Studios tiếp tục sản xuất những bộ phim hoạt hình và người thật đóng chất lượng cao như Nàng tiên cá, Người đẹp và Quái vật, và Vua sư tử."],
+["His films continue to inspire both adults and children to follow their dreams.","Những bộ phim của ông tiếp tục truyền cảm hứng cho cả người lớn và trẻ em theo đuổi ước mơ của mình."]
+];
+
+/* CỤM TỪ ĐƯỢC TRÍCH NGUYÊN TỪ BÀI NGHE */
+const vocabulary=[
+["film industry","ngành điện ảnh","/fɪlm ˈɪndəstri/","movie industry"],
+["set up","thành lập","/set ʌp/","establish"],
+["film company","công ty điện ảnh","/fɪlm ˈkʌmpəni/","movie company"],
+["start a new career","bắt đầu sự nghiệp mới","/stɑːrt ə nuː kəˈrɪr/","begin a new career"],
+["pet mouse","chuột cưng","/pet maʊs/","pet: thú cưng"],
+["cartoon character","nhân vật hoạt hình","/kɑːrˈtuːn ˈkærəktər/","animated character"],
+["feature-length animated film","phim hoạt hình dài tập","/ˈfiːtʃər leŋθ ˈænɪmeɪtɪd fɪlm/","animated film"],
+["a huge success","một thành công rực rỡ","/ə hjuːdʒ səkˈses/","a great success"],
+["theme park","công viên giải trí","/θiːm pɑːrk/","amusement park"],
+["follow their dreams","theo đuổi ước mơ của mình","/ˈfɑːloʊ ðer driːmz/","pursue their dreams"]
+];
+
+const $=id=>document.getElementById(id);
+const letters=["A","B","C"];
+const encouragement=[
+ "🌟 Mỗi câu hỏi là một cơ hội tiến bộ!",
+ "💡 Lắng nghe từ khóa và suy luận nhé!",
+ "🎯 Bạn đang xây dựng kỹ năng nghe rất tốt!",
+ "✨ Kiên trì luyện tập sẽ tạo nên khác biệt!"
+];
+
+let current=0,answers=[null,null,null,null],
+ checked=[false,false,false,false];
+let remaining=3000,timerId=null,finished=false;
+let student="",studentClass="",soundOn=true;
+let audioUrl=null,clipEnd=null,flashIndex=0,flipped=false;
+let matchLeft=null,matchRight=null,matched=new Set();
+let clips=Array.from({length:4},()=>({start:"",end:""}));
+
+function escapeHTML(s){
+ return String(s).replace(/[&<>"']/g,c=>({
+  "&":"&amp;","<":"&lt;",">":"&gt;",
+  '"':"&quot;","'":"&#39;"
+ }[c]));
+}
+function beep(success=true){
+ if(!soundOn)return;
+ try{
+  const ctx=new (window.AudioContext||window.webkitAudioContext)();
+  const o=ctx.createOscillator(),g=ctx.createGain();
+  o.type="sine";o.frequency.value=success?660:310;
+  g.gain.setValueAtTime(.07,ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.17);
+  o.connect(g);g.connect(ctx.destination);
+  o.start();o.stop(ctx.currentTime+.18);
+  o.onended=()=>ctx.close();
+ }catch(e){}
+}
+function speak(text){
+ stopMedia();
+ if(!("speechSynthesis" in window)){
+  $("mediaStatus").textContent="Trình duyệt không hỗ trợ đọc văn bản.";
+  return;
+ }
+ const utterance=new SpeechSynthesisUtterance(text);
+ utterance.lang="en-US";utterance.rate=.87;
+ const voices=speechSynthesis.getVoices();
+ const voice=voices.find(v=>v.lang.toLowerCase().startsWith("en"));
+ if(voice)utterance.voice=voice;
+ speechSynthesis.speak(utterance);
+ $("mediaStatus").textContent="Đang đọc bằng giọng của thiết bị (không phải file gốc).";
+}
+function stopMedia(){
+ if("speechSynthesis" in window)speechSynthesis.cancel();
+ $("audio").pause();clipEnd=null;
+}
+function playFull(){
+ stopMedia();
+ if(audioUrl){
+  $("audio").currentTime=0;
+  $("audio").play().catch(()=>{});
+  $("mediaStatus").textContent="Đang phát file nghe gốc.";
+ }else speak(transcript.map(x=>x[0]).join(" "));
+}
+function playEvidence(i){
+ stopMedia();
+ const c=clips[i];
+ const start=Number(c.start),end=Number(c.end);
+ if(audioUrl&&c.start!==""&&c.end!==""&&
+ Number.isFinite(start)&&Number.isFinite(end)&&
+ start>=0&&end>start&&
+ Number.isFinite($("audio").duration)&&
+ end<=$("audio").duration){
+  $("audio").currentTime=start;
+  clipEnd=end;
+  $("audio").play().catch(()=>{});
+  $("mediaStatus").textContent="Đang phát đoạn bằng chứng từ file gốc.";
+ }else{
+  speak(questions[i].evidence);
+  $("mediaStatus").textContent=
+   "Chưa thiết lập mốc cắt hợp lệ: đang đọc câu bằng chứng.";
+ }
+}
+$("audio").addEventListener("timeupdate",()=>{
+ if(clipEnd!==null&&$("audio").currentTime>=clipEnd){
+  $("audio").pause();clipEnd=null;
+ }
+});
+$("audioFile").addEventListener("change",e=>{
+ const file=e.target.files[0];
+ if(!file)return;
+ stopMedia();
+ if(audioUrl)URL.revokeObjectURL(audioUrl);
+ audioUrl=URL.createObjectURL(file);
+ $("audio").src=audioUrl;
+ $("mediaStatus").textContent="Đã tải: "+file.name;
+});
+$("ttsBtn").onclick=()=>speak(transcript.map(x=>x[0]).join(" "));
+$("stopAudioBtn").onclick=stopMedia;
+$("fullAudioBtn").onclick=playFull;
+
+function renderClipEditor(){
+ $("clipEditor").innerHTML=questions.map((q,i)=>`
+ <div class="row" style="margin:9px 0">
+  <strong>Câu ${i+1}</strong>
+  <label>Bắt đầu (giây)
+   <input type="number" min="0" step=".1" id="cs${i}"
+    value="${clips[i].start}" style="width:105px"></label>
+  <label>Kết thúc (giây)
+   <input type="number" min="0" step=".1" id="ce${i}"
+    value="${clips[i].end}" style="width:105px"></label>
+ </div>`).join("");
+}
+$("saveClips").onclick=()=>{
+ const next=questions.map((_,i)=>({
+  start:$("cs"+i).value,end:$("ce"+i).value
+ }));
+ for(const c of next){
+  if((c.start==="")!==(c.end==="")||
+    (c.start!==""&&
+    (+c.start<0||+c.end<=+c.start))){
+   alert("Vui lòng nhập đủ hai mốc hợp lệ cho mỗi đoạn.");
+   return;
+  }
+ }
+ clips=next;
+ $("mediaStatus").textContent="Đã lưu mốc nghe trong phiên hiện tại.";
+};
+renderClipEditor();
+
+function renderSentences(){
+ $("sentences").innerHTML="";
+ transcript.forEach(([en,vi],i)=>{
+  const b=document.createElement("button");
+  b.className="sentence";
+  b.innerHTML=`${i+1}. ${escapeHTML(en)}
+   <span>🇻🇳 ${escapeHTML(vi)}</span>`;
+  b.onclick=()=>b.classList.toggle("open");
+  $("sentences").appendChild(b);
+ });
+}
+renderSentences();
+$("fullTranslationBtn").onclick=()=>{
+ const panel=$("fullTranslation");
+ panel.classList.toggle("hidden");
+ if(!panel.classList.contains("hidden")){
+  panel.textContent=transcript.map(x=>x[1]).join(" ");
+ }
+};
+
+function renderQuestion(){
+ const q=questions[current];
+ $("questionCounter").textContent=`Câu ${current+1}/4`;
+ $("progressFill").style.width=((current+1)/4*100)+"%";
+ $("motivation").textContent=encouragement[current];
+ $("questionText").textContent=`Question ${current+1}. ${q.q}`;
+ $("options").innerHTML="";
+ q.opts.forEach((opt,i)=>{
+  const b=document.createElement("button");
+  b.className="option";
+  if(answers[current]===i)b.classList.add("selected");
+  if(checked[current]){
+   if(i===q.answer)b.classList.add("correct");
+   if(i===answers[current]&&i!==q.answer)b.classList.add("wrong");
+  }
+  b.innerHTML=`<strong>${letters[i]}.</strong> ${escapeHTML(opt)}
+    <div class="translation">🇻🇳 ${escapeHTML(q.vis[i])}</div>`;
+  b.onclick=()=>{
+   if(checked[current]||finished){
+    b.classList.toggle("show-translation");
+    return;
+   }
+   answers[current]=i;
+   renderQuestion();
+  };
+  b.oncontextmenu=e=>{
+   e.preventDefault();
+   b.classList.toggle("show-translation");
+  };
+  $("options").appendChild(b);
+ });
+ $("checkBtn").disabled=checked[current]||finished;
+ $("correctBtn").disabled=!checked[current];
+ $("clipBtn").disabled=!checked[current];
+ $("feedback").innerHTML="";
+ $("explanation").classList.add("hidden");
+ $("explanation").innerHTML="";
+ if(checked[current]){
+  showFeedback();
+ }
+ $("prevBtn").disabled=current===0;
+ $("nextBtn").disabled=current===3;
+}
+function showFeedback(){
+ const correct=answers[current]===questions[current].answer;
+ $("feedback").innerHTML=`<div class="notice">
+ <span class="${correct?"good":"bad"}">
+ ${correct?"✓ Chính xác!":"↗ Chưa chính xác."}</span>
+ ${correct?"Bạn đã nắm được thông tin quan trọng!":
+ "Hãy nghe lại bằng chứng để hiểu rõ hơn nhé!"}
+ </div>`;
+}
+$("checkBtn").onclick=()=>{
+ if(answers[current]===null){
+  alert("Hãy chọn một phương án trước khi kiểm tra.");
+  return;
+ }
+ checked[current]=true;
+ beep(answers[current]===questions[current].answer);
+ renderQuestion();
+};
+$("correctBtn").onclick=()=>{
+ const q=questions[current];
+ const el=$("explanation");
+ el.classList.toggle("hidden");
+ if(el.classList.contains("hidden"))return;
+ el.innerHTML=`
+ <div class="notice">
+ <h3>📖 Correct Answer: ${letters[q.answer]}</h3>
+ <p><strong>Đề bài:</strong> ${escapeHTML(q.vi)}</p>
+ <p><strong>Giải thích:</strong> ${escapeHTML(q.reason)}</p>
+ <h3>🎧 Listening Evidence</h3>
+ <p>${escapeHTML(q.evidence)}</p>
+ <p><strong>Dịch:</strong> ${escapeHTML(q.evidenceVi)}</p>
+ <h3>🇻🇳 Nghĩa của từng phương án</h3>
+ ${q.opts.map((o,i)=>`<p><strong>${letters[i]}.</strong>
+ ${escapeHTML(o)}<br>${escapeHTML(q.vis[i])}</p>`).join("")}
+ <h3>📚 Vocabulary & Collocations</h3>
+ <p>${escapeHTML(q.vocab)}</p>
+ <h3>📝 Grammar Notes</h3>
+ <p>${escapeHTML(q.grammar)}</p>
+ </div>`;
+};
+$("clipBtn").onclick=()=>playEvidence(current);
+$("prevBtn").onclick=()=>{current--;renderQuestion()};
+$("nextBtn").onclick=()=>{current++;renderQuestion()};
+
+function updateTimer(){
+ const m=Math.floor(remaining/60),s=remaining%60;
+ $("timer").textContent=`${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+ $("timer").classList.toggle("warning",remaining<=300);
+}
+function startTimer(){
+ updateTimer();
+ timerId=setInterval(()=>{
+  if(finished){clearInterval(timerId);return}
+  remaining--;
+  updateTimer();
+  if(remaining<=0)finish(true);
+ },1000);
+}
+$("startBtn").onclick=()=>{
+ student=$("studentName").value.trim();
+ studentClass=$("studentClass").value;
+ if(!student||!studentClass){
+  alert("Vui lòng nhập họ tên và chọn lớp.");
+  return;
+ }
+ $("startScreen").classList.add("hidden");
+ $("appArea").classList.remove("hidden");
+ $("studentInfo").textContent=student+" • "+studentClass;
+ renderQuestion();startTimer();
+ window.scrollTo(0,0);
+};
+
+function finish(timeout=false){
+ if(finished)return;
+ const unanswered=answers.filter(x=>x===null).length;
+ if(!timeout&&unanswered&&
+ !confirm(`Còn ${unanswered} câu chưa chọn. Bạn vẫn muốn nộp bài?`))return;
+ finished=true;clearInterval(timerId);stopMedia();
+ const correct=questions.reduce((n,q,i)=>n+(answers[i]===q.answer?1:0),0);
+ const score=correct/4*10;
+ $("quizScreen").classList.add("hidden");
+ $("studyScreen").classList.add("hidden");
+ $("resultScreen").classList.remove("hidden");
+ $("resultTitle").textContent=student;
+ $("resultDetails").innerHTML=`
+ <p><strong>Lớp:</strong> ${escapeHTML(studentClass)}</p>
+ <h2>${correct}/4 câu đúng • ${score.toFixed(2)}/10 điểm</h2>
+ <p>Thời gian sử dụng: ${Math.floor((3000-remaining)/60)} phút
+ ${(3000-remaining)%60} giây</p>
+ <p>${timeout?"Đã hết thời gian làm bài.":"Đã hoàn thành bài luyện nghe."}</p>`;
+ $("resultMessage").textContent=correct===4?
+ "Xuất sắc! Hãy tiếp tục phát huy kỹ năng nghe và suy luận.":
+ correct>=3?"Rất tốt! Bạn đã nắm được phần lớn nội dung bài nghe.":
+ correct>=2?"Bạn đang tiến bộ! Hãy ôn lại các từ khóa quan trọng.":
+ "Mỗi lần luyện tập đều có giá trị. Hãy nghe lại và thử sức lần nữa!";
+ const eligible=correct/4>.7;
+ $("certificate").classList.toggle("hidden",!eligible);
+ $("printBtn").classList.toggle("hidden",!eligible);
+ if(eligible){
+  $("certName").textContent=student;
+  $("certClass").textContent="Lớp "+studentClass;
+  $("certScore").textContent=`Kết quả: ${correct}/4 • ${score.toFixed(2)}/10`;
+  $("certDate").textContent="Ngày hoàn thành: "+
+   new Date().toLocaleDateString("vi-VN");
+  $("certCode").textContent="Mã chứng nhận: WD-"+
+   Date.now().toString(36).toUpperCase();
+ }
+ beep(true);
+ window.scrollTo(0,0);
+}
+$("finishBtn").onclick=()=>finish(false);
+$("printBtn").onclick=()=>window.print();
+$("restartBtn").onclick=()=>location.reload();
+$("reviewBtn").onclick=()=>{
+ $("resultScreen").classList.add("hidden");
+ $("quizScreen").classList.remove("hidden");
+ current=0;
+ renderQuestion();
+ window.scrollTo(0,0);
+};
+$("studyBtn").onclick=()=>{
+ $("resultScreen").classList.add("hidden");
+ $("studyScreen").classList.remove("hidden");
+ renderMatching();renderFlashcard();
+ window.scrollTo(0,0);
+};
+$("backResults").onclick=()=>{
+ $("studyScreen").classList.add("hidden");
+ $("resultScreen").classList.remove("hidden");
+ window.scrollTo(0,0);
+};
+
+/* MATCHING: 10 CỤM TỪ */
+function shuffledIndices(){
+ const a=Array.from({length:10},(_,i)=>i);
+ for(let i=a.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [a[i],a[j]]=[a[j],a[i]];
+ }
+ return a;
+}
+let rightOrder=shuffledIndices();
+function renderMatching(){
+ $("matching").innerHTML="";
+ const left=document.createElement("div");
+ const right=document.createElement("div");
+ vocabulary.forEach((v,i)=>{
+  const b=document.createElement("button");
+  b.className="match-item";
+  b.textContent=(i+1)+". "+v[0];
+  b.disabled=matched.has(i);
+  if(matchLeft===i)b.classList.add("active");
+  if(matched.has(i))b.classList.add("matched");
+  b.onclick=()=>{matchLeft=i;testMatch();renderMatching()};
+  left.appendChild(b);
+ });
+ rightOrder.forEach((idx,pos)=>{
+  const b=document.createElement("button");
+  b.className="match-item";
+  b.textContent=String.fromCharCode(65+pos)+". "+vocabulary[idx][1];
+  b.disabled=matched.has(idx);
+  if(matchRight===idx)b.classList.add("active");
+  if(matched.has(idx))b.classList.add("matched");
+  b.onclick=()=>{matchRight=idx;testMatch();renderMatching()};
+  right.appendChild(b);
+ });
+ $("matching").append(left,right);
+ $("matchStatus").textContent=
+  `Đã nối đúng ${matched.size}/10 cặp.`+
+  (matched.size===10?" 🎉 Hoàn thành xuất sắc!":"");
+}
+function testMatch(){
+ if(matchLeft===null||matchRight===null)return;
+ if(matchLeft===matchRight){
+  matched.add(matchLeft);beep(true);
+ }else{
+  beep(false);
+  $("matchStatus").textContent="Chưa khớp. Hãy thử lại!";
+ }
+ matchLeft=null;matchRight=null;
+}
+$("resetMatch").onclick=()=>{
+ matched.clear();matchLeft=null;matchRight=null;
+ rightOrder=shuffledIndices();renderMatching();
+};
+
+/* FLASHCARDS */
+function renderFlashcard(){
+ const v=vocabulary[flashIndex];
+ $("flashcard").innerHTML=flipped?
+ `<div class="word">${escapeHTML(v[1])}</div>
+  <p>${escapeHTML(v[0])}</p>
+  <p>${escapeHTML(v[2])}</p>
+  <p><strong>Từ/cụm liên quan:</strong> ${escapeHTML(v[3])}</p>`:
+ `<div class="word">${escapeHTML(v[0])}</div>
+  <p>${escapeHTML(v[2])}</p>
+  <p>👆 Nhấn để xem nghĩa</p>`;
+ $("flashCounter").textContent=`Thẻ ${flashIndex+1}/10`;
+}
+function flip(){flipped=!flipped;renderFlashcard()}
+$("flashcard").onclick=flip;
+$("flashcard").onkeydown=e=>{
+ if(e.key==="Enter"||e.key===" "){e.preventDefault();flip()}
+};
+$("flashFlip").onclick=flip;
+$("flashNext").onclick=()=>{
+ flashIndex=(flashIndex+1)%10;flipped=false;renderFlashcard();
+};
+$("flashPrev").onclick=()=>{
+ flashIndex=(flashIndex+9)%10;flipped=false;renderFlashcard();
+};
+
+/* GIAO DIỆN */
+$("theme").onchange=e=>{
+ document.body.dataset.theme=e.target.value;
+ try{localStorage.setItem("msduyen-theme",e.target.value)}catch(e){}
+};
+try{
+ const saved=localStorage.getItem("msduyen-theme");
+ if(["blue","mint","peach","lavender","dark"].includes(saved)){
+  $("theme").value=saved;
+  document.body.dataset.theme=saved;
+ }
+}catch(e){}
+$("soundBtn").onclick=()=>{
+ soundOn=!soundOn;
+ $("soundBtn").textContent=soundOn?
+ "🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+};
+window.addEventListener("beforeunload",()=>{
+ stopMedia();
+ if(audioUrl)URL.revokeObjectURL(audioUrl);
+});
+</script>
+</body>
+</html>

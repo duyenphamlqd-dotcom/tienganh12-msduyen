@@ -1,0 +1,2437 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test 01-Listening part 1 – New words | Ms.Duyen</title>
+
+<style>
+:root {
+  --bg: #eef3ff;
+  --surface: #ffffff;
+  --surface2: #e8efff;
+  --text: #192b49;
+  --muted: #526481;
+  --primary: #3659c7;
+  --primaryText: #ffffff;
+  --border: #ccd7ee;
+  --success: #14774a;
+  --successBg: #e2f7eb;
+  --danger: #b33646;
+  --dangerBg: #ffedf0;
+  --gold: #b98217;
+  --shadow: 0 8px 28px rgba(20,40,85,.08);
+}
+
+body[data-theme="green"] {
+  --bg:#e6f7ee;
+  --surface:#ffffff;
+  --surface2:#d9f2e5;
+  --text:#17392d;
+  --muted:#426959;
+  --primary:#137c55;
+  --primaryText:#ffffff;
+  --border:#b5dac7;
+  --success:#126c42;
+}
+
+body[data-theme="purple"] {
+  --bg:#f2ebff;
+  --surface:#ffffff;
+  --surface2:#eadfff;
+  --text:#36244d;
+  --muted:#675477;
+  --primary:#7746b6;
+  --primaryText:#ffffff;
+  --border:#d3bfe9;
+}
+
+body[data-theme="peach"] {
+  --bg:#fff0e6;
+  --surface:#fffdfb;
+  --surface2:#ffe1ce;
+  --text:#4d2b28;
+  --muted:#75544c;
+  --primary:#a84b33;
+  --primaryText:#ffffff;
+  --border:#e6bda8;
+}
+
+body[data-theme="dark"] {
+  --bg:#111b2f;
+  --surface:#1e2c45;
+  --surface2:#30425f;
+  --text:#f3f7ff;
+  --muted:#c3d1e4;
+  --primary:#a6c2ff;
+  --primaryText:#10203b;
+  --border:#526784;
+  --success:#80e9b0;
+  --successBg:#193f35;
+  --danger:#ff9cab;
+  --dangerBg:#512a37;
+  --gold:#ffd28a;
+  --shadow:0 8px 28px rgba(0,0,0,.15);
+}
+
+* {
+  box-sizing:border-box;
+}
+
+html {
+  scroll-behavior:smooth;
+}
+
+body {
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  color:var(--text);
+  background:var(--bg);
+  transition:background .25s,color .25s;
+}
+
+button,input,select {
+  font:inherit;
+}
+
+button {
+  cursor:pointer;
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:11px 16px;
+  background:var(--surface2);
+  color:var(--text);
+  font-weight:650;
+  transition:transform .15s,background .15s;
+}
+
+button:hover:not(:disabled) {
+  transform:translateY(-1px);
+}
+
+button:disabled {
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[role="button"]:focus-visible {
+  outline:3px solid var(--primary);
+  outline-offset:3px;
+}
+
+input,select {
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:12px;
+  background:var(--surface);
+  color:var(--text);
+  max-width:100%;
+}
+
+.primary {
+  background:var(--primary);
+  color:var(--primaryText);
+  border-color:var(--primary);
+}
+
+.successButton {
+  background:var(--successBg);
+  color:var(--success);
+  border:1px solid var(--success);
+}
+
+.container {
+  max-width:1120px;
+  margin:auto;
+  padding:18px;
+}
+
+.panel {
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:25px;
+  margin:18px 0;
+  box-shadow:var(--shadow);
+}
+
+.hidden {
+  display:none!important;
+}
+
+.center {
+  text-align:center;
+}
+
+.row {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.between {
+  justify-content:space-between;
+}
+
+.script {
+  font-family:"Brush Script MT","Segoe Script","Palatino Linotype",Georgia,serif;
+  font-style:italic;
+  font-weight:bold;
+  letter-spacing:.4px;
+}
+
+h1,h2,h3 {
+  line-height:1.35;
+}
+
+h2 {
+  color:var(--primary);
+}
+
+.muted {
+  color:var(--muted);
+}
+
+.small {
+  font-size:14px;
+}
+
+.tag {
+  display:inline-block;
+  background:var(--surface2);
+  color:var(--text);
+  padding:6px 13px;
+  border-radius:30px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.hero {
+  min-height:570px;
+  padding:55px 28px;
+  background:linear-gradient(145deg,var(--surface2),var(--surface) 65%);
+  text-align:center;
+}
+
+.hero h1 {
+  font-size:clamp(42px,7vw,78px);
+  line-height:1.12;
+  color:var(--primary);
+  margin:23px 0;
+}
+
+.heroSubtitle {
+  font-size:clamp(19px,3vw,27px);
+  font-weight:700;
+}
+
+.fields {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  max-width:650px;
+  margin:28px auto;
+  text-align:left;
+}
+
+.field label {
+  display:block;
+  margin-bottom:5px;
+  font-weight:700;
+}
+
+.field input,
+.field select {
+  width:100%;
+}
+
+.bigButton {
+  padding:15px 30px;
+  font-size:18px;
+  border-radius:16px;
+}
+
+.message {
+  background:var(--surface2);
+  border-left:4px solid var(--primary);
+  padding:12px 15px;
+  margin:12px 0;
+  border-radius:9px;
+}
+
+.topbar {
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:12px 17px;
+  margin:14px 0;
+  box-shadow:var(--shadow);
+}
+
+#timer {
+  font-size:24px;
+  font-weight:800;
+  font-variant-numeric:tabular-nums;
+}
+
+.timerWarning {
+  color:var(--danger);
+}
+
+.progressOuter {
+  height:11px;
+  background:var(--surface2);
+  border-radius:20px;
+  overflow:hidden;
+  margin:12px 0;
+}
+
+.progressInner {
+  height:100%;
+  width:0;
+  background:var(--primary);
+  transition:width .3s;
+}
+
+.studyGrid {
+  display:grid;
+  grid-template-columns:minmax(220px,30%) minmax(0,1fr);
+  gap:20px;
+  align-items:stretch;
+}
+
+.audioSide {
+  background:var(--surface2);
+  border-radius:18px;
+  padding:22px;
+  text-align:center;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  gap:13px;
+}
+
+.speakerButton {
+  width:98px;
+  height:98px;
+  border-radius:50%;
+  font-size:43px;
+  background:var(--primary);
+  color:var(--primaryText);
+  border:0;
+  box-shadow:0 6px 18px rgba(0,0,0,.12);
+}
+
+.cardArea {
+  perspective:1200px;
+  min-height:310px;
+}
+
+.flashcard {
+  position:relative;
+  width:100%;
+  min-height:310px;
+  border:2px solid var(--primary);
+  border-radius:22px;
+  background:var(--surface2);
+  cursor:pointer;
+  transition:transform .25s,box-shadow .25s;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:25px;
+  text-align:center;
+}
+
+.flashcard:hover {
+  box-shadow:0 8px 25px rgba(0,0,0,.09);
+}
+
+.flashcardContent {
+  width:100%;
+  animation:appear .23s ease;
+}
+
+.flashcard h2 {
+  font-size:clamp(25px,3.5vw,38px);
+  margin:12px 0;
+}
+
+.ipa {
+  font-family:Arial,sans-serif;
+  color:var(--muted);
+  font-size:20px;
+}
+
+.cardBackMeaning {
+  font-size:clamp(22px,3vw,30px);
+  font-weight:750;
+}
+
+.cardControls {
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:19px;
+}
+
+.sectionHeading {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.matchRow {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);
+  gap:13px;
+  padding:13px 10px;
+  border-bottom:1px solid var(--border);
+  align-items:center;
+}
+
+.matchRow select {
+  width:100%;
+}
+
+.matchRow.correct {
+  background:var(--successBg);
+  border-radius:10px;
+  border-left:4px solid var(--success);
+}
+
+.matchRow.incorrect {
+  background:var(--dangerBg);
+  border-radius:10px;
+  border-left:4px solid var(--danger);
+}
+
+.matchFeedback {
+  grid-column:1/-1;
+  font-size:14px;
+  padding:3px 8px;
+}
+
+.correctText {
+  color:var(--success);
+  font-weight:750;
+}
+
+.incorrectText {
+  color:var(--danger);
+  font-weight:750;
+}
+
+.quizQuestion {
+  padding:20px;
+  margin:18px 0;
+  border:1px solid var(--border);
+  border-radius:18px;
+  background:var(--surface);
+}
+
+.quizPrompt {
+  font-size:19px;
+  font-weight:750;
+}
+
+.quizOption {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px;
+  border:2px solid var(--border);
+  border-radius:13px;
+  margin:10px 0;
+  min-height:54px;
+}
+
+.quizOption.selected {
+  border-color:var(--primary);
+  background:var(--surface2);
+}
+
+.quizOption.correct {
+  border-color:var(--success);
+  background:var(--successBg);
+}
+
+.quizOption.incorrect {
+  border-color:var(--danger);
+  background:var(--dangerBg);
+}
+
+.quizOption label {
+  flex:1;
+  cursor:pointer;
+  min-width:0;
+}
+
+.quizOption input {
+  width:18px;
+  height:18px;
+  accent-color:var(--primary);
+  flex-shrink:0;
+}
+
+.translateButton {
+  padding:6px 10px;
+  flex-shrink:0;
+  font-size:14px;
+}
+
+.optionMeaning {
+  margin:5px 0 8px 30px;
+  padding:9px;
+  background:var(--surface2);
+  border-radius:8px;
+  font-size:14px;
+}
+
+.explanation {
+  padding:15px;
+  background:var(--surface2);
+  border-radius:12px;
+  margin-top:12px;
+  border-left:4px solid var(--primary);
+}
+
+.resultNumber {
+  font-size:clamp(40px,8vw,75px);
+  font-weight:850;
+  color:var(--primary);
+  margin:8px 0;
+}
+
+.scoreGrid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin:18px auto;
+}
+
+.scoreBox {
+  border:1px solid var(--border);
+  border-radius:15px;
+  background:var(--surface2);
+  padding:17px 8px;
+  text-align:center;
+}
+
+.scoreBox strong {
+  font-size:clamp(20px,3vw,30px);
+}
+
+.certificate {
+  border:7px double var(--primary);
+  border-radius:10px;
+  background:var(--surface);
+  padding:35px 20px;
+  text-align:center;
+}
+
+.certificate h2 {
+  font-size:clamp(33px,5vw,55px);
+  font-family:"Brush Script MT","Segoe Script",Georgia,serif;
+  font-style:italic;
+  margin:16px 0;
+}
+
+.certificateName {
+  font-size:clamp(25px,4vw,40px);
+  font-weight:800;
+  color:var(--primary);
+  overflow-wrap:anywhere;
+}
+
+.signature {
+  font-family:"Brush Script MT","Segoe Script",Georgia,serif;
+  font-style:italic;
+  font-size:32px;
+  color:var(--primary);
+}
+
+.divider {
+  height:1px;
+  background:var(--border);
+  margin:22px 0;
+}
+
+footer {
+  text-align:center;
+  color:var(--muted);
+  padding:22px;
+  font-size:14px;
+}
+
+@keyframes appear {
+  from {opacity:0;transform:translateY(7px)}
+  to {opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:680px) {
+  .container {padding:10px}
+  .panel {padding:17px}
+  .hero {padding:35px 17px;min-height:auto}
+  .fields {grid-template-columns:1fr}
+  .studyGrid {grid-template-columns:1fr}
+  .audioSide {min-height:180px}
+  .matchRow {grid-template-columns:1fr}
+  .scoreGrid {grid-template-columns:1fr 1fr}
+  .topbar {position:relative}
+  .quizOption {align-items:flex-start}
+  .translateButton {padding:7px}
+}
+
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+}
+
+@media print {
+  body {
+    background:white!important;
+    color:black!important;
+  }
+  body * {
+    visibility:hidden!important;
+  }
+  #certificateSection,
+  #certificateSection * {
+    visibility:visible!important;
+  }
+  #certificateSection {
+    display:block!important;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    margin:0;
+    padding:0;
+    border:0;
+    box-shadow:none;
+  }
+  .certificate {
+    border:6px double #333!important;
+    color:black!important;
+  }
+  .certificate * {
+    color:black!important;
+  }
+  .noPrint {
+    display:none!important;
+  }
+  @page {
+    size:A4;
+    margin:15mm;
+  }
+}
+</style>
+</head>
+
+<body data-theme="blue">
+
+<div class="container">
+
+<!-- THEME SETTINGS -->
+
+<header class="row between noPrint">
+  <strong>🎓 ENGLISH VOCABULARY LAB</strong>
+
+  <div class="row">
+    <label for="themeSelector">🎨 Màu nền:</label>
+
+    <select id="themeSelector" onchange="setTheme(this.value)">
+      <option value="blue">Ocean Blue</option>
+      <option value="green">Mint Green</option>
+      <option value="purple">Lavender</option>
+      <option value="peach">Warm Peach</option>
+      <option value="dark">Dark Mode</option>
+    </select>
+
+    <button id="soundButton" onclick="toggleSound()">
+      🔊 Sound ON
+    </button>
+  </div>
+</header>
+
+
+<!-- WELCOME SCREEN -->
+
+<section id="welcomeScreen" class="panel hero">
+
+  <span class="tag">GRADE 12 • MIDTERM I REVISION</span>
+
+  <h1 class="script">
+    Test 01<br>
+    Listening Part 1<br>
+    New Words
+  </h1>
+
+  <p class="heroSubtitle">
+    ✨ Walt Disney's Life ✨
+  </p>
+
+  <p>
+    15 Essential Phrases • Flashcards • Matching • Quick Quiz
+  </p>
+
+  <p>
+    <strong>Giáo viên thiết kế: Ms.Duyen</strong>
+  </p>
+
+  <div class="message" style="max-width:680px;margin:25px auto">
+    <strong>
+      Kiểm tra mà như chơi – chơi mà vẫn học được!
+    </strong>
+
+    <p>
+      Mỗi từ vựng mới là một bước tiến trên hành trình chinh phục tiếng Anh.
+    </p>
+  </div>
+
+  <div class="fields">
+
+    <div class="field">
+      <label for="studentName">👤 Họ và tên học sinh</label>
+      <input
+        id="studentName"
+        type="text"
+        maxlength="90"
+        autocomplete="name"
+        placeholder="Nhập họ và tên">
+    </div>
+
+    <div class="field">
+      <label for="studentClass">🏫 Lớp</label>
+      <input
+        id="studentClass"
+        type="text"
+        maxlength="20"
+        placeholder="Ví dụ: 12A1">
+    </div>
+
+  </div>
+
+  <button class="primary bigButton" onclick="startGame()">
+    🚀 START LEARNING
+  </button>
+
+  <p class="muted small">
+    ⏱️ 50 minutes • 15 Flashcards • 15 Matching Items • 5 Quiz Questions
+  </p>
+
+  <p class="small">
+    Hoàn thành với trên 70% câu đúng để nhận giấy chứng nhận.
+  </p>
+
+  <p class="small muted">
+    Phát âm sử dụng giọng tiếng Anh sẵn có trên thiết bị.
+    Chất lượng và khả năng phát khi ngoại tuyến phụ thuộc vào trình duyệt
+    và giọng đọc đã cài đặt.
+  </p>
+
+</section>
+
+
+<!-- MAIN APP -->
+
+<main id="appScreen" class="hidden">
+
+  <!-- STATUS -->
+
+  <div class="topbar noPrint">
+
+    <div class="row between">
+
+      <div>
+        <strong id="studentLabel"></strong>
+        <div class="small muted">Test 01 – Listening part 1</div>
+      </div>
+
+      <div class="row">
+        <span class="tag" id="studyProgress">0/15 flashcards</span>
+        <span id="timer">50:00</span>
+      </div>
+
+    </div>
+
+    <div class="progressOuter">
+      <div id="progressBar" class="progressInner"></div>
+    </div>
+
+  </div>
+
+
+  <!-- MOTIVATION -->
+
+  <section class="panel center">
+    <div class="tag">VOCABULARY CHALLENGE</div>
+
+    <h2 class="script" style="font-size:36px">
+      Learn • Practice • Grow
+    </h2>
+
+    <p id="motivation" class="message">
+      Every new word brings you closer to your goal!
+    </p>
+
+    <div class="row" style="justify-content:center">
+      <button onclick="goTo('flashcardSection')">🃏 Flashcards</button>
+      <button onclick="goTo('matchingSection')">🧩 Matching</button>
+      <button onclick="goTo('quizSection')">⚡ Quick Quiz</button>
+    </div>
+
+  </section>
+
+
+  <!-- FLASHCARDS -->
+
+  <section id="flashcardSection" class="panel">
+
+    <div class="sectionHeading">
+      <h2>🃏 Part 1 – Vocabulary Flashcards</h2>
+      <span class="tag" id="cardCounter">1 / 15</span>
+    </div>
+
+    <p class="muted">
+      Click the flashcard to see its Vietnamese meaning,
+      synonyms, antonyms and grammar notes.
+    </p>
+
+    <div class="studyGrid">
+
+      <!-- LEFT AUDIO -->
+
+      <div class="audioSide">
+
+        <strong>🎧 LISTEN & REPEAT</strong>
+
+        <button
+          class="speakerButton"
+          onclick="speakCurrent()"
+          aria-label="Nghe phát âm cụm từ">
+          🔊
+        </button>
+
+        <span class="tag">British English</span>
+
+        <p id="audioPhrase" style="font-weight:750"></p>
+
+        <button onclick="speakCurrent()">▶ Listen Again</button>
+
+        <button onclick="stopSpeaking()">■ Stop</button>
+
+        <p id="speechStatus" class="small muted" aria-live="polite">
+          Nhấn loa để nghe phát âm.
+        </p>
+
+      </div>
+
+
+      <!-- RIGHT CARD -->
+
+      <div class="cardArea">
+
+        <div
+          id="flashcard"
+          class="flashcard"
+          role="button"
+          tabindex="0"
+          aria-label="Lật thẻ từ vựng"
+          onclick="flipCard()"
+          onkeydown="flashcardKey(event)">
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="cardControls">
+
+      <button onclick="previousCard()">← Previous</button>
+
+      <button onclick="flipCard()">🔄 Flip Card</button>
+
+      <button onclick="markLearned()" class="successButton">
+        ✅ I Know This Word
+      </button>
+
+      <button onclick="nextCard()">Next →</button>
+
+    </div>
+
+    <div class="center">
+      <p id="flashFeedback" class="muted" aria-live="polite"></p>
+    </div>
+
+  </section>
+
+
+  <!-- MATCHING -->
+
+  <section id="matchingSection" class="panel">
+
+    <div class="sectionHeading">
+      <h2>🧩 Part 2 – Matching Challenge</h2>
+      <span class="tag">15 items</span>
+    </div>
+
+    <p>
+      <strong>Match each English phrase with its Vietnamese meaning.</strong>
+    </p>
+
+    <p class="muted">
+      Nối 15 cụm từ tiếng Anh với nghĩa tiếng Việt.
+      Mỗi đáp án đúng được 1 điểm.
+    </p>
+
+    <div id="matchingContainer"></div>
+
+    <div class="row" style="margin-top:20px">
+
+      <button
+        id="matchingSubmit"
+        class="primary"
+        onclick="submitMatching()">
+        ✔ Check My Answers
+      </button>
+
+      <span id="matchingScore" class="tag">
+        Not submitted
+      </span>
+
+    </div>
+
+    <div id="matchingFeedback" aria-live="polite"></div>
+
+  </section>
+
+
+  <!-- QUICK QUIZ -->
+
+  <section id="quizSection" class="panel">
+
+    <div class="sectionHeading">
+      <h2>⚡ Part 3 – Quick Quiz</h2>
+      <span class="tag">5 questions</span>
+    </div>
+
+    <p>
+      <strong>Choose the best English phrase for each Vietnamese meaning.</strong>
+    </p>
+
+    <p class="muted">
+      5 câu trắc nghiệm được tự động chọn từ danh sách 15 cụm từ.
+      Nhấn nút 🇻🇳 bên cạnh mỗi phương án để xem nghĩa.
+    </p>
+
+    <div id="quizContainer"></div>
+
+    <div class="row">
+
+      <button
+        id="quizSubmit"
+        class="primary"
+        onclick="submitQuiz()">
+        📝 NỘP BÀI – SUBMIT QUIZ
+      </button>
+
+      <span id="quizScore" class="tag">
+        Not submitted
+      </span>
+
+    </div>
+
+    <div id="quizFeedback" aria-live="polite"></div>
+
+  </section>
+
+
+  <!-- FINISH -->
+
+  <section class="panel center">
+
+    <h2 class="script" style="font-size:37px">
+      Ready to Celebrate Your Progress?
+    </h2>
+
+    <p>
+      Điểm tổng kết được tính từ 15 câu nối nghĩa và
+      5 câu trắc nghiệm, tổng cộng 20 câu.
+    </p>
+
+    <p>
+      <strong>Đạt trên 70%: tối thiểu 15/20 câu đúng.</strong>
+    </p>
+
+    <div class="row" style="justify-content:center">
+
+      <button class="primary bigButton" onclick="finishGame(false)">
+        🏆 HOÀN THÀNH & XEM KẾT QUẢ
+      </button>
+
+      <button onclick="resetTest()">
+        🔄 Reset Test
+      </button>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- RESULTS -->
+
+<section id="resultScreen" class="panel hidden center">
+
+  <h1 class="script" style="font-size:clamp(43px,7vw,72px);color:var(--primary)">
+    Your Learning Achievement!
+  </h1>
+
+  <p id="resultStudent"></p>
+
+  <div id="resultScore" class="resultNumber"></div>
+
+  <div class="scoreGrid">
+
+    <div class="scoreBox">
+      <strong id="matchingResultScore">0/15</strong>
+      <p>Matching</p>
+    </div>
+
+    <div class="scoreBox">
+      <strong id="quizResultScore">0/5</strong>
+      <p>Quick Quiz</p>
+    </div>
+
+    <div class="scoreBox">
+      <strong id="percentResult">0%</strong>
+      <p>Accuracy</p>
+    </div>
+
+  </div>
+
+  <h2 id="resultTitle"></h2>
+
+  <p id="resultComment" class="message"></p>
+
+  <p id="resultTime"></p>
+
+  <div class="row noPrint" style="justify-content:center">
+
+    <button onclick="reviewLearning()">
+      📚 Review Vocabulary
+    </button>
+
+    <button id="certificateButton" class="primary hidden"
+      onclick="printCertificate()">
+      🖨️ Print Certificate
+    </button>
+
+    <button onclick="resetTest()">
+      🔄 Try Again
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- CERTIFICATE -->
+
+<section id="certificateSection" class="panel hidden">
+
+  <div class="certificate">
+
+    <p style="letter-spacing:3px;font-weight:bold">
+      ENGLISH LEARNING ACHIEVEMENT
+    </p>
+
+    <h2>Certificate of Completion</h2>
+
+    <h3>GIẤY CHỨNG NHẬN HOÀN THÀNH</h3>
+
+    <div class="divider"></div>
+
+    <p>This certificate is proudly presented to</p>
+
+    <div id="certificateName" class="certificateName"></div>
+
+    <p id="certificateClass"></p>
+
+    <p>For successfully completing</p>
+
+    <h3>
+      Test 01-Listening part 1 – New words
+    </h3>
+
+    <p>Walt Disney's Life – Vocabulary Challenge</p>
+
+    <h2 id="certificateScore"></h2>
+
+    <p id="certificateDate"></p>
+
+    <p id="certificateID" class="small muted"></p>
+
+    <div class="divider"></div>
+
+    <p>Giáo viên thiết kế: Ms.Duyen</p>
+
+    <p class="signature">Ms.Duyên</p>
+
+    <p>Teacher's Signature</p>
+
+    <p class="small">
+      Keep learning, keep improving, keep believing in yourself!
+    </p>
+
+  </div>
+
+</section>
+
+
+<footer class="noPrint">
+  ✨ Test 01 – Listening Part 1 – New Words ✨
+  <br>
+  Giáo viên thiết kế: Ms.Duyen
+</footer>
+
+</div>
+
+
+<script>
+"use strict";
+
+/* =========================================================
+   EXACT VOCABULARY SOURCE
+   15 ITEMS PROVIDED BY THE TEACHER
+========================================================= */
+
+const vocabulary = [
+
+  {
+    phrase:"Be popular with",
+    ipa:"/bi ˈpɒp.jə.lər wɪð/",
+    meaning:"Phổ biến với",
+    synonym:"Be favored by; be well-liked",
+    antonym:"",
+    note:"",
+    speak:"Be popular with"
+  },
+
+  {
+    phrase:"Set up (a company/business)",
+    ipa:"/set ʌp/",
+    meaning:"Thành lập (một công ty/doanh nghiệp)",
+    synonym:"Establish; found; start",
+    antonym:"",
+    note:"Set up (a company/business) = thành lập một công ty/doanh nghiệp.",
+    speak:"Set up a company"
+  },
+
+  {
+    phrase:"Be profitable",
+    ipa:"/bi ˈprɒf.ɪ.tə.bəl/",
+    meaning:"Sinh lời, có lãi, mang lại lợi nhuận",
+    synonym:"Make a profit; be lucrative",
+    antonym:"",
+    note:"",
+    speak:"Be profitable"
+  },
+
+  {
+    phrase:"Start a career",
+    ipa:"/stɑːt ə kəˈrɪər/",
+    meaning:"Bắt đầu sự nghiệp",
+    synonym:"Begin a profession",
+    antonym:"",
+    note:"",
+    speak:"Start a career"
+  },
+
+  {
+    phrase:"Be based on (something)",
+    ipa:"/bi beɪst ɒn/",
+    meaning:"Được dựa trên (cái gì)",
+    synonym:"",
+    antonym:"",
+    note:"Cấu trúc bị động: A is based on B.",
+    speak:"Be based on"
+  },
+
+  {
+    phrase:"Voice a character",
+    ipa:"/vɔɪs ə ˈkær.ək.tər/",
+    meaning:"Lồng tiếng cho nhân vật",
+    synonym:"",
+    antonym:"",
+    note:"Voice: danh từ = giọng nói; động từ = lồng tiếng.",
+    speak:"Voice a character"
+  },
+
+  {
+    phrase:"Go on to do something",
+    ipa:"/ɡəʊ ɒn tuː duː ˈsʌm.θɪŋ/",
+    meaning:"Tiếp tục làm một việc gì đó mới (sau khi đã hoàn thành một việc khác)",
+    synonym:"",
+    antonym:"",
+    note:"Go on to do something: chuyển sang làm việc mới. Go on + V-ing: tiếp tục làm việc đang làm dở.",
+    speak:"Go on to do something"
+  },
+
+  {
+    phrase:"Animated film",
+    ipa:"/ˈæn.ɪ.meɪ.tɪd fɪlm/",
+    meaning:"Phim hoạt hình",
+    synonym:"Cartoon; animation",
+    antonym:"",
+    note:"",
+    speak:"Animated film"
+  },
+
+  {
+    phrase:"Become a huge success",
+    ipa:"/bɪˈkʌm ə hjuːdʒ səkˈses/",
+    meaning:"Trở thành một thành công lớn / rực rỡ",
+    synonym:"Be highly successful",
+    antonym:"",
+    note:"",
+    speak:"Become a huge success"
+  },
+
+  {
+    phrase:"Hold a record",
+    ipa:"/həʊld ə ˈrek.ɔːd/",
+    meaning:"Nắm giữ kỷ lục",
+    synonym:"",
+    antonym:"",
+    note:"Set a record = thiết lập kỷ lục; break a record = phá vỡ kỷ lục.",
+    speak:"Hold a record"
+  },
+
+  {
+    phrase:"Theme park",
+    ipa:"/θiːm pɑːk/",
+    meaning:"Công viên giải trí theo chủ đề",
+    synonym:"Amusement park",
+    antonym:"",
+    note:"",
+    speak:"Theme park"
+  },
+
+  {
+    phrase:"Live-action film",
+    ipa:"/ˌlaɪvˈæk.ʃən fɪlm/",
+    meaning:"Phim do người thật đóng",
+    synonym:"",
+    antonym:"Animated film; cartoon",
+    note:"",
+    speak:"Live-action film"
+  },
+
+  {
+    phrase:"High-quality",
+    ipa:"/ˌhaɪˈkwɒl.ə.ti/",
+    meaning:"Chất lượng cao",
+    synonym:"",
+    antonym:"Low-quality",
+    note:"",
+    speak:"High-quality"
+  },
+
+  {
+    phrase:"Inspire somebody to do something",
+    ipa:"/ɪnˈspaɪər ˈsʌm.bə.di tuː duː ˈsʌm.θɪŋ/",
+    meaning:"Truyền cảm hứng cho ai đó làm gì",
+    synonym:"Motivate somebody to do something; encourage somebody to do something",
+    antonym:"",
+    note:"",
+    speak:"Inspire somebody to do something"
+  },
+
+  {
+    phrase:"Follow one's dream",
+    ipa:"/ˈfɒl.əʊ wʌnz driːm/",
+    meaning:"Theo đuổi giấc mơ",
+    synonym:"Pursue one's dream; chase one's dream",
+    antonym:"",
+    note:"",
+    speak:"Follow one's dream"
+  }
+
+];
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+const $ = id => document.getElementById(id);
+
+const TOTAL_TIME = 50 * 60;
+
+let state = createInitialState();
+
+let timerInterval = null;
+let audioContext = null;
+let availableVoices = [];
+
+function createInitialState() {
+  return {
+    name:"",
+    className:"",
+    currentCard:0,
+    flipped:false,
+    learned:new Set(),
+    matchingAnswers:{},
+    matchingSubmitted:false,
+    matchingCorrect:0,
+    quizQuestions:[],
+    quizAnswers:{},
+    quizSubmitted:false,
+    quizCorrect:0,
+    seconds:TOTAL_TIME,
+    sound:true,
+    started:false,
+    finished:false,
+    certificateCode:"",
+    finishedAt:null
+  };
+}
+
+
+/* =========================================================
+   UTILITY FUNCTIONS
+========================================================= */
+
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, ch => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[ch]);
+}
+
+function shuffle(array) {
+  const copy=[...array];
+
+  for(let i=copy.length-1;i>0;i--) {
+    const j=Math.floor(Math.random()*(i+1));
+    [copy[i],copy[j]]=[copy[j],copy[i]];
+  }
+
+  return copy;
+}
+
+function goTo(id) {
+  const el=$(id);
+  if(el)el.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+}
+
+function setTheme(theme) {
+  const permitted=["blue","green","purple","peach","dark"];
+
+  if(!permitted.includes(theme))return;
+
+  document.body.dataset.theme=theme;
+
+  try {
+    localStorage.setItem("msduyen_flashcard_theme",theme);
+  }catch(e) {}
+}
+
+function toggleSound() {
+  state.sound=!state.sound;
+
+  $("soundButton").textContent=
+    state.sound?"🔊 Sound ON":"🔇 Sound OFF";
+
+  if(!state.sound)stopSpeaking();
+}
+
+function playFeedbackSound(correct=true) {
+  if(!state.sound)return;
+
+  try {
+    const AudioClass=
+      window.AudioContext||window.webkitAudioContext;
+
+    if(!AudioClass)return;
+
+    const ctx=new AudioClass();
+    const osc=ctx.createOscillator();
+    const gain=ctx.createGain();
+
+    osc.type="sine";
+    osc.frequency.setValueAtTime(
+      correct?660:350,
+      ctx.currentTime
+    );
+
+    gain.gain.setValueAtTime(.035,ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+      .001,
+      ctx.currentTime+.19
+    );
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+
+    osc.start();
+    osc.stop(ctx.currentTime+.2);
+
+    osc.onended=()=>ctx.close();
+
+  }catch(e) {
+    // The app remains usable if Web Audio is unavailable.
+  }
+}
+
+function showScreen(id) {
+  ["welcomeScreen","appScreen","resultScreen","certificateSection"]
+    .forEach(name=>$(name).classList.add("hidden"));
+
+  $(id).classList.remove("hidden");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+function setMotivation() {
+  const messages=[
+    "🌟 Every new word brings you closer to your goal!",
+    "💪 Great progress begins with small steps.",
+    "✨ Learn a little more every day!",
+    "🎯 Focus on meaning, pronunciation and useful phrases.",
+    "🌈 You are building your English confidence!",
+    "🚀 Keep learning, keep growing!",
+    "👏 Your effort is making a difference!",
+    "💡 Practice turns unfamiliar words into familiar ones!"
+  ];
+
+  const index=state.learned.size%messages.length;
+
+  $("motivation").textContent=messages[index];
+}
+
+function updateProgress() {
+  const count=state.learned.size;
+
+  $("studyProgress").textContent=count+"/15 flashcards";
+
+  $("progressBar").style.width=
+    ((count/15)*100)+"%";
+}
+
+
+/* =========================================================
+   START GAME
+========================================================= */
+
+function startGame() {
+  const name=$("studentName").value.trim();
+  const className=$("studentClass").value.trim();
+
+  if(!name||!className) {
+    alert("Vui lòng nhập đầy đủ Họ tên và Lớp.");
+    return;
+  }
+
+  state=createInitialState();
+
+  state.name=name;
+  state.className=className;
+  state.started=true;
+
+  $("studentLabel").textContent=name+" • "+className;
+
+  state.quizQuestions=generateQuiz();
+
+  renderFlashcard();
+  renderMatching();
+  renderQuiz();
+
+  updateProgress();
+  setMotivation();
+
+  $("matchingSubmit").disabled=false;
+  $("quizSubmit").disabled=false;
+  $("matchingScore").textContent="Not submitted";
+  $("quizScore").textContent="Not submitted";
+  $("matchingFeedback").innerHTML="";
+  $("quizFeedback").innerHTML="";
+
+  $("certificateSection").classList.add("hidden");
+
+  showScreen("appScreen");
+
+  startTimer();
+  playFeedbackSound(true);
+}
+
+
+/* =========================================================
+   TIMER – 50 MINUTES
+========================================================= */
+
+function startTimer() {
+  clearInterval(timerInterval);
+
+  updateTimer();
+
+  timerInterval=setInterval(()=>{
+    if(state.finished)return;
+
+    state.seconds=Math.max(0,state.seconds-1);
+
+    updateTimer();
+
+    if(state.seconds===0) {
+      clearInterval(timerInterval);
+
+      alert(
+        "Đã hết 50 phút! Hệ thống sẽ chấm những câu đã làm. "+
+        "Các câu chưa trả lời được tính là chưa đúng."
+      );
+
+      finishGame(true);
+    }
+
+  },1000);
+}
+
+function updateTimer() {
+  const minutes=Math.floor(state.seconds/60);
+  const seconds=state.seconds%60;
+
+  $("timer").textContent=
+    String(minutes).padStart(2,"0")+
+    ":"+
+    String(seconds).padStart(2,"0");
+
+  $("timer").classList.toggle(
+    "timerWarning",
+    state.seconds<=300
+  );
+}
+
+
+/* =========================================================
+   OFFLINE-CAPABLE BROWSER SPEECH SYNTHESIS
+========================================================= */
+
+function refreshVoices() {
+  if(!("speechSynthesis" in window))return;
+
+  availableVoices=window.speechSynthesis.getVoices();
+}
+
+if("speechSynthesis" in window) {
+  refreshVoices();
+
+  if(typeof window.speechSynthesis.addEventListener==="function") {
+    window.speechSynthesis.addEventListener(
+      "voiceschanged",
+      refreshVoices
+    );
+  }
+}
+
+function getEnglishVoice() {
+  refreshVoices();
+
+  const english=availableVoices.filter(v=>
+    String(v.lang).toLowerCase().startsWith("en")
+  );
+
+  return (
+    english.find(v=>
+      v.localService&&v.lang.toLowerCase().startsWith("en-gb")
+    ) ||
+    english.find(v=>
+      v.lang.toLowerCase().startsWith("en-gb")
+    ) ||
+    english.find(v=>v.localService) ||
+    english[0] ||
+    null
+  );
+}
+
+function speakCurrent() {
+  speakPhrase(vocabulary[state.currentCard].speak);
+}
+
+function speakPhrase(phrase) {
+  if(!state.sound) {
+    $("speechStatus").textContent=
+      "Âm thanh đang tắt. Hãy bật Sound ON.";
+    return;
+  }
+
+  if(!("speechSynthesis" in window)) {
+    $("speechStatus").textContent=
+      "Trình duyệt này chưa hỗ trợ đọc văn bản.";
+    return;
+  }
+
+  window.speechSynthesis.cancel();
+
+  refreshVoices();
+
+  const voice=getEnglishVoice();
+
+  if(!voice) {
+    $("speechStatus").textContent=
+      "Chưa tìm thấy giọng tiếng Anh. "+
+      "Hãy cài giọng English trên thiết bị để nghe ngoại tuyến.";
+    return;
+  }
+
+  const utterance=new SpeechSynthesisUtterance(phrase);
+
+  utterance.voice=voice;
+  utterance.lang=voice.lang;
+  utterance.rate=.83;
+  utterance.pitch=1;
+  utterance.volume=1;
+
+  $("speechStatus").textContent="🔊 Playing pronunciation...";
+
+  utterance.onend=()=>{
+    $("speechStatus").textContent=
+      "Listen again and repeat the phrase!";
+  };
+
+  utterance.onerror=()=>{
+    $("speechStatus").textContent=
+      "Không thể phát giọng đọc. "+
+      "Hãy kiểm tra giọng tiếng Anh đã cài trên thiết bị.";
+  };
+
+  window.speechSynthesis.speak(utterance);
+}
+
+function stopSpeaking() {
+  if("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+  }
+
+  if($("speechStatus")) {
+    $("speechStatus").textContent="Đã dừng phát âm.";
+  }
+}
+
+
+/* =========================================================
+   FLASHCARDS
+========================================================= */
+
+function renderFlashcard() {
+  const word=vocabulary[state.currentCard];
+
+  $("cardCounter").textContent=
+    (state.currentCard+1)+" / 15";
+
+  $("audioPhrase").textContent=word.phrase;
+
+  const card=$("flashcard");
+
+  if(!state.flipped) {
+
+    card.innerHTML=`
+      <div class="flashcardContent">
+
+        <span class="tag">ENGLISH PHRASE</span>
+
+        <h2>${escapeHTML(word.phrase)}</h2>
+
+        <p class="ipa">${escapeHTML(word.ipa)}</p>
+
+        <p class="muted">
+          👆 Click to reveal Vietnamese meaning
+        </p>
+
+      </div>
+    `;
+
+  }else{
+
+    let extra="";
+
+    if(word.synonym) {
+      extra+=`
+        <p>
+          <strong>Synonym / Related expression:</strong><br>
+          ${escapeHTML(word.synonym)}
+        </p>
+      `;
+    }
+
+    if(word.antonym) {
+      extra+=`
+        <p>
+          <strong>Antonym / Contrast:</strong><br>
+          ${escapeHTML(word.antonym)}
+        </p>
+      `;
+    }
+
+    if(word.note) {
+      extra+=`
+        <div class="message">
+          <strong>Grammar / Usage:</strong><br>
+          ${escapeHTML(word.note)}
+        </div>
+      `;
+    }
+
+    card.innerHTML=`
+      <div class="flashcardContent">
+
+        <span class="tag">VIETNAMESE MEANING</span>
+
+        <p class="cardBackMeaning">
+          ${escapeHTML(word.meaning)}
+        </p>
+
+        <p class="ipa">${escapeHTML(word.ipa)}</p>
+
+        ${extra}
+
+        <p class="small muted">
+          Click to return to English
+        </p>
+
+      </div>
+    `;
+  }
+
+  const learned=state.learned.has(state.currentCard);
+
+  $("flashFeedback").textContent=learned?
+    "✅ You have marked this phrase as learned.":
+    "✨ Read, listen, repeat and remember!";
+}
+
+function flipCard() {
+  state.flipped=!state.flipped;
+  renderFlashcard();
+}
+
+function flashcardKey(event) {
+  if(event.key==="Enter"||event.key===" ") {
+    event.preventDefault();
+    flipCard();
+  }
+}
+
+function previousCard() {
+  stopSpeaking();
+
+  state.currentCard=
+    (state.currentCard-1+vocabulary.length)%
+    vocabulary.length;
+
+  state.flipped=false;
+
+  renderFlashcard();
+}
+
+function nextCard() {
+  stopSpeaking();
+
+  state.currentCard=
+    (state.currentCard+1)%vocabulary.length;
+
+  state.flipped=false;
+
+  renderFlashcard();
+}
+
+function markLearned() {
+  state.learned.add(state.currentCard);
+
+  playFeedbackSound(true);
+
+  updateProgress();
+  setMotivation();
+  renderFlashcard();
+
+  if(state.learned.size===15) {
+    $("flashFeedback").textContent=
+      "🎉 Fantastic! You have reviewed all 15 flashcards!";
+  }
+}
+
+
+/* =========================================================
+   MATCHING – 15 ITEMS
+========================================================= */
+
+function renderMatching() {
+  const container=$("matchingContainer");
+
+  const shuffledMeanings=shuffle(
+    vocabulary.map((v,index)=>({
+      index,
+      meaning:v.meaning
+    }))
+  );
+
+  container.innerHTML=vocabulary.map((word,i)=>{
+
+    const selectOptions=shuffledMeanings.map(item=>`
+      <option value="${item.index}">
+        ${escapeHTML(item.meaning)}
+      </option>
+    `).join("");
+
+    return `
+      <div class="matchRow" id="matchRow${i}">
+
+        <div>
+          <strong>
+            ${i+1}. ${escapeHTML(word.phrase)}
+          </strong>
+
+          <div class="small muted">
+            ${escapeHTML(word.ipa)}
+          </div>
+        </div>
+
+        <select
+          id="match${i}"
+          aria-label="Chọn nghĩa của ${escapeHTML(word.phrase)}"
+          onchange="state.matchingAnswers[${i}]=this.value">
+          <option value="">-- Choose meaning --</option>
+          ${selectOptions}
+        </select>
+
+        <div id="matchFeedback${i}"
+          class="matchFeedback hidden">
+        </div>
+
+      </div>
+    `;
+
+  }).join("");
+}
+
+function submitMatching(force=false) {
+  if(state.matchingSubmitted)return;
+
+  if(!force) {
+    const unanswered=vocabulary.filter((_,i)=>
+      state.matchingAnswers[i]===undefined||
+      state.matchingAnswers[i]===""
+    ).length;
+
+    if(unanswered>0) {
+      const proceed=confirm(
+        `Bạn còn ${unanswered} câu nối nghĩa chưa làm. `+
+        "Bạn vẫn muốn chấm bài?"
+      );
+
+      if(!proceed)return;
+    }
+  }
+
+  state.matchingSubmitted=true;
+
+  let correct=0;
+
+  vocabulary.forEach((word,i)=>{
+
+    const selected=state.matchingAnswers[i];
+    const isCorrect=
+      selected!==undefined&&
+      selected!==""&&
+      Number(selected)===i;
+
+    const row=$("matchRow"+i);
+    const feedback=$("matchFeedback"+i);
+    const select=$("match"+i);
+
+    select.disabled=true;
+    feedback.classList.remove("hidden");
+
+    if(isCorrect) {
+      correct++;
+
+      row.classList.add("correct");
+
+      feedback.innerHTML=`
+        <span class="correctText">
+          ✓ Correct! ${escapeHTML(word.meaning)}
+        </span>
+      `;
+
+    }else{
+      row.classList.add("incorrect");
+
+      feedback.innerHTML=`
+        <span class="incorrectText">
+          ✗ Correct meaning:
+          ${escapeHTML(word.meaning)}
+        </span>
+
+        ${word.synonym?
+          `<div>Related expression:
+          ${escapeHTML(word.synonym)}</div>`:""}
+
+        ${word.note?
+          `<div>Note:
+          ${escapeHTML(word.note)}</div>`:""}
+      `;
+    }
+  });
+
+  state.matchingCorrect=correct;
+
+  $("matchingScore").textContent=
+    correct+"/15 correct";
+
+  $("matchingSubmit").disabled=true;
+
+  $("matchingFeedback").innerHTML=`
+    <div class="message">
+      <strong>Your Matching Score: ${correct}/15</strong>
+      <p>
+        ${correct===15?
+          "🎉 Perfect matching! Excellent vocabulary recognition!":
+          "🌱 Every correction helps you remember the words better!"}
+      </p>
+    </div>
+  `;
+
+  playFeedbackSound(correct>=11);
+}
+
+
+/* =========================================================
+   QUICK QUIZ – AUTOMATICALLY GENERATED
+========================================================= */
+
+function generateQuiz() {
+  const selected=shuffle(
+    vocabulary.map((_,index)=>index)
+  ).slice(0,5);
+
+  return selected.map((correctIndex,number)=>{
+
+    const distractors=shuffle(
+      vocabulary.map((_,i)=>i)
+        .filter(i=>i!==correctIndex)
+    ).slice(0,3);
+
+    const choices=shuffle([
+      correctIndex,
+      ...distractors
+    ]);
+
+    return {
+      number:number+1,
+      correctIndex,
+      choices
+    };
+  });
+}
+
+function renderQuiz() {
+  $("quizContainer").innerHTML=
+    state.quizQuestions.map((question,qIndex)=>{
+
+      const target=vocabulary[question.correctIndex];
+
+      const optionHTML=question.choices.map(
+        (vocabIndex,optionIndex)=>{
+
+          const word=vocabulary[vocabIndex];
+          const letter="ABCD"[optionIndex];
+
+          return `
+            <div class="quizOption"
+              id="quizOption${qIndex}_${optionIndex}">
+
+              <input
+                type="radio"
+                name="quiz${qIndex}"
+                id="q${qIndex}o${optionIndex}"
+                value="${vocabIndex}"
+                onchange="chooseQuizAnswer(${qIndex},${vocabIndex})">
+
+              <label for="q${qIndex}o${optionIndex}">
+                <strong>${letter}.</strong>
+                ${escapeHTML(word.phrase)}
+              </label>
+
+              <button
+                class="translateButton"
+                type="button"
+                aria-label="Xem nghĩa tiếng Việt"
+                onclick="toggleOptionMeaning(${qIndex},${optionIndex})">
+                🇻🇳
+              </button>
+
+            </div>
+
+            <div
+              id="meaning${qIndex}_${optionIndex}"
+              class="optionMeaning hidden">
+              ${escapeHTML(word.meaning)}
+            </div>
+          `;
+        }
+      ).join("");
+
+      return `
+        <div class="quizQuestion" id="quizQuestion${qIndex}">
+
+          <span class="tag">
+            QUESTION ${qIndex+1} / 5
+          </span>
+
+          <p class="quizPrompt">
+            Which phrase means:
+            <br>
+            <span style="color:var(--primary)">
+              "${escapeHTML(target.meaning)}"
+            </span>
+          </p>
+
+          <p class="small muted">
+            Choose one correct answer.
+          </p>
+
+          ${optionHTML}
+
+          <div
+            id="quizExplanation${qIndex}"
+            class="explanation hidden">
+          </div>
+
+          <p class="small muted">
+            ✨ Think carefully – every attempt is a learning opportunity!
+          </p>
+
+        </div>
+      `;
+
+    }).join("");
+}
+
+function chooseQuizAnswer(qIndex,vocabIndex) {
+  if(state.quizSubmitted)return;
+
+  state.quizAnswers[qIndex]=vocabIndex;
+
+  const question=state.quizQuestions[qIndex];
+
+  question.choices.forEach((index,optionIndex)=>{
+    const el=$("quizOption"+qIndex+"_"+optionIndex);
+
+    el.classList.toggle(
+      "selected",
+      index===vocabIndex
+    );
+  });
+}
+
+function toggleOptionMeaning(qIndex,optionIndex) {
+  const el=$("meaning"+qIndex+"_"+optionIndex);
+
+  el.classList.toggle("hidden");
+}
+
+function submitQuiz(force=false) {
+  if(state.quizSubmitted)return;
+
+  const unanswered=state.quizQuestions.filter((_,i)=>
+    state.quizAnswers[i]===undefined
+  ).length;
+
+  if(unanswered>0&&!force) {
+    const proceed=confirm(
+      `Bạn còn ${unanswered} câu Quiz chưa trả lời. `+
+      "Bạn vẫn muốn nộp bài?"
+    );
+
+    if(!proceed)return;
+  }
+
+  state.quizSubmitted=true;
+
+  let correct=0;
+
+  state.quizQuestions.forEach((question,qIndex)=>{
+
+    const answer=state.quizAnswers[qIndex];
+    const correctIndex=question.correctIndex;
+
+    const isCorrect=answer===correctIndex;
+
+    if(isCorrect)correct++;
+
+    question.choices.forEach((vocabIndex,optionIndex)=>{
+
+      const option=$("quizOption"+qIndex+"_"+optionIndex);
+
+      const radio=option.querySelector("input");
+      radio.disabled=true;
+
+      if(vocabIndex===correctIndex) {
+        option.classList.add("correct");
+      }
+
+      if(vocabIndex===answer&&answer!==correctIndex) {
+        option.classList.add("incorrect");
+      }
+
+    });
+
+    const target=vocabulary[correctIndex];
+
+    const explanation=$("quizExplanation"+qIndex);
+
+    explanation.classList.remove("hidden");
+
+    explanation.innerHTML=`
+      <p class="${isCorrect?"correctText":"incorrectText"}">
+        ${isCorrect?
+          "✓ Correct! Wonderful job!":
+          "✗ Not quite. Let's learn from this question!"}
+      </p>
+
+      <p>
+        <strong>Correct Answer:</strong>
+        ${escapeHTML(target.phrase)}
+      </p>
+
+      <p>
+        <strong>Vietnamese Meaning:</strong>
+        ${escapeHTML(target.meaning)}
+      </p>
+
+      <p>
+        <strong>IPA:</strong>
+        ${escapeHTML(target.ipa)}
+      </p>
+
+      ${target.synonym?
+        `<p><strong>Synonym / Related expression:</strong>
+        ${escapeHTML(target.synonym)}</p>`:""}
+
+      ${target.antonym?
+        `<p><strong>Antonym / Contrast:</strong>
+        ${escapeHTML(target.antonym)}</p>`:""}
+
+      ${target.note?
+        `<p><strong>Grammar / Usage:</strong>
+        ${escapeHTML(target.note)}</p>`:""}
+
+      <p class="small">
+        🌟 Learning the explanation is just as important
+        as choosing the correct answer!
+      </p>
+    `;
+  });
+
+  state.quizCorrect=correct;
+
+  $("quizScore").textContent=
+    correct+"/5 correct";
+
+  $("quizSubmit").disabled=true;
+
+  $("quizFeedback").innerHTML=`
+    <div class="message">
+      <strong>Your Quick Quiz Score: ${correct}/5</strong>
+      <p>
+        ${correct===5?
+          "🏆 Excellent! All five answers are correct!":
+          "💪 Keep practising. Each question helps you improve!"}
+      </p>
+    </div>
+  `;
+
+  playFeedbackSound(correct>=4);
+}
+
+
+/* =========================================================
+   FINAL RESULTS
+========================================================= */
+
+function finishGame(timeUp=false) {
+  if(state.finished)return;
+
+  if(!timeUp) {
+    const unfinished=
+      !state.matchingSubmitted||
+      !state.quizSubmitted;
+
+    if(unfinished) {
+      const proceed=confirm(
+        "Một hoặc nhiều phần chưa được chấm. "+
+        "Nếu hoàn thành bây giờ, những phần đó sẽ được chấm "+
+        "và câu chưa trả lời tính là sai. Bạn có muốn tiếp tục?"
+      );
+
+      if(!proceed)return;
+    }
+  }
+
+  if(!state.matchingSubmitted)submitMatching(true);
+  if(!state.quizSubmitted)submitQuiz(true);
+
+  state.finished=true;
+  state.started=false;
+
+  clearInterval(timerInterval);
+  stopSpeaking();
+
+  state.finishedAt=new Date();
+
+  const correct=
+    state.matchingCorrect+
+    state.quizCorrect;
+
+  const total=20;
+  const percentage=correct/total*100;
+  const score=(correct/total*10).toFixed(2);
+
+  const eligible=percentage>70;
+
+  $("resultStudent").textContent=
+    state.name+" • "+state.className;
+
+  $("resultScore").textContent=
+    score+"/10";
+
+  $("matchingResultScore").textContent=
+    state.matchingCorrect+"/15";
+
+  $("quizResultScore").textContent=
+    state.quizCorrect+"/5";
+
+  $("percentResult").textContent=
+    percentage.toFixed(0)+"%";
+
+  $("resultTime").textContent=
+    "Correct answers: "+correct+"/20";
+
+  let title="";
+  let comment="";
+
+  if(percentage===100) {
+    title="🌟 Outstanding Achievement!";
+    comment=
+      "Perfect score! Your vocabulary recognition is excellent. "+
+      "Keep using these phrases in your English learning!";
+  }else if(percentage>70) {
+    title="🏆 Wonderful Progress!";
+    comment=
+      "Congratulations! You have successfully completed "+
+      "the vocabulary challenge. Keep building your confidence!";
+  }else if(percentage>=50) {
+    title="🌱 Keep Growing!";
+    comment=
+      "You have made meaningful progress. "+
+      "Review the explanations and flashcards, "+
+      "then challenge yourself again!";
+  }else{
+    title="✨ Every Step Counts!";
+    comment=
+      "Vocabulary learning takes practice. "+
+      "Revisit the flashcards, listen to the phrases, "+
+      "and keep moving forward!";
+  }
+
+  $("resultTitle").textContent=title;
+  $("resultComment").textContent=comment;
+
+  if(eligible) {
+    generateCertificate(correct,percentage,score);
+
+    $("certificateButton").classList.remove("hidden");
+  }else{
+    $("certificateButton").classList.add("hidden");
+    $("certificateSection").classList.add("hidden");
+  }
+
+  showScreen("resultScreen");
+
+  playFeedbackSound(eligible);
+}
+
+
+/* =========================================================
+   CERTIFICATE – ONLY WHEN SCORE > 70%
+========================================================= */
+
+function generateCertificate(correct,percentage,score) {
+  if(!state.certificateCode) {
+    state.certificateCode=
+      "MSD-"+state.finishedAt.getTime().toString(36).toUpperCase();
+  }
+
+  $("certificateName").textContent=state.name;
+
+  $("certificateClass").textContent=
+    "Class: "+state.className;
+
+  $("certificateScore").textContent=
+    "Achievement: "+correct+"/20 • "+percentage.toFixed(0)+"%";
+
+  $("certificateDate").textContent=
+    "Date: "+state.finishedAt.toLocaleDateString("vi-VN");
+
+  $("certificateID").textContent=
+    "Certificate ID: "+state.certificateCode;
+}
+
+function printCertificate() {
+  const correct=
+    state.matchingCorrect+
+    state.quizCorrect;
+
+  if(!state.finished||correct/20<=.70) {
+    alert("Giấy chứng nhận chỉ cấp khi đạt trên 70%.");
+    return;
+  }
+
+  $("certificateSection").classList.remove("hidden");
+
+  window.print();
+}
+
+
+/* =========================================================
+   REVIEW LEARNING
+========================================================= */
+
+function reviewLearning() {
+  $("resultScreen").classList.add("hidden");
+  $("appScreen").classList.remove("hidden");
+  $("certificateSection").classList.add("hidden");
+
+  // Review mode: all submitted answers remain locked.
+  // The timer stays stopped and the score cannot change.
+  goTo("flashcardSection");
+}
+
+
+/* =========================================================
+   RESET TEST
+========================================================= */
+
+function resetTest() {
+  const confirmed=confirm(
+    "Bạn muốn làm lại bài từ đầu? "+
+    "Kết quả của lượt hiện tại sẽ được đặt lại."
+  );
+
+  if(!confirmed)return;
+
+  clearInterval(timerInterval);
+  stopSpeaking();
+
+  const name=state.name;
+  const className=state.className;
+  const sound=state.sound;
+
+  state=createInitialState();
+  state.sound=sound;
+
+  $("studentName").value=name;
+  $("studentClass").value=className;
+
+  $("resultScreen").classList.add("hidden");
+  $("certificateSection").classList.add("hidden");
+
+  showScreen("welcomeScreen");
+}
+
+
+/* =========================================================
+   KEYBOARD & ACCESSIBILITY
+========================================================= */
+
+document.addEventListener("keydown",event=>{
+  if(event.key==="Escape") {
+    stopSpeaking();
+  }
+});
+
+
+/* =========================================================
+   LOAD SAVED THEME
+========================================================= */
+
+(function initialize() {
+  try {
+    const saved=localStorage.getItem(
+      "msduyen_flashcard_theme"
+    );
+
+    if(["blue","green","purple","peach","dark"].includes(saved)) {
+      $("themeSelector").value=saved;
+      setTheme(saved);
+    }
+  }catch(e) {}
+
+  updateTimer();
+})();
+
+
+/* =========================================================
+   PREVENT ACCIDENTAL PAGE CLOSING DURING ACTIVE TEST
+========================================================= */
+
+window.addEventListener("beforeunload",event=>{
+  if(state.started&&!state.finished) {
+    event.preventDefault();
+    event.returnValue="";
+  }
+});
+
+
+/* =========================================================
+   CERTIFICATE PRINT CLEANUP
+========================================================= */
+
+window.addEventListener("afterprint",()=>{
+  if(state.finished) {
+    $("certificateSection").classList.add("hidden");
+  }
+});
+
+</script>
+
+</body>
+</html>

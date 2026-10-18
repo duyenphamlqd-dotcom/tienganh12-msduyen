@@ -1,0 +1,2870 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test 02-Listening part 2 – New words | Ms.Duyen</title>
+
+<style>
+:root{
+  --bg:#edf3ff;
+  --surface:#ffffff;
+  --soft:#e8efff;
+  --text:#192b49;
+  --muted:#526580;
+  --primary:#365ac8;
+  --primaryText:#ffffff;
+  --border:#cbd7ed;
+  --success:#147849;
+  --successBg:#e0f7e9;
+  --danger:#b32d43;
+  --dangerBg:#ffebef;
+  --shadow:0 8px 28px rgba(20,45,90,.09);
+}
+
+body[data-theme="mint"]{
+  --bg:#e6f7ef;
+  --surface:#ffffff;
+  --soft:#d9f2e5;
+  --text:#173c2e;
+  --muted:#436a58;
+  --primary:#117750;
+  --primaryText:#ffffff;
+  --border:#b7dbc9;
+}
+
+body[data-theme="lavender"]{
+  --bg:#f2ebff;
+  --surface:#ffffff;
+  --soft:#e9ddff;
+  --text:#37254f;
+  --muted:#685579;
+  --primary:#7142b4;
+  --primaryText:#ffffff;
+  --border:#d2bfe9;
+}
+
+body[data-theme="peach"]{
+  --bg:#fff0e5;
+  --surface:#fffdfa;
+  --soft:#ffe1ce;
+  --text:#4e3028;
+  --muted:#79564b;
+  --primary:#a54a31;
+  --primaryText:#ffffff;
+  --border:#e8bda7;
+}
+
+body[data-theme="dark"]{
+  --bg:#101a2d;
+  --surface:#1d2b45;
+  --soft:#30425f;
+  --text:#f4f7ff;
+  --muted:#c7d4e5;
+  --primary:#aac5ff;
+  --primaryText:#101d34;
+  --border:#536984;
+  --success:#8cf0b7;
+  --successBg:#1c4034;
+  --danger:#ff9daa;
+  --dangerBg:#512b38;
+  --shadow:0 8px 28px rgba(0,0,0,.2);
+}
+
+*{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:"Segoe UI",Arial,sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  transition:background .25s,color .25s;
+}
+
+button,input,select{font:inherit}
+
+button{
+  border:1px solid var(--border);
+  border-radius:12px;
+  background:var(--soft);
+  color:var(--text);
+  padding:11px 16px;
+  font-weight:700;
+  cursor:pointer;
+  transition:transform .15s,filter .15s;
+}
+
+button:hover:not(:disabled){
+  transform:translateY(-1px);
+  filter:brightness(.97);
+}
+
+button:disabled{
+  opacity:.62;
+  cursor:not-allowed;
+}
+
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible{
+  outline:3px solid var(--primary);
+  outline-offset:3px;
+}
+
+input,select{
+  border:1px solid var(--border);
+  border-radius:11px;
+  padding:12px;
+  background:var(--surface);
+  color:var(--text);
+  max-width:100%;
+}
+
+.primary{
+  background:var(--primary);
+  color:var(--primaryText);
+  border-color:var(--primary);
+}
+
+.successButton{
+  color:var(--success);
+  background:var(--successBg);
+  border-color:var(--success);
+}
+
+.container{
+  max-width:1130px;
+  margin:auto;
+  padding:16px;
+}
+
+.panel{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:25px;
+  margin:18px 0;
+  box-shadow:var(--shadow);
+}
+
+.hidden{display:none!important}
+.center{text-align:center}
+
+.row{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.between{justify-content:space-between}
+
+.script{
+  font-family:"Brush Script MT","Segoe Script",
+  "Palatino Linotype",Georgia,serif;
+  font-style:italic;
+  font-weight:bold;
+  letter-spacing:.4px;
+}
+
+h1,h2,h3{line-height:1.35}
+h2{color:var(--primary)}
+
+.muted{color:var(--muted)}
+.small{font-size:14px}
+
+.tag{
+  display:inline-block;
+  background:var(--soft);
+  color:var(--text);
+  padding:6px 13px;
+  border-radius:30px;
+  font-size:13px;
+  font-weight:750;
+}
+
+.message{
+  background:var(--soft);
+  border-left:4px solid var(--primary);
+  border-radius:10px;
+  padding:13px 16px;
+  margin:15px 0;
+}
+
+.bigButton{
+  padding:16px 29px;
+  font-size:18px;
+  border-radius:16px;
+}
+
+.divider{
+  height:1px;
+  background:var(--border);
+  margin:25px 0;
+}
+
+/* ================= WELCOME ================= */
+
+.hero{
+  padding:55px 26px;
+  text-align:center;
+  background:linear-gradient(
+    145deg,
+    var(--soft),
+    var(--surface) 68%
+  );
+}
+
+.hero h1{
+  font-size:clamp(40px,7vw,76px);
+  color:var(--primary);
+  line-height:1.15;
+  margin:23px 0;
+}
+
+.heroSubtitle{
+  font-size:clamp(19px,3vw,27px);
+  font-weight:750;
+}
+
+.fields{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  max-width:660px;
+  margin:27px auto;
+  text-align:left;
+}
+
+.field label{
+  display:block;
+  font-weight:750;
+  margin-bottom:5px;
+}
+
+.field input{width:100%}
+
+/* ================= STATUS ================= */
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:20;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:12px 17px;
+  box-shadow:var(--shadow);
+}
+
+#timer{
+  font-size:24px;
+  font-weight:850;
+  font-variant-numeric:tabular-nums;
+}
+
+.timerWarning{color:var(--danger)}
+
+.progressOuter{
+  height:11px;
+  background:var(--soft);
+  border-radius:20px;
+  overflow:hidden;
+  margin-top:12px;
+}
+
+.progressInner{
+  height:100%;
+  width:0;
+  background:var(--primary);
+  transition:width .25s;
+}
+
+.navigation{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+/* ================= FLASHCARDS ================= */
+
+.studyGrid{
+  display:grid;
+  grid-template-columns:minmax(220px,30%) minmax(0,1fr);
+  gap:20px;
+  align-items:stretch;
+}
+
+.audioPanel{
+  background:var(--soft);
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:22px 16px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  text-align:center;
+}
+
+.speakerButton{
+  height:105px;
+  width:105px;
+  border-radius:50%;
+  background:var(--primary);
+  color:var(--primaryText);
+  border:0;
+  font-size:44px;
+  box-shadow:0 8px 22px rgba(0,0,0,.13);
+}
+
+.flashcard{
+  background:var(--soft);
+  border:2px solid var(--primary);
+  border-radius:22px;
+  min-height:345px;
+  padding:25px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  cursor:pointer;
+  transition:box-shadow .2s;
+}
+
+.flashcard:hover{
+  box-shadow:0 9px 25px rgba(0,0,0,.09);
+}
+
+.cardContent{
+  width:100%;
+  animation:appear .22s ease;
+}
+
+.flashcard h2{
+  font-size:clamp(25px,3.5vw,39px);
+  overflow-wrap:anywhere;
+}
+
+.cardMeaning{
+  font-size:clamp(22px,3vw,30px);
+  font-weight:800;
+}
+
+.ipa{
+  font-family:Arial,sans-serif;
+  font-size:20px;
+  color:var(--muted);
+}
+
+.cardControls{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:20px;
+}
+
+/* ================= MATCHING ================= */
+
+.matchRow{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1.35fr);
+  gap:12px;
+  align-items:center;
+  padding:13px 10px;
+  border-bottom:1px solid var(--border);
+}
+
+.matchRow select{width:100%}
+
+.matchRow.correct{
+  background:var(--successBg);
+  border-left:4px solid var(--success);
+  border-radius:11px;
+}
+
+.matchRow.incorrect{
+  background:var(--dangerBg);
+  border-left:4px solid var(--danger);
+  border-radius:11px;
+}
+
+.matchFeedback{
+  grid-column:1/-1;
+  font-size:14px;
+  padding:5px;
+}
+
+.correctText{
+  color:var(--success);
+  font-weight:800;
+}
+
+.incorrectText{
+  color:var(--danger);
+  font-weight:800;
+}
+
+/* ================= QUIZ ================= */
+
+.quizQuestion{
+  border:1px solid var(--border);
+  border-radius:19px;
+  padding:21px;
+  margin:18px 0;
+}
+
+.quizPrompt{
+  font-size:19px;
+  font-weight:750;
+}
+
+.quizOption{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  border:2px solid var(--border);
+  border-radius:13px;
+  min-height:55px;
+  padding:12px;
+  margin:10px 0;
+}
+
+.quizOption.selected{
+  border-color:var(--primary);
+  background:var(--soft);
+}
+
+.quizOption.correct{
+  border-color:var(--success);
+  background:var(--successBg);
+}
+
+.quizOption.incorrect{
+  border-color:var(--danger);
+  background:var(--dangerBg);
+}
+
+.quizOption input{
+  width:19px;
+  height:19px;
+  flex-shrink:0;
+  accent-color:var(--primary);
+}
+
+.quizOption label{
+  flex:1;
+  cursor:pointer;
+  min-width:0;
+}
+
+.translateButton{
+  padding:7px 10px;
+  font-size:14px;
+  flex-shrink:0;
+}
+
+.optionMeaning{
+  background:var(--soft);
+  border-radius:9px;
+  padding:10px;
+  margin:5px 0 12px;
+  font-size:14px;
+}
+
+.explanation{
+  background:var(--soft);
+  border-left:4px solid var(--primary);
+  border-radius:12px;
+  padding:16px;
+  margin-top:15px;
+}
+
+.explanation p{margin:8px 0}
+
+/* ================= RESULTS ================= */
+
+.resultNumber{
+  font-size:clamp(45px,8vw,82px);
+  font-weight:850;
+  color:var(--primary);
+  margin:10px 0;
+}
+
+.scoreGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin:23px 0;
+}
+
+.scoreBox{
+  background:var(--soft);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:18px 10px;
+  text-align:center;
+}
+
+.scoreBox strong{
+  display:block;
+  font-size:clamp(23px,3vw,34px);
+}
+
+/* ================= CERTIFICATE ================= */
+
+.certificate{
+  border:7px double var(--primary);
+  border-radius:12px;
+  padding:38px 24px;
+  background:var(--surface);
+  text-align:center;
+}
+
+.certificate h2{
+  font-family:"Brush Script MT","Segoe Script",Georgia,serif;
+  font-style:italic;
+  font-size:clamp(32px,5vw,55px);
+}
+
+.certificateName{
+  font-size:clamp(26px,4vw,42px);
+  font-weight:850;
+  color:var(--primary);
+  overflow-wrap:anywhere;
+}
+
+.signature{
+  font-family:"Brush Script MT","Segoe Script",Georgia,serif;
+  font-style:italic;
+  font-size:35px;
+  color:var(--primary);
+}
+
+footer{
+  text-align:center;
+  color:var(--muted);
+  padding:25px;
+  font-size:14px;
+}
+
+@keyframes appear{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+@media(max-width:700px){
+  .container{padding:10px}
+  .panel{padding:17px}
+  .hero{padding:36px 16px}
+  .fields,.studyGrid,.matchRow{
+    grid-template-columns:1fr;
+  }
+  .audioPanel{min-height:200px}
+  .topbar{position:relative}
+  .scoreGrid{grid-template-columns:1fr 1fr}
+  .quizOption{align-items:flex-start}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation:none!important;
+    transition:none!important;
+    scroll-behavior:auto!important;
+  }
+}
+
+@media print{
+  body{
+    background:white!important;
+    color:black!important;
+  }
+
+  body *{visibility:hidden!important}
+
+  #certificateSection,
+  #certificateSection *{
+    visibility:visible!important;
+  }
+
+  #certificateSection{
+    display:block!important;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    margin:0;
+    padding:0;
+    border:0;
+    box-shadow:none;
+  }
+
+  .certificate{
+    border:6px double #333!important;
+  }
+
+  .certificate *{
+    color:black!important;
+  }
+
+  @page{
+    size:A4;
+    margin:15mm;
+  }
+}
+</style>
+  <link rel="stylesheet" href="../assets/css/shared-nav.css">
+</head>
+
+<body data-theme="blue">
+<div class="container">
+
+<!-- ================= SETTINGS ================= -->
+
+<header class="row between">
+  <strong>🌱 ENGLISH VOCABULARY LAB</strong>
+
+  <div class="row">
+    <label for="themeSelector">🎨 Màu nền</label>
+
+    <select id="themeSelector" onchange="changeTheme(this.value)">
+      <option value="blue">Ocean Blue</option>
+      <option value="mint">Mint Green</option>
+      <option value="lavender">Lavender</option>
+      <option value="peach">Warm Peach</option>
+      <option value="dark">Dark Mode</option>
+    </select>
+
+    <button id="soundButton" onclick="toggleSound()">
+      🔊 Sound ON
+    </button>
+  </div>
+</header>
+
+
+<!-- ================= WELCOME ================= -->
+
+<section id="welcomeScreen" class="panel hero">
+
+  <span class="tag">GRADE 12 • MIDTERM I REVISION</span>
+
+  <h1 class="script">
+    Test 02<br>
+    Listening Part 2<br>
+    New Words
+  </h1>
+
+  <p class="heroSubtitle">
+    🌱 Making a Compost Pile 🌱
+  </p>
+
+  <p>
+    15 Essential Phrases • Flashcards • Matching • Quick Quiz
+  </p>
+
+  <p>
+    <strong>Giáo viên thiết kế: Ms.Duyen</strong>
+  </p>
+
+  <div class="message" style="max-width:720px;margin:25px auto">
+    <strong>
+      ✨ Kiểm tra mà như chơi – chơi mà vẫn học được! ✨
+    </strong>
+
+    <p>
+      Learn new words, practise pronunciation,
+      and develop your English with confidence!
+    </p>
+  </div>
+
+  <div class="fields">
+
+    <div class="field">
+      <label for="studentName">👤 Họ và tên học sinh</label>
+
+      <input
+        id="studentName"
+        type="text"
+        maxlength="90"
+        autocomplete="name"
+        placeholder="Nhập họ và tên">
+    </div>
+
+    <div class="field">
+      <label for="studentClass">🏫 Lớp</label>
+
+      <input
+        id="studentClass"
+        type="text"
+        maxlength="20"
+        placeholder="Ví dụ: 12A1">
+    </div>
+
+  </div>
+
+  <button class="primary bigButton" onclick="startGame()">
+    🚀 START LEARNING
+  </button>
+
+  <p class="small muted">
+    ⏱️ 50 minutes • 15 Flashcards • 15 Matching Items • 5 MCQs
+  </p>
+
+  <p>
+    <strong>
+      Đạt trên 70% (từ 15/20 câu đúng)
+      để nhận giấy chứng nhận hoàn thành.
+    </strong>
+  </p>
+
+  <p class="small muted">
+    Phiên âm IPA được lấy từ tài liệu.
+    Chức năng nghe sử dụng giọng đọc tiếng Anh có sẵn
+    của trình duyệt hoặc thiết bị, ưu tiên giọng Anh-Anh.
+    Phát âm thanh ngoại tuyến phụ thuộc vào giọng đọc đã cài đặt;
+    giọng tổng hợp không bảo đảm trùng khớp hoàn toàn với IPA.
+  </p>
+
+</section>
+
+
+<!-- ================= MAIN APP ================= -->
+
+<main id="appScreen" class="hidden">
+
+  <!-- STATUS -->
+
+  <div class="topbar">
+
+    <div class="row between">
+
+      <div>
+        <strong id="studentLabel"></strong>
+        <div class="small muted">
+          Test 02 – Listening Part 2
+        </div>
+      </div>
+
+      <div class="row">
+        <span id="learnedCounter" class="tag">0/15 learned</span>
+        <span id="timer">50:00</span>
+      </div>
+
+    </div>
+
+    <div class="progressOuter">
+      <div id="progressBar" class="progressInner"></div>
+    </div>
+
+  </div>
+
+
+  <!-- MOTIVATION -->
+
+  <section class="panel center">
+
+    <span class="tag">ENVIRONMENTAL VOCABULARY CHALLENGE</span>
+
+    <h2 class="script" style="font-size:37px">
+      Learn • Practise • Grow
+    </h2>
+
+    <p id="motivation" class="message">
+      Every new phrase brings you closer to your goal!
+    </p>
+
+    <div class="navigation">
+      <button onclick="goTo('flashcardSection')">
+        🃏 Flashcards
+      </button>
+
+      <button onclick="goTo('matchingSection')">
+        🧩 Matching
+      </button>
+
+      <button onclick="goTo('quizSection')">
+        ⚡ Quick Quiz
+      </button>
+    </div>
+
+  </section>
+
+
+  <!-- ================= FLASHCARDS ================= -->
+
+  <section id="flashcardSection" class="panel">
+
+    <div class="row between">
+      <h2>🃏 Part 1 – Vocabulary Flashcards</h2>
+      <span id="cardCounter" class="tag">1 / 15</span>
+    </div>
+
+    <p class="muted">
+      Listen, repeat and click each flashcard to reveal
+      the Vietnamese meaning, synonyms, antonyms and usage notes.
+    </p>
+
+    <div class="studyGrid">
+
+      <!-- LEFT: AUDIO -->
+
+      <div class="audioPanel">
+
+        <strong>🎧 LISTEN & REPEAT</strong>
+
+        <button
+          class="speakerButton"
+          onclick="speakCurrent()"
+          aria-label="Nghe phát âm cụm từ">
+          🔊
+        </button>
+
+        <span class="tag">
+          British English preferred
+        </span>
+
+        <p
+          id="audioPhrase"
+          style="font-weight:800;font-size:19px">
+        </p>
+
+        <button onclick="speakCurrent()">
+          ▶ Listen Again
+        </button>
+
+        <button onclick="stopSpeaking()">
+          ■ Stop
+        </button>
+
+        <p id="speechStatus" class="small muted" aria-live="polite">
+          Press the speaker to listen.
+        </p>
+
+      </div>
+
+      <!-- RIGHT: FLASHCARD -->
+
+      <div
+        id="flashcard"
+        class="flashcard"
+        role="button"
+        tabindex="0"
+        aria-label="Lật thẻ từ vựng"
+        onclick="flipCard()"
+        onkeydown="flashcardKey(event)">
+      </div>
+
+    </div>
+
+    <div class="cardControls">
+
+      <button onclick="previousCard()">
+        ← Previous
+      </button>
+
+      <button onclick="flipCard()">
+        🔄 Flip Card
+      </button>
+
+      <button class="successButton" onclick="markLearned()">
+        ✅ I Know This Phrase
+      </button>
+
+      <button onclick="nextCard()">
+        Next →
+      </button>
+
+    </div>
+
+    <p id="flashFeedback" class="center muted" aria-live="polite"></p>
+
+  </section>
+
+
+  <!-- ================= MATCHING ================= -->
+
+  <section id="matchingSection" class="panel">
+
+    <div class="row between">
+      <h2>🧩 Part 2 – Matching Challenge</h2>
+      <span class="tag">15 ITEMS</span>
+    </div>
+
+    <p>
+      <strong>
+        Match each English phrase with its Vietnamese meaning.
+      </strong>
+    </p>
+
+    <p class="muted">
+      Nối 15 từ/cụm từ với nghĩa tiếng Việt.
+      Mỗi đáp án đúng được 1 điểm.
+      Nhấn 🌐 để xem nghĩa của cụm từ khi tự học.
+    </p>
+
+    <div id="matchingContainer"></div>
+
+    <div class="row" style="margin-top:21px">
+
+      <button
+        id="matchingSubmit"
+        class="primary"
+        onclick="submitMatching()">
+        ✔ Check My Answers
+      </button>
+
+      <span id="matchingScore" class="tag">
+        Not submitted
+      </span>
+
+    </div>
+
+    <div id="matchingFeedback" aria-live="polite"></div>
+
+  </section>
+
+
+  <!-- ================= QUICK QUIZ ================= -->
+
+  <section id="quizSection" class="panel">
+
+    <div class="row between">
+      <h2>⚡ Part 3 – Quick Quiz</h2>
+      <span class="tag">5 MCQs</span>
+    </div>
+
+    <p>
+      <strong>
+        Choose the English phrase that matches
+        the Vietnamese meaning.
+      </strong>
+    </p>
+
+    <p class="muted">
+      Hệ thống tự động chọn 5 mục từ danh sách 15 từ/cụm từ.
+      Mỗi câu có 4 phương án A, B, C, D.
+      Nhấn 🇻🇳 bên cạnh từng phương án để xem nghĩa tiếng Việt.
+    </p>
+
+    <div id="quizContainer"></div>
+
+    <div class="row">
+
+      <button
+        id="quizSubmit"
+        class="primary"
+        onclick="submitQuiz()">
+        📝 NỘP BÀI – SUBMIT QUIZ
+      </button>
+
+      <span id="quizScore" class="tag">
+        Not submitted
+      </span>
+
+    </div>
+
+    <div id="quizFeedback" aria-live="polite"></div>
+
+  </section>
+
+
+  <!-- ================= FINISH ================= -->
+
+  <section class="panel center">
+
+    <h2 class="script" style="font-size:38px">
+      Celebrate Your Progress!
+    </h2>
+
+    <p>
+      Tổng điểm = 15 câu Matching + 5 câu Quick Quiz.
+    </p>
+
+    <p>
+      <strong>
+        Đạt từ 15/20 câu đúng để nhận giấy chứng nhận.
+      </strong>
+    </p>
+
+    <div class="navigation">
+
+      <button
+        id="finishButton"
+        class="primary bigButton"
+        onclick="finishGame(false)">
+        🏆 HOÀN THÀNH & XEM KẾT QUẢ
+      </button>
+
+      <button onclick="resetTest()">
+        🔄 Reset Test
+      </button>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<!-- ================= RESULTS ================= -->
+
+<section id="resultScreen" class="panel hidden center">
+
+  <h1 class="script"
+      style="font-size:clamp(42px,7vw,74px);color:var(--primary)">
+    Your Learning Achievement!
+  </h1>
+
+  <p id="resultStudent"></p>
+
+  <div id="resultScore" class="resultNumber"></div>
+
+  <div class="scoreGrid">
+
+    <div class="scoreBox">
+      <strong id="matchingResultScore">0/15</strong>
+      Matching
+    </div>
+
+    <div class="scoreBox">
+      <strong id="quizResultScore">0/5</strong>
+      Quick Quiz
+    </div>
+
+    <div class="scoreBox">
+      <strong id="percentResult">0%</strong>
+      Accuracy
+    </div>
+
+  </div>
+
+  <h2 id="resultTitle"></h2>
+
+  <p id="resultComment" class="message"></p>
+
+  <p id="resultDetails"></p>
+
+  <div class="navigation">
+
+    <button onclick="reviewLearning()">
+      📚 Review Vocabulary
+    </button>
+
+    <button
+      id="certificateButton"
+      class="primary hidden"
+      onclick="printCertificate()">
+      🖨️ Print Certificate
+    </button>
+
+    <button onclick="resetTest()">
+      🔄 Try Again
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- ================= CERTIFICATE ================= -->
+
+<section id="certificateSection" class="panel hidden">
+
+  <div class="certificate">
+
+    <p style="letter-spacing:3px;font-weight:800">
+      ENGLISH LEARNING ACHIEVEMENT
+    </p>
+
+    <h2>Certificate of Completion</h2>
+
+    <h3>GIẤY CHỨNG NHẬN HOÀN THÀNH</h3>
+
+    <div class="divider"></div>
+
+    <p>This certificate is proudly presented to</p>
+
+    <div id="certificateName" class="certificateName"></div>
+
+    <p id="certificateClass"></p>
+
+    <p>For successfully completing</p>
+
+    <h3>
+      Test 02-Listening part 2 – New words
+    </h3>
+
+    <p>
+      Environmental Vocabulary – Making a Compost Pile
+    </p>
+
+    <h2 id="certificateScore"></h2>
+
+    <p id="certificateDate"></p>
+
+    <p id="certificateID" class="small muted"></p>
+
+    <div class="divider"></div>
+
+    <p>
+      Giáo viên thiết kế: Ms.Duyen
+    </p>
+
+    <p class="signature">
+      Ms.Duyên
+    </p>
+
+    <p>Teacher's Signature</p>
+
+    <p class="small">
+      Keep learning, keep improving,
+      keep believing in yourself!
+    </p>
+
+  </div>
+
+</section>
+
+
+<footer>
+  🌱 Test 02 – Listening Part 2 – New Words 🌱
+  <br>
+  Grade 12 • Midterm I Revision
+  <br>
+  Giáo viên thiết kế: Ms.Duyen
+</footer>
+
+</div>
+
+
+<script>
+"use strict";
+
+/* ======================================================
+   ORIGINAL VOCABULARY DATA
+   TEST 2 – LISTENING TASK 2
+   15 ITEMS FROM THE TEACHER'S SOURCE
+
+   Displayed phrases, IPA, meanings and annotations
+   follow the supplied vocabulary list.
+
+   The quiz uses only these 15 phrases.
+====================================================== */
+
+const vocabulary = [
+
+  {
+    phrase:"Make a compost pile",
+    ipa:"/meɪk ə ˈkɒm.pɒst paɪl/",
+    meaning:"Làm đống ủ phân hữu cơ (phân xanh).",
+    synonym:"",
+    antonym:"",
+    note:"",
+    speak:"Make a compost pile"
+  },
+
+  {
+    phrase:"Throw away",
+    ipa:"/θrəʊ əˈweɪ/",
+    meaning:"Vứt bỏ, ném đi.",
+    synonym:"Discard, get rid of, dispose of.",
+    antonym:"",
+    note:"",
+    speak:"Throw away"
+  },
+
+  {
+    phrase:"Clear a space",
+    ipa:"/klɪər ə speɪs/",
+    meaning:"Dọn dẹp một khoảng trống.",
+    synonym:"",
+    antonym:"",
+    note:"",
+    speak:"Clear a space"
+  },
+
+  {
+    phrase:"Base layer",
+    ipa:"/beɪs ˈleɪ.ər/",
+    meaning:"Lớp nền, lớp dưới cùng.",
+    synonym:"",
+    antonym:"",
+    note:"",
+    speak:"Base layer"
+  },
+
+  {
+    phrase:"Spread (something) on the ground",
+    ipa:"/spred ɒn ðə ɡraʊnd/",
+    meaning:"Trải (cái gì) lên mặt đất.",
+    synonym:"",
+    antonym:"",
+    note:"",
+    speak:"Spread on the ground"
+  },
+
+  {
+    phrase:"Dry leaves",
+    ipa:"/draɪ liːvz/",
+    meaning:"Lá khô.",
+    synonym:"",
+    antonym:"",
+    note:"",
+    speak:"Dry leaves"
+  },
+
+  {
+    phrase:"Grass clippings",
+    ipa:"/ɡrɑːs ˈklɪp.ɪŋz/",
+    meaning:"Cỏ xén, cỏ được cắt vụn.",
+    synonym:"",
+    antonym:"",
+    note:"",
+    speak:"Grass clippings"
+  },
+
+  {
+    phrase:"Household waste",
+    ipa:"/ˈhaʊs.həʊld weɪst/",
+    meaning:"Rác thải sinh hoạt / rác thải gia đình.",
+    synonym:"Domestic waste, household garbage.",
+    antonym:"",
+    note:"",
+    speak:"Household waste"
+  },
+
+  {
+    phrase:"Fruit peels",
+    ipa:"/fruːt piːlz/",
+    meaning:"Vỏ trái cây.",
+    synonym:"",
+    antonym:"",
+    note:"",
+    speak:"Fruit peels"
+  },
+
+  {
+    phrase:"Turn the compost pile",
+    ipa:"/tɜːn ðə ˈkɒm.pɒst paɪl/",
+    meaning:"Lật / đảo đống phân ủ.",
+    synonym:"Turn = Mix, flip over.",
+    antonym:"",
+    note:"",
+    speak:"Turn the compost pile"
+  },
+
+  {
+    phrase:"Be worth it",
+    ipa:"/bi wɜːθ ɪt/",
+    meaning:"Đáng giá, bõ công.",
+    synonym:"",
+    antonym:"",
+    note:"Cụm từ dùng để diễn tả một việc tuy vất vả nhưng mang lại kết quả xứng đáng. Ví dụ: It's a lot of work, but it's worth it.",
+    speak:"Be worth it"
+  },
+
+  {
+    phrase:"Avoid chemical fertilisers",
+    ipa:"/əˈvɔɪd ˈkem.ɪ.kəl ˈfɜː.tɪ.laɪ.zəz/",
+    meaning:"Tránh sử dụng phân bón hóa học.",
+    synonym:"",
+    antonym:"Use organic fertilisers (Sử dụng phân bón hữu cơ).",
+    note:"",
+    speak:"Avoid chemical fertilisers"
+  },
+
+  {
+    phrase:"Reuse (Verb)",
+    ipa:"/ˌriːˈjuːz/",
+    meaning:"Tái sử dụng.",
+    synonym:"",
+    antonym:"",
+    note:"Reuse là động từ (Verb).",
+    speak:"Reuse"
+  },
+
+  {
+    phrase:"Send to the landfill",
+    ipa:"/send tuː ðə ˈlænd.fɪl/",
+    meaning:"Gửi / Đưa đến bãi chôn lấp rác.",
+    synonym:"Landfill = Rubbish dump, garbage dump.",
+    antonym:"",
+    note:"",
+    speak:"Send to the landfill"
+  },
+
+  {
+    phrase:"Go green",
+    ipa:"/ɡəʊ ɡriːn/",
+    meaning:"Sống xanh, áp dụng lối sống thân thiện với môi trường.",
+    synonym:"Adopt an eco-friendly lifestyle, live sustainably.",
+    antonym:"",
+    note:"",
+    speak:"Go green"
+  }
+
+];
+
+
+/* ======================================================
+   APP STATE
+====================================================== */
+
+const $ = id => document.getElementById(id);
+
+const TOTAL_SECONDS = 50 * 60;
+
+function createInitialState(){
+  return {
+    name:"",
+    className:"",
+    started:false,
+    finished:false,
+
+    currentCard:0,
+    flipped:false,
+    learned:new Set(),
+
+    matchingAnswers:{},
+    matchingSubmitted:false,
+    matchingCorrect:0,
+
+    quizQuestions:[],
+    quizAnswers:{},
+    quizSubmitted:false,
+    quizCorrect:0,
+
+    remaining:TOTAL_SECONDS,
+    deadline:0,
+
+    sound:true,
+    finishedAt:null,
+    certificateCode:""
+  };
+}
+
+let state=createInitialState();
+
+let timerInterval=null;
+let voices=[];
+let speechToken=0;
+
+
+/* ======================================================
+   HELPERS
+====================================================== */
+
+function escapeHTML(value){
+  return String(value).replace(/[&<>"']/g,c=>({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    '"':"&quot;",
+    "'":"&#39;"
+  })[c]);
+}
+
+function shuffle(items){
+  const arr=[...items];
+
+  for(let i=arr.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+
+    [arr[i],arr[j]]=[arr[j],arr[i]];
+  }
+
+  return arr;
+}
+
+function changeTheme(theme){
+  const allowed=[
+    "blue","mint","lavender","peach","dark"
+  ];
+
+  if(!allowed.includes(theme))return;
+
+  document.body.dataset.theme=theme;
+
+  try{
+    localStorage.setItem(
+      "msduyen_test02_part2_theme",
+      theme
+    );
+  }catch(e){}
+}
+
+function goTo(id){
+  const el=$(id);
+
+  if(el){
+    el.scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+  }
+}
+
+function showScreen(id){
+  [
+    "welcomeScreen",
+    "appScreen",
+    "resultScreen",
+    "certificateSection"
+  ].forEach(x=>$(x).classList.add("hidden"));
+
+  $(id).classList.remove("hidden");
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+}
+
+function toggleSound(){
+  state.sound=!state.sound;
+
+  $("soundButton").textContent=
+    state.sound?"🔊 Sound ON":"🔇 Sound OFF";
+
+  if(!state.sound)stopSpeaking();
+}
+
+function playFeedbackSound(correct=true){
+  if(!state.sound)return;
+
+  try{
+    const AudioClass=
+      window.AudioContext||
+      window.webkitAudioContext;
+
+    if(!AudioClass)return;
+
+    const context=new AudioClass();
+    const oscillator=context.createOscillator();
+    const gain=context.createGain();
+
+    oscillator.type="sine";
+
+    oscillator.frequency.value=
+      correct?650:350;
+
+    gain.gain.setValueAtTime(
+      .035,
+      context.currentTime
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+      .001,
+      context.currentTime+.18
+    );
+
+    oscillator.connect(gain);
+    gain.connect(context.destination);
+
+    oscillator.start();
+    oscillator.stop(context.currentTime+.19);
+
+    oscillator.onended=()=>context.close();
+
+  }catch(error){}
+}
+
+function updateMotivation(){
+  const messages=[
+    "🌟 Every new phrase brings you closer to your goal!",
+    "💪 Small steps lead to big improvements!",
+    "✨ Your English is growing stronger every day!",
+    "🌱 Learning environmental vocabulary helps you understand the topic!",
+    "🎯 Listen carefully and remember the meaning!",
+    "🌈 Every attempt is an opportunity to learn!",
+    "👏 Your effort is making a difference!",
+    "🚀 Keep learning, keep growing!"
+  ];
+
+  const index=state.learned.size%messages.length;
+
+  $("motivation").textContent=messages[index];
+}
+
+function updateProgress(){
+  const count=state.learned.size;
+
+  $("learnedCounter").textContent=
+    count+"/15 learned";
+
+  $("progressBar").style.width=
+    (count/15*100)+"%";
+}
+
+
+/* ======================================================
+   START GAME
+====================================================== */
+
+function startGame(){
+  const name=$("studentName").value.trim();
+  const className=$("studentClass").value.trim();
+
+  if(!name||!className){
+    alert(
+      "Vui lòng nhập đầy đủ Họ tên và Lớp."
+    );
+    return;
+  }
+
+  const sound=state.sound;
+
+  state=createInitialState();
+
+  state.sound=sound;
+  state.name=name;
+  state.className=className;
+  state.started=true;
+
+  state.quizQuestions=generateQuiz();
+
+  $("studentLabel").textContent=
+    name+" • "+className;
+
+  $("matchingSubmit").disabled=false;
+  $("quizSubmit").disabled=false;
+  $("finishButton").disabled=false;
+
+  $("matchingScore").textContent="Not submitted";
+  $("quizScore").textContent="Not submitted";
+
+  $("matchingFeedback").innerHTML="";
+  $("quizFeedback").innerHTML="";
+
+  renderFlashcard();
+  renderMatching();
+  renderQuiz();
+
+  updateProgress();
+  updateMotivation();
+
+  showScreen("appScreen");
+
+  startTimer();
+  playFeedbackSound(true);
+}
+
+
+/* ======================================================
+   TIMER – 50 MINUTES
+====================================================== */
+
+function startTimer(){
+  clearInterval(timerInterval);
+
+  state.deadline=
+    Date.now()+state.remaining*1000;
+
+  updateTimer();
+
+  timerInterval=setInterval(()=>{
+
+    if(state.finished)return;
+
+    state.remaining=Math.max(
+      0,
+      Math.ceil(
+        (state.deadline-Date.now())/1000
+      )
+    );
+
+    updateTimer();
+
+    if(state.remaining===0){
+      clearInterval(timerInterval);
+      finishGame(true);
+    }
+
+  },250);
+}
+
+function updateTimer(){
+  const minutes=Math.floor(state.remaining/60);
+  const seconds=state.remaining%60;
+
+  $("timer").textContent=
+    String(minutes).padStart(2,"0")+
+    ":"+
+    String(seconds).padStart(2,"0");
+
+  $("timer").classList.toggle(
+    "timerWarning",
+    state.remaining<=300
+  );
+}
+
+
+/* ======================================================
+   SPEECH SYNTHESIS
+====================================================== */
+
+function loadVoices(){
+  if(!("speechSynthesis" in window))return;
+
+  voices=window.speechSynthesis.getVoices();
+}
+
+if("speechSynthesis" in window){
+
+  loadVoices();
+
+  if(
+    typeof window.speechSynthesis.addEventListener===
+    "function"
+  ){
+    window.speechSynthesis.addEventListener(
+      "voiceschanged",
+      loadVoices
+    );
+  }
+}
+
+function getEnglishVoice(){
+  loadVoices();
+
+  return (
+    voices.find(v=>
+      v.localService&&
+      /^en-GB/i.test(v.lang)
+    )||
+    voices.find(v=>
+      /^en-GB/i.test(v.lang)
+    )||
+    voices.find(v=>
+      v.localService&&
+      /^en/i.test(v.lang)
+    )||
+    voices.find(v=>
+      /^en/i.test(v.lang)
+    )||
+    null
+  );
+}
+
+function speakCurrent(){
+  speakPhrase(
+    vocabulary[state.currentCard].speak
+  );
+}
+
+function speakPhrase(text){
+
+  if(!state.sound){
+    $("speechStatus").textContent=
+      "Âm thanh đang tắt. Hãy bật Sound ON.";
+    return;
+  }
+
+  if(!("speechSynthesis" in window)){
+    $("speechStatus").textContent=
+      "Trình duyệt chưa hỗ trợ phát âm.";
+    return;
+  }
+
+  stopSpeaking();
+
+  const voice=getEnglishVoice();
+
+  if(!voice){
+    $("speechStatus").textContent=
+      "Chưa tìm thấy giọng tiếng Anh. "+
+      "Hãy cài đặt giọng English trên thiết bị.";
+    return;
+  }
+
+  const token=++speechToken;
+
+  const utterance=
+    new SpeechSynthesisUtterance(text);
+
+  utterance.voice=voice;
+  utterance.lang=voice.lang;
+  utterance.rate=.82;
+  utterance.pitch=1;
+  utterance.volume=1;
+
+  $("speechStatus").textContent=
+    "🔊 Playing pronunciation...";
+
+  utterance.onend=()=>{
+    if(token===speechToken){
+      $("speechStatus").textContent=
+        "Listen again and repeat!";
+    }
+  };
+
+  utterance.onerror=()=>{
+    if(token===speechToken){
+      $("speechStatus").textContent=
+        "Không thể phát âm thanh. "+
+        "Hãy kiểm tra giọng đọc của thiết bị.";
+    }
+  };
+
+  window.speechSynthesis.speak(utterance);
+}
+
+function stopSpeaking(){
+  speechToken++;
+
+  if("speechSynthesis" in window){
+    window.speechSynthesis.cancel();
+  }
+
+  if($("speechStatus")){
+    $("speechStatus").textContent=
+      "Audio stopped.";
+  }
+}
+
+
+/* ======================================================
+   FLASHCARD SYSTEM
+====================================================== */
+
+function renderFlashcard(){
+
+  const word=
+    vocabulary[state.currentCard];
+
+  $("cardCounter").textContent=
+    (state.currentCard+1)+" / 15";
+
+  $("audioPhrase").textContent=
+    word.phrase;
+
+  const card=$("flashcard");
+
+  if(!state.flipped){
+
+    card.innerHTML=`
+      <div class="cardContent">
+
+        <span class="tag">
+          ENGLISH PHRASE
+        </span>
+
+        <h2>
+          ${escapeHTML(word.phrase)}
+        </h2>
+
+        <p class="ipa">
+          ${escapeHTML(word.ipa)}
+        </p>
+
+        <p class="muted">
+          👆 Click to reveal the meaning
+        </p>
+
+      </div>
+    `;
+
+  }else{
+
+    const synonym=word.synonym?`
+      <p>
+        <strong>Synonym / Related expression:</strong>
+        <br>
+        ${escapeHTML(word.synonym)}
+      </p>
+    `:"";
+
+    const antonym=word.antonym?`
+      <p>
+        <strong>Antonym / Contrast:</strong>
+        <br>
+        ${escapeHTML(word.antonym)}
+      </p>
+    `:"";
+
+    const note=word.note?`
+      <div class="message">
+        <strong>Grammar / Usage:</strong>
+        <br>
+        ${escapeHTML(word.note)}
+      </div>
+    `:"";
+
+    card.innerHTML=`
+      <div class="cardContent">
+
+        <span class="tag">
+          VIETNAMESE MEANING
+        </span>
+
+        <p class="cardMeaning">
+          ${escapeHTML(word.meaning)}
+        </p>
+
+        <p class="ipa">
+          ${escapeHTML(word.ipa)}
+        </p>
+
+        ${synonym}
+        ${antonym}
+        ${note}
+
+        <p class="small muted">
+          Click to return to English
+        </p>
+
+      </div>
+    `;
+  }
+
+  $("flashFeedback").textContent=
+    state.learned.has(state.currentCard)?
+      "✅ You have marked this phrase as learned.":
+      "✨ Listen, repeat and remember!";
+}
+
+function flipCard(){
+  state.flipped=!state.flipped;
+
+  renderFlashcard();
+}
+
+function flashcardKey(event){
+  if(
+    event.key==="Enter"||
+    event.key===" "
+  ){
+    event.preventDefault();
+    flipCard();
+  }
+}
+
+function previousCard(){
+  stopSpeaking();
+
+  state.currentCard=
+    (state.currentCard-1+15)%15;
+
+  state.flipped=false;
+
+  renderFlashcard();
+}
+
+function nextCard(){
+  stopSpeaking();
+
+  state.currentCard=
+    (state.currentCard+1)%15;
+
+  state.flipped=false;
+
+  renderFlashcard();
+}
+
+function markLearned(){
+
+  state.learned.add(
+    state.currentCard
+  );
+
+  updateProgress();
+  updateMotivation();
+  renderFlashcard();
+
+  playFeedbackSound(true);
+
+  if(state.learned.size===15){
+    $("flashFeedback").textContent=
+      "🎉 Fantastic! You have reviewed all 15 phrases!";
+  }
+}
+
+
+/* ======================================================
+   MATCHING – 15 ITEMS
+====================================================== */
+
+function renderMatching(){
+
+  const shuffled=shuffle(
+    vocabulary.map((word,index)=>({
+      index,
+      meaning:word.meaning
+    }))
+  );
+
+  $("matchingContainer").innerHTML=
+    vocabulary.map((word,index)=>{
+
+      const options=shuffled.map(item=>`
+        <option value="${item.index}">
+          ${escapeHTML(item.meaning)}
+        </option>
+      `).join("");
+
+      return `
+        <div class="matchRow" id="matchRow${index}">
+
+          <div>
+
+            <strong>
+              ${index+1}.
+              ${escapeHTML(word.phrase)}
+            </strong>
+
+            <div class="small muted">
+              ${escapeHTML(word.ipa)}
+            </div>
+
+            <button
+              type="button"
+              class="translateButton"
+              onclick="toggleMatchingMeaning(${index})">
+              🌐 Meaning
+            </button>
+
+            <div
+              id="matchingMeaning${index}"
+              class="optionMeaning hidden">
+              ${escapeHTML(word.meaning)}
+            </div>
+
+          </div>
+
+          <select
+            id="match${index}"
+            aria-label="Nghĩa của ${escapeHTML(word.phrase)}"
+            onchange="setMatchingAnswer(${index},this.value)">
+
+            <option value="">
+              -- Choose meaning --
+            </option>
+
+            ${options}
+
+          </select>
+
+          <div
+            id="matchFeedback${index}"
+            class="matchFeedback hidden">
+          </div>
+
+        </div>
+      `;
+
+    }).join("");
+}
+
+function toggleMatchingMeaning(index){
+  $("matchingMeaning"+index)
+    .classList.toggle("hidden");
+}
+
+function setMatchingAnswer(index,value){
+
+  if(
+    state.matchingSubmitted||
+    state.finished
+  )return;
+
+  state.matchingAnswers[index]=value;
+
+  // Each Vietnamese meaning can be matched only once.
+  // If selected elsewhere, clear the previous selection.
+
+  if(value!==""){
+
+    for(let i=0;i<vocabulary.length;i++){
+
+      if(i===index)continue;
+
+      if(state.matchingAnswers[i]===value){
+
+        state.matchingAnswers[i]="";
+
+        const select=$("match"+i);
+
+        if(select)select.value="";
+      }
+    }
+  }
+}
+
+function submitMatching(force=false){
+
+  if(state.matchingSubmitted)return true;
+
+  const unanswered=vocabulary.filter(
+    (_,index)=>
+      state.matchingAnswers[index]===undefined||
+      state.matchingAnswers[index]===""
+  ).length;
+
+  if(unanswered>0&&!force){
+
+    const proceed=confirm(
+      `Bạn còn ${unanswered} câu nối nghĩa chưa trả lời. `+
+      "Bạn muốn chấm bài ngay?"
+    );
+
+    if(!proceed)return false;
+  }
+
+  state.matchingSubmitted=true;
+
+  let correct=0;
+
+  vocabulary.forEach((word,index)=>{
+
+    const answer=
+      state.matchingAnswers[index];
+
+    const isCorrect=
+      answer!==undefined&&
+      answer!==""&&
+      Number(answer)===index;
+
+    const row=$("matchRow"+index);
+    const feedback=$("matchFeedback"+index);
+    const select=$("match"+index);
+
+    select.disabled=true;
+
+    feedback.classList.remove("hidden");
+
+    if(isCorrect){
+
+      correct++;
+
+      row.classList.add("correct");
+
+      feedback.innerHTML=`
+        <span class="correctText">
+          ✓ Correct!
+          ${escapeHTML(word.meaning)}
+        </span>
+      `;
+
+    }else{
+
+      row.classList.add("incorrect");
+
+      feedback.innerHTML=`
+        <span class="incorrectText">
+          ✗ Correct meaning:
+          ${escapeHTML(word.meaning)}
+        </span>
+
+        ${word.synonym?`
+          <div>
+            <strong>Synonym:</strong>
+            ${escapeHTML(word.synonym)}
+          </div>
+        `:""}
+
+        ${word.antonym?`
+          <div>
+            <strong>Antonym / Contrast:</strong>
+            ${escapeHTML(word.antonym)}
+          </div>
+        `:""}
+
+        ${word.note?`
+          <div>
+            <strong>Usage:</strong>
+            ${escapeHTML(word.note)}
+          </div>
+        `:""}
+      `;
+    }
+
+  });
+
+  state.matchingCorrect=correct;
+
+  $("matchingScore").textContent=
+    correct+"/15 correct";
+
+  $("matchingSubmit").disabled=true;
+
+  $("matchingFeedback").innerHTML=`
+    <div class="message">
+
+      <strong>
+        Your Matching Score: ${correct}/15
+      </strong>
+
+      <p>
+        ${correct===15?
+          "🎉 Excellent! You matched all 15 phrases correctly!":
+          "🌱 Every correction helps you remember vocabulary better!"}
+      </p>
+
+    </div>
+  `;
+
+  playFeedbackSound(correct>=11);
+
+  return true;
+}
+
+
+/* ======================================================
+   QUICK QUIZ – AUTO-GENERATED FROM 15 PHRASES
+====================================================== */
+
+function generateQuiz(){
+
+  const selected=shuffle(
+    vocabulary.map((_,index)=>index)
+  ).slice(0,5);
+
+  return selected.map(
+    (correctIndex,number)=>{
+
+      const distractors=shuffle(
+        vocabulary.map((_,index)=>index)
+          .filter(index=>index!==correctIndex)
+      ).slice(0,3);
+
+      return {
+        number:number+1,
+        correctIndex,
+        choices:shuffle([
+          correctIndex,
+          ...distractors
+        ])
+      };
+
+    }
+  );
+}
+
+function renderQuiz(){
+
+  $("quizContainer").innerHTML=
+    state.quizQuestions.map(
+      (question,qIndex)=>{
+
+        const target=
+          vocabulary[question.correctIndex];
+
+        const options=question.choices.map(
+          (vocabIndex,optionIndex)=>{
+
+            const word=
+              vocabulary[vocabIndex];
+
+            const letter=
+              "ABCD"[optionIndex];
+
+            return `
+              <div
+                class="quizOption"
+                id="quizOption${qIndex}_${optionIndex}">
+
+                <input
+                  type="radio"
+                  name="quiz${qIndex}"
+                  id="quiz${qIndex}option${optionIndex}"
+                  value="${vocabIndex}"
+                  onchange="chooseQuizAnswer(${qIndex},${vocabIndex})">
+
+                <label
+                  for="quiz${qIndex}option${optionIndex}">
+
+                  <strong>${letter}.</strong>
+
+                  ${escapeHTML(word.phrase)}
+
+                </label>
+
+                <button
+                  type="button"
+                  class="translateButton"
+                  aria-label="Xem nghĩa tiếng Việt"
+                  onclick="toggleQuizMeaning(${qIndex},${optionIndex})">
+                  🇻🇳
+                </button>
+
+              </div>
+
+              <div
+                id="quizMeaning${qIndex}_${optionIndex}"
+                class="optionMeaning hidden">
+                ${escapeHTML(word.meaning)}
+              </div>
+            `;
+
+          }
+        ).join("");
+
+        return `
+          <div class="quizQuestion">
+
+            <span class="tag">
+              QUESTION ${qIndex+1} / 5
+            </span>
+
+            <p class="quizPrompt">
+
+              Which phrase means:
+
+              <br>
+
+              <span style="color:var(--primary)">
+                "${escapeHTML(target.meaning)}"
+              </span>
+
+            </p>
+
+            <p class="small muted">
+              Choose one correct answer.
+            </p>
+
+            ${options}
+
+            <div
+              id="quizExplanation${qIndex}"
+              class="explanation hidden">
+            </div>
+
+            <p class="small muted">
+              ✨ Think carefully –
+              every attempt is a learning opportunity!
+            </p>
+
+          </div>
+        `;
+      }
+    ).join("");
+}
+
+function chooseQuizAnswer(qIndex,vocabIndex){
+
+  if(
+    state.quizSubmitted||
+    state.finished
+  )return;
+
+  state.quizAnswers[qIndex]=vocabIndex;
+
+  const question=
+    state.quizQuestions[qIndex];
+
+  question.choices.forEach(
+    (index,optionIndex)=>{
+
+      const element=$(
+        "quizOption"+qIndex+"_"+optionIndex
+      );
+
+      element.classList.toggle(
+        "selected",
+        index===vocabIndex
+      );
+
+    }
+  );
+}
+
+function toggleQuizMeaning(qIndex,optionIndex){
+
+  $(
+    "quizMeaning"+qIndex+"_"+optionIndex
+  ).classList.toggle("hidden");
+}
+
+function submitQuiz(force=false){
+
+  if(state.quizSubmitted)return true;
+
+  const unanswered=
+    state.quizQuestions.filter(
+      (_,index)=>
+        state.quizAnswers[index]===undefined
+    ).length;
+
+  if(unanswered>0&&!force){
+
+    const proceed=confirm(
+      `Bạn còn ${unanswered} câu Quick Quiz chưa trả lời. `+
+      "Bạn vẫn muốn nộp bài?"
+    );
+
+    if(!proceed)return false;
+  }
+
+  state.quizSubmitted=true;
+
+  let correct=0;
+
+  state.quizQuestions.forEach(
+    (question,qIndex)=>{
+
+      const answer=
+        state.quizAnswers[qIndex];
+
+      const correctIndex=
+        question.correctIndex;
+
+      const isCorrect=
+        answer===correctIndex;
+
+      if(isCorrect)correct++;
+
+      question.choices.forEach(
+        (vocabIndex,optionIndex)=>{
+
+          const option=$(
+            "quizOption"+qIndex+"_"+optionIndex
+          );
+
+          const radio=
+            option.querySelector("input");
+
+          radio.disabled=true;
+
+          if(vocabIndex===correctIndex){
+            option.classList.add("correct");
+          }
+
+          if(
+            vocabIndex===answer&&
+            answer!==correctIndex
+          ){
+            option.classList.add("incorrect");
+          }
+
+        }
+      );
+
+      const target=
+        vocabulary[correctIndex];
+
+      const explanation=$(
+        "quizExplanation"+qIndex
+      );
+
+      explanation.classList.remove("hidden");
+
+      const correctLetter=
+        "ABCD"[question.choices.indexOf(correctIndex)];
+
+      // Explain the correct answer and the other options
+      // using only vocabulary from the provided list.
+
+      const allOptions=
+        question.choices.map(
+          (index,optionIndex)=>{
+
+            const word=vocabulary[index];
+
+            return `
+              <p>
+                <strong>
+                  ${"ABCD"[optionIndex]}.
+                  ${escapeHTML(word.phrase)}
+                </strong>
+
+                <br>
+
+                ${escapeHTML(word.meaning)}
+
+                ${index===correctIndex?
+                  '<span class="correctText"> ✓ Correct</span>':""}
+              </p>
+            `;
+          }
+        ).join("");
+
+      explanation.innerHTML=`
+        <p class="${isCorrect?"correctText":"incorrectText"}">
+
+          ${isCorrect?
+            "✓ Correct! Great vocabulary recognition!":
+            "✗ Not quite. Let's review the correct phrase!"}
+
+        </p>
+
+        <p>
+          <strong>Correct Answer:</strong>
+          ${correctLetter}.
+          ${escapeHTML(target.phrase)}
+        </p>
+
+        <p>
+          <strong>Explanation:</strong>
+          ${escapeHTML(target.phrase)}
+          = ${escapeHTML(target.meaning)}
+        </p>
+
+        <p>
+          <strong>IPA:</strong>
+          ${escapeHTML(target.ipa)}
+        </p>
+
+        ${target.synonym?`
+          <p>
+            <strong>Synonym / Related expression:</strong>
+            ${escapeHTML(target.synonym)}
+          </p>
+        `:""}
+
+        ${target.antonym?`
+          <p>
+            <strong>Antonym / Contrast:</strong>
+            ${escapeHTML(target.antonym)}
+          </p>
+        `:""}
+
+        ${target.note?`
+          <p>
+            <strong>Grammar / Usage:</strong>
+            ${escapeHTML(target.note)}
+          </p>
+        `:""}
+
+        <details>
+          <summary>
+            🇻🇳 Vietnamese meanings of all four options
+          </summary>
+          ${allOptions}
+        </details>
+
+        <p class="small">
+          🌟 Review the phrase in your flashcards
+          to strengthen your memory!
+        </p>
+      `;
+
+    }
+  );
+
+  state.quizCorrect=correct;
+
+  $("quizScore").textContent=
+    correct+"/5 correct";
+
+  $("quizSubmit").disabled=true;
+
+  $("quizFeedback").innerHTML=`
+    <div class="message">
+
+      <strong>
+        Your Quick Quiz Score: ${correct}/5
+      </strong>
+
+      <p>
+        ${correct===5?
+          "🏆 Wonderful! All five questions are correct!":
+          "💪 Keep practising. Every question helps you improve!"}
+      </p>
+
+    </div>
+  `;
+
+  playFeedbackSound(correct>=4);
+
+  return true;
+}
+
+
+/* ======================================================
+   RESULTS AND SCORING
+====================================================== */
+
+function finishGame(timeUp=false){
+
+  if(state.finished){
+    showResults();
+    return;
+  }
+
+  if(
+    !timeUp&&
+    (
+      !state.matchingSubmitted||
+      !state.quizSubmitted
+    )
+  ){
+
+    const proceed=confirm(
+      "Một hoặc nhiều phần chưa được chấm. "+
+      "Nếu hoàn thành ngay, các câu chưa trả lời "+
+      "sẽ được tính là sai. Bạn có muốn tiếp tục?"
+    );
+
+    if(!proceed)return;
+  }
+
+  if(!state.matchingSubmitted){
+    submitMatching(true);
+  }
+
+  if(!state.quizSubmitted){
+    submitQuiz(true);
+  }
+
+  state.finished=true;
+  state.started=false;
+
+  clearInterval(timerInterval);
+  stopSpeaking();
+
+  state.finishedAt=new Date();
+
+  const correct=
+    state.matchingCorrect+
+    state.quizCorrect;
+
+  const percentage=
+    correct/20*100;
+
+  const score=
+    (correct/20*10).toFixed(2);
+
+  const eligible=
+    percentage>70;
+
+  $("resultStudent").textContent=
+    state.name+" • "+state.className;
+
+  $("resultScore").textContent=
+    score+"/10";
+
+  $("matchingResultScore").textContent=
+    state.matchingCorrect+"/15";
+
+  $("quizResultScore").textContent=
+    state.quizCorrect+"/5";
+
+  $("percentResult").textContent=
+    percentage.toFixed(0)+"%";
+
+  $("resultDetails").textContent=
+    "Correct Answers: "+correct+"/20";
+
+  let title="";
+  let comment="";
+
+  if(percentage===100){
+
+    title="🌟 Outstanding Achievement!";
+
+    comment=
+      "Perfect score! Your vocabulary recognition "+
+      "is excellent. Keep using these phrases "+
+      "in your English learning!";
+
+  }else if(eligible){
+
+    title="🏆 Wonderful Progress!";
+
+    comment=
+      "Congratulations! You have successfully "+
+      "completed the vocabulary challenge. "+
+      "Your effort and determination are paying off!";
+
+  }else if(percentage>=50){
+
+    title="🌱 Keep Growing!";
+
+    comment=
+      "You have made meaningful progress. "+
+      "Review the explanations, listen to the phrases "+
+      "again and continue practising!";
+
+  }else{
+
+    title="✨ Every Step Counts!";
+
+    comment=
+      "Vocabulary learning takes practice. "+
+      "Review the flashcards, explore their meanings "+
+      "and try again with confidence!";
+  }
+
+  if(timeUp){
+    comment+=
+      " Thời gian 50 phút đã kết thúc. "+
+      "Các câu chưa trả lời được tính là sai.";
+  }
+
+  $("resultTitle").textContent=title;
+  $("resultComment").textContent=comment;
+
+  if(eligible){
+
+    generateCertificate(
+      correct,
+      percentage
+    );
+
+    $("certificateButton")
+      .classList.remove("hidden");
+
+  }else{
+
+    $("certificateButton")
+      .classList.add("hidden");
+
+  }
+
+  $("finishButton").disabled=false;
+
+  showResults();
+
+  playFeedbackSound(eligible);
+}
+
+function showResults(){
+
+  showScreen("resultScreen");
+
+  const correct=
+    state.matchingCorrect+
+    state.quizCorrect;
+
+  if(
+    state.finished&&
+    correct/20>.70
+  ){
+    $("certificateSection")
+      .classList.remove("hidden");
+  }
+}
+
+
+/* ======================================================
+   CERTIFICATE – SCORE > 70%
+====================================================== */
+
+function generateCertificate(
+  correct,
+  percentage
+){
+
+  if(!state.certificateCode){
+
+    state.certificateCode=
+      "MSD-T02P2-"+
+      state.finishedAt.getTime()
+        .toString(36)
+        .toUpperCase();
+  }
+
+  $("certificateName").textContent=
+    state.name;
+
+  $("certificateClass").textContent=
+    "Class: "+state.className;
+
+  $("certificateScore").textContent=
+    "Achievement: "+
+    correct+"/20 • "+
+    percentage.toFixed(0)+"%";
+
+  $("certificateDate").textContent=
+    "Date: "+
+    state.finishedAt.toLocaleDateString("vi-VN");
+
+  $("certificateID").textContent=
+    "Certificate ID: "+
+    state.certificateCode;
+}
+
+function printCertificate(){
+
+  const correct=
+    state.matchingCorrect+
+    state.quizCorrect;
+
+  if(
+    !state.finished||
+    correct/20<=.70
+  ){
+    alert(
+      "Giấy chứng nhận chỉ được cấp "+
+      "khi đạt trên 70% câu đúng."
+    );
+    return;
+  }
+
+  $("certificateSection")
+    .classList.remove("hidden");
+
+  window.print();
+}
+
+
+/* ======================================================
+   REVIEW
+====================================================== */
+
+function reviewLearning(){
+
+  $("resultScreen").classList.add("hidden");
+  $("certificateSection").classList.add("hidden");
+  $("appScreen").classList.remove("hidden");
+
+  $("finishButton").disabled=false;
+  $("finishButton").textContent=
+    "🏆 XEM LẠI KẾT QUẢ";
+
+  // The submitted answers stay locked.
+  // Students may still flip flashcards and
+  // read all explanations after finishing.
+
+  goTo("flashcardSection");
+}
+
+
+/* ======================================================
+   RESET
+====================================================== */
+
+function resetTest(){
+
+  const confirmed=confirm(
+    "Bạn muốn làm lại bài từ đầu? "+
+    "Kết quả hiện tại sẽ được đặt lại."
+  );
+
+  if(!confirmed)return;
+
+  clearInterval(timerInterval);
+  stopSpeaking();
+
+  const name=state.name;
+  const className=state.className;
+  const sound=state.sound;
+
+  state=createInitialState();
+
+  state.sound=sound;
+
+  $("studentName").value=name;
+  $("studentClass").value=className;
+
+  $("certificateSection").classList.add("hidden");
+
+  $("finishButton").textContent=
+    "🏆 HOÀN THÀNH & XEM KẾT QUẢ";
+
+  showScreen("welcomeScreen");
+
+  updateTimer();
+}
+
+
+/* ======================================================
+   KEYBOARD AND ACCESSIBILITY
+====================================================== */
+
+document.addEventListener(
+  "keydown",
+  event=>{
+
+    if(event.key==="Escape"){
+      stopSpeaking();
+    }
+
+  }
+);
+
+
+/* ======================================================
+   INITIALIZE
+====================================================== */
+
+(function initialize(){
+
+  try{
+
+    const saved=
+      localStorage.getItem(
+        "msduyen_test02_part2_theme"
+      );
+
+    const allowed=[
+      "blue",
+      "mint",
+      "lavender",
+      "peach",
+      "dark"
+    ];
+
+    if(allowed.includes(saved)){
+
+      $("themeSelector").value=saved;
+
+      changeTheme(saved);
+    }
+
+  }catch(error){}
+
+  updateTimer();
+
+})();
+
+
+/* ======================================================
+   PAGE CLOSE PROTECTION
+====================================================== */
+
+window.addEventListener(
+  "beforeunload",
+  event=>{
+
+    if(
+      state.started&&
+      !state.finished
+    ){
+
+      event.preventDefault();
+
+      event.returnValue="";
+    }
+
+  }
+);
+
+
+/* ======================================================
+   PRINT CLEANUP
+====================================================== */
+
+window.addEventListener(
+  "afterprint",
+  ()=>{
+
+    if(!state.finished)return;
+
+    const correct=
+      state.matchingCorrect+
+      state.quizCorrect;
+
+    if(correct/20>.70){
+
+      $("certificateSection")
+        .classList.remove("hidden");
+
+    }
+
+  }
+);
+
+</script>
+
+  <script src="../assets/js/shared-nav.js"></script>
+</body>
+</html>

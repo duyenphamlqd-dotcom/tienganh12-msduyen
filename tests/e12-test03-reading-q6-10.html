@@ -1,0 +1,557 @@
+﻿
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test 03 – Reading Q6-10 | Ms.Duyen</title>
+<style>
+:root{
+ --bg:#eef3fb;--panel:#fff;--ink:#182a47;
+ --muted:#536681;--accent:#345bdb;--soft:#e8efff;
+ --border:#ccd7e8;--good:#087443;--bad:#b42336;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font:16px/1.65 system-ui,"Segoe UI",Arial,sans-serif;
+ transition:background .3s,color .3s}
+button,input,select{font:inherit}
+button{cursor:pointer;border-radius:12px;border:1px solid var(--border);
+ padding:10px 15px;background:var(--panel);color:var(--ink)}
+button:hover:not(:disabled){filter:brightness(.95)}
+button:disabled{opacity:.55;cursor:not-allowed}
+button:focus-visible,input:focus-visible{outline:3px solid #e6a936;outline-offset:2px}
+.primary{background:var(--accent);color:white;border-color:var(--accent);font-weight:750}
+.danger{color:var(--bad);border-color:var(--bad)}
+header{background:var(--panel);border-bottom:1px solid var(--border);
+ padding:12px max(15px,calc((100vw - 1200px)/2));display:flex;
+ justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.brand{font-weight:850;color:var(--accent)}
+.controls{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+select{padding:9px;border-radius:10px;background:var(--panel);
+ color:var(--ink);border:1px solid var(--border)}
+main{max-width:1200px;margin:auto;padding:22px 15px 60px}
+.hidden{display:none!important}
+.card{background:var(--panel);border:1px solid var(--border);
+ border-radius:20px;padding:24px;box-shadow:0 8px 24px #142b5510}
+.hero{text-align:center;max-width:820px;margin:35px auto;padding:42px 26px}
+.script{font-family:"Segoe Script","Brush Script MT","Palatino Linotype",cursive;
+ font-style:italic;font-size:clamp(32px,5vw,58px);line-height:1.25;
+ color:var(--accent);margin:15px 0}
+.subtitle{letter-spacing:2px;text-transform:uppercase;font-weight:750;color:var(--muted)}
+.fields{display:grid;grid-template-columns:2fr 1fr;gap:12px;max-width:570px;margin:25px auto}
+input{width:100%;padding:13px;border:1px solid var(--border);
+ border-radius:12px;background:var(--panel);color:var(--ink)}
+.grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);
+ gap:18px;align-items:start}
+.sticky{position:sticky;top:12px}
+h2,h3{line-height:1.35}
+h2{font-size:23px}
+.passage{font-size:17px;line-height:2;text-align:justify;white-space:normal}
+.passage p{margin:0 0 16px}
+.blank{color:var(--accent);font-weight:850;white-space:nowrap}
+.topline{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center}
+.timer{font-weight:850;font-variant-numeric:tabular-nums;
+ background:var(--soft);color:var(--accent);padding:8px 14px;border-radius:12px}
+.progress{height:10px;background:var(--soft);border-radius:10px;overflow:hidden;margin:15px 0}
+.progress>div{height:100%;background:var(--accent);width:0;transition:width .3s}
+.options{display:grid;gap:10px;margin:18px 0}
+.option{width:100%;text-align:left;display:flex;gap:12px;align-items:flex-start;
+ padding:14px;border:2px solid var(--border);background:var(--panel)}
+.option b{display:grid;place-items:center;flex:none;width:29px;height:29px;
+ background:var(--soft);color:var(--accent);border-radius:9px}
+.option.selected{border-color:var(--accent);background:var(--soft)}
+.option.correct{border-color:var(--good)}
+.option.wrong{border-color:var(--bad)}
+.option .meaning{display:block;font-size:14px;color:var(--muted);margin-top:5px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.feedback{padding:14px;border-radius:12px;margin-top:15px;
+ background:var(--soft);border-left:4px solid var(--accent)}
+.feedback.good{border-color:var(--good)}
+.feedback.bad{border-color:var(--bad)}
+.learning{margin-top:15px;padding:17px;background:var(--soft);border-radius:14px}
+.learning p{margin:8px 0}
+.translation{margin-top:15px;border-top:1px solid var(--border);padding-top:15px}
+.translation p{margin:0 0 12px}
+.small{font-size:14px;color:var(--muted)}
+.tag{display:inline-block;background:var(--soft);color:var(--accent);
+ padding:4px 10px;border-radius:30px;font-size:13px;font-weight:750}
+.center{text-align:center}
+.score{font-size:58px;font-weight:900;color:var(--accent);line-height:1.2}
+.certificate{border:7px double #b99b53;border-radius:14px;padding:30px;
+ margin:25px auto;max-width:780px;text-align:center;background:#fffdf4;color:#24304c}
+.certificate h2{font-family:Georgia,serif;color:#947126;font-size:30px}
+.signature{font-family:"Segoe Script",cursive;font-size:27px;color:#294b8b}
+.matchgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.matchrow{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+.matchrow span{flex:1}
+.matchrow select{width:80px}
+.flash{min-height:210px;display:flex;flex-direction:column;
+ justify-content:center;align-items:center;text-align:center;gap:10px;
+ background:var(--soft);border:2px dashed var(--accent);border-radius:18px;
+ padding:24px;cursor:pointer}
+.flash strong{font-size:26px}
+.footer{text-align:center;color:var(--muted);margin:25px}
+@media(max-width:800px){
+ .grid,.matchgrid{grid-template-columns:1fr}
+ .sticky{position:static}
+ .fields{grid-template-columns:1fr}
+ .card{padding:17px}
+ .hero{margin:15px auto}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+@media print{
+ body{background:white}
+ header,.no-print,#welcome,#quiz,#practice,.footer{display:none!important}
+ #results{display:block!important}
+ #results> :not(.certificate){display:none!important}
+ .certificate{display:block!important;border:7px double #b99b53;
+ break-inside:avoid;box-shadow:none}
+}
+</style>
+  <link rel="stylesheet" href="../assets/css/shared-nav.css">
+</head>
+<body>
+<header>
+ <div class="brand">✦ Ms.Duyen • Reading Challenge</div>
+ <div class="controls">
+  <label for="theme">🎨 Màu nền</label>
+  <select id="theme" aria-label="Chọn màu nền">
+   <option value="blue">Xanh dịu</option>
+   <option value="cream">Kem ấm</option>
+   <option value="mint">Xanh bạc hà</option>
+   <option value="dark">Xanh đêm</option>
+  </select>
+  <button id="soundBtn" type="button">🔊 Âm thanh</button>
+ </div>
+</header>
+<main>
+<section id="welcome" class="card hero">
+ <span class="tag">GRADE 12 • MIDTERM I REVIEW</span>
+ <h1 class="script">Test 03 – Reading Q6–10</h1>
+ <h2>LIFE STORIES WE ADMIRE</h2>
+ <p>Kiểm tra mà như chơi – chơi mà vẫn học được!</p>
+ <p>5 câu hỏi • 50 phút • Tự học qua giải thích, dịch nghĩa và flashcards</p>
+ <div class="fields">
+  <input id="student" placeholder="Họ và tên học sinh" maxlength="80">
+  <select id="className" aria-label="Chọn lớp">
+   <option value="">Chọn lớp</option>
+   <option>12A1</option><option>12A4</option>
+  </select>
+ </div>
+ <button class="primary" id="startBtn">Bắt đầu thử thách →</button>
+ <p id="startError" role="alert" class="small"></p>
+ <p class="small">Giáo viên thiết kế: Ms.Duyen</p>
+</section>
+
+<section id="quiz" class="hidden">
+ <div class="topline" style="margin-bottom:15px">
+  <div><strong id="studentLabel"></strong><br><span class="small">Test 03 – Reading Q6–10</span></div>
+  <div class="timer" id="timer">⏱ 50:00</div>
+ </div>
+ <div class="progress"><div id="progressBar"></div></div>
+ <div class="grid">
+  <article class="card sticky">
+   <span class="tag">READING PASSAGE</span>
+   <h2>LIFE STORIES WE ADMIRE</h2>
+   <div class="passage" id="passage">
+    <p>In life, everyone faces struggles, and at times we may even <span class="blank">(6) ______</span> out of money. But what makes a story truly <span class="blank">(7) ______</span> is how one rises above these challenges. Life Stories We Admire often involve people who refuse to give <span class="blank">(8) ______</span>, even when they seem to have nothing left.</p>
+    <p>From overcoming financial difficulties to chasing their dreams, these stories show us that success is not always about having the resources, but about finding the strength to push forward. Our resources, <span class="blank">(9) ______</span> to help those who have run out of money but refuse to quit, will guide you on your path to success. These resources include <span class="blank">(10) ______</span> that can help you get back on track.</p>
+    <p>People we admire for their resilience prove that no matter how tough the journey gets, perseverance and creativity can always lead to victory. Their stories are a reminder that obstacles are just stepping stones to greater achievements.</p>
+   </div>
+   <button id="translateBtn">🌐 Dịch bài đọc sang tiếng Việt</button>
+   <div id="translation" class="translation hidden">
+    <h3>Bản dịch: Những câu chuyện cuộc đời đáng ngưỡng mộ</h3>
+    <p>Trong cuộc sống, ai cũng đối mặt với khó khăn, và đôi khi chúng ta thậm chí có thể cạn tiền. Nhưng điều khiến một câu chuyện thực sự truyền cảm hứng chính là cách một người vượt lên trên những thử thách ấy. Những câu chuyện cuộc đời mà chúng ta ngưỡng mộ thường nói về những người không chịu bỏ cuộc, ngay cả khi dường như họ chẳng còn gì.</p>
+    <p>Từ việc vượt qua khó khăn tài chính đến theo đuổi ước mơ, những câu chuyện này cho thấy thành công không phải lúc nào cũng phụ thuộc vào việc có sẵn nguồn lực, mà còn nằm ở việc tìm được sức mạnh để tiến về phía trước. Những nguồn tài liệu của chúng tôi, được thiết kế để giúp những người đã cạn tiền nhưng vẫn không chịu từ bỏ, sẽ dẫn dắt bạn trên con đường đến thành công. Những tài liệu này bao gồm các công cụ tài chính đơn giản có thể giúp bạn trở lại đúng hướng.</p>
+    <p>Những người mà chúng ta ngưỡng mộ vì khả năng kiên cường của họ chứng minh rằng, cho dù hành trình có khó khăn đến đâu, sự kiên trì và sáng tạo vẫn có thể dẫn đến chiến thắng. Câu chuyện của họ nhắc nhở chúng ta rằng trở ngại chỉ là những bậc thang dẫn đến các thành tựu lớn lao hơn.</p>
+   </div>
+  </article>
+  <article class="card">
+   <div class="topline">
+    <span class="tag" id="questionNumber">QUESTION 6 / 10</span>
+    <span class="small" id="answeredCount">0/5 đã trả lời</span>
+   </div>
+   <h2 id="questionTitle"></h2>
+   <p class="small">Chọn phương án để xem nghĩa tiếng Việt. Sau đó xác nhận đáp án.</p>
+   <div id="options" class="options"></div>
+   <div id="feedback" aria-live="polite"></div>
+   <div class="actions">
+    <button class="primary" id="confirmBtn">✓ Xác nhận câu trả lời</button>
+    <button id="explainBtn" disabled>📖 Correct Answer</button>
+   </div>
+   <div id="explanation" class="learning hidden"></div>
+   <div class="actions">
+    <button id="prevBtn">← Câu trước</button>
+    <button id="nextBtn">Câu tiếp →</button>
+   </div>
+   <div class="actions">
+    <button class="primary" id="checkBtn">🏁 Check My Answers</button>
+    <button class="danger" id="resetBtn">↺ Reset Test</button>
+   </div>
+  </article>
+ </div>
+</section>
+
+<section id="results" class="hidden card center">
+ <span class="tag">CHALLENGE COMPLETED</span>
+ <h1 class="script">Wonderful Effort!</h1>
+ <h2 id="resultName"></h2>
+ <div class="score" id="score"></div>
+ <p id="scoreDetail"></p>
+ <h3 id="comment"></h3>
+ <p id="review"></p>
+ <div class="actions" style="justify-content:center">
+  <button class="primary" id="practiceBtn">🧩 Luyện từ vựng</button>
+  <button id="reviewBtn">📚 Xem lại bài làm</button>
+  <button id="againBtn">↺ Làm lại bài</button>
+ </div>
+ <div id="certificate" class="certificate hidden">
+  <div style="font-size:38px">🏆</div>
+  <h2>CERTIFICATE OF COMPLETION</h2>
+  <p>GIẤY CHỨNG NHẬN HOÀN THÀNH</p>
+  <p>This certificate is proudly presented to</p>
+  <h2 id="certName"></h2>
+  <p id="certClass"></p>
+  <p>For successfully completing</p>
+  <strong>TEST 03 – READING Q6–10</strong>
+  <p id="certScore"></p>
+  <p id="certDate"></p>
+  <p>Teacher's Signature</p>
+  <div class="signature">Ms.Duyên</div>
+  <p><strong>Giáo viên thiết kế: Ms.Duyen</strong></p>
+  <button class="no-print" id="printBtn">🖨 In / Lưu PDF chứng nhận</button>
+ </div>
+</section>
+
+<section id="practice" class="hidden">
+ <div class="card">
+  <h1 class="script center">Vocabulary Adventure</h1>
+  <p class="center">10 cụm từ trích từ bài đọc LIFE STORIES WE ADMIRE.</p>
+  <h2>🧩 Matching – Nối cụm từ với nghĩa</h2>
+  <p>Chọn chữ cái tương ứng với nghĩa tiếng Việt.</p>
+  <div class="matchgrid">
+   <div id="matchQuestions"></div>
+   <div id="matchMeanings"></div>
+  </div>
+  <div class="actions">
+   <button class="primary" id="matchCheck">Kiểm tra nối nghĩa</button>
+   <button id="matchReset">Làm lại nối nghĩa</button>
+  </div>
+  <p id="matchResult" aria-live="polite"></p>
+ </div>
+ <div class="card" style="margin-top:18px">
+  <h2>🃏 Flashcards – 10 cụm từ B1</h2>
+  <p class="small">Chạm thẻ để lật. Mỗi thẻ có IPA, nghĩa, và từ đồng nghĩa hoặc trái nghĩa khi phù hợp.</p>
+  <div id="flashcard" class="flash" role="button" tabindex="0"></div>
+  <p class="center" id="flashCounter"></p>
+  <div class="actions" style="justify-content:center">
+   <button id="flashPrev">← Trước</button>
+   <button id="flashFlip" class="primary">Lật thẻ</button>
+   <button id="flashNext">Tiếp →</button>
+  </div>
+ </div>
+ <div class="actions">
+  <button id="backResults">← Trở lại kết quả</button>
+ </div>
+</section>
+<div class="footer">Giáo viên thiết kế: Ms.Duyen • Học tập tích cực, tiến bộ mỗi ngày ✨</div>
+</main>
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const QUESTIONS=[
+ {n:6,options:["give","run","put","take"],key:1,
+ meanings:["cho; trao","chạy; cạn kiệt (trong cụm run out of)","đặt; để","lấy; mang"],
+ why:"Run out of money = hết tiền, cạn tiền. Sau chỗ trống đã có 'out of money', nên chọn run.",
+ grammar:"Cụm động từ: run out of + danh từ.",
+ vocab:"run out of money = cạn tiền; face struggles = đối mặt khó khăn."},
+ {n:7,options:["to inspiring","inspire","to inspiring","inspiring"],key:3,
+ meanings:["đến việc truyền cảm hứng (không phù hợp cấu trúc)","truyền cảm hứng (động từ nguyên mẫu)","đến việc truyền cảm hứng (trùng A, không phù hợp)","truyền cảm hứng; đầy cảm hứng (tính từ)"],
+ why:"Sau 'truly' và trước 'is', cần tính từ mô tả 'a story'. Inspiring là tính từ phù hợp.",
+ grammar:"make + object + adjective; truly + adjective. Trong câu: 'what makes a story truly inspiring'.",
+ vocab:"inspiring = truyền cảm hứng; rise above challenges = vượt lên thử thách."},
+ {n:8,options:["to","up","on","back"],key:1,
+ meanings:["đến; để","từ bỏ (trong give up)","tiếp tục (trong go on)","trở lại; phía sau"],
+ why:"Give up = từ bỏ. 'Refuse to give up' = không chịu bỏ cuộc.",
+ grammar:"refuse + to V; give up là phrasal verb.",
+ vocab:"refuse to give up = quyết không bỏ cuộc; have nothing left = không còn gì."},
+ {n:9,options:["designing","that designed","designed","was designing"],key:2,
+ meanings:["đang thiết kế; việc thiết kế","mà đã thiết kế (không phù hợp ý bị động)","được thiết kế","đã/đang thiết kế (quá khứ tiếp diễn)"],
+ why:"'Our resources, designed to help ..., will guide ...' dùng phân từ quá khứ để bổ nghĩa cho resources, mang nghĩa bị động.",
+ grammar:"Rút gọn mệnh đề quan hệ bị động: resources which are designed → resources designed.",
+ vocab:"be designed to + V = được thiết kế nhằm; guide someone on a path = dẫn dắt ai trên con đường."},
+ {n:10,options:["simple financial tools","tools simple financial","simple tools financial","tools financial simple"],key:0,
+ meanings:["các công cụ tài chính đơn giản","trật tự từ không đúng","trật tự từ không đúng","trật tự từ không đúng"],
+ why:"Trật tự đúng: simple (tính từ) + financial (tính từ chỉ lĩnh vực) + tools (danh từ chính).",
+ grammar:"Tính từ đứng trước danh từ; tính từ miêu tả chung thường đứng trước tính từ chỉ lĩnh vực.",
+ vocab:"financial tools = công cụ tài chính; get back on track = trở lại đúng hướng."}
+];
+const WORDS=[
+ ["face struggles","/feɪs ˈstrʌɡəlz/","đối mặt với khó khăn","Syn: face difficulties"],
+ ["run out of money","/rʌn aʊt əv ˈmʌni/","cạn tiền","Syn: have no money left"],
+ ["rise above challenges","/raɪz əˈbʌv ˈtʃælɪndʒɪz/","vượt lên thử thách","Syn: overcome difficulties"],
+ ["give up","/ɡɪv ʌp/","từ bỏ","Ant: keep going"],
+ ["financial difficulties","/faɪˈnænʃəl ˈdɪfɪkəltiz/","khó khăn tài chính","Syn: money problems"],
+ ["chase their dreams","/tʃeɪs ðeə driːmz/","theo đuổi ước mơ","Syn: pursue their dreams"],
+ ["push forward","/pʊʃ ˈfɔːwəd/","tiến về phía trước","Syn: move ahead"],
+ ["refuse to quit","/rɪˈfjuːz tə kwɪt/","quyết không bỏ cuộc","Ant: give up"],
+ ["get back on track","/ɡet bæk ɒn træk/","trở lại đúng hướng","Syn: return to the right path"],
+ ["stepping stones","/ˈstepɪŋ stəʊnz/","những bước đệm để tiến tới thành công","Syn: steps towards success"]
+];
+let index=0,answers=Array(5).fill(null),locked=Array(5).fill(false);
+let name="",klass="",seconds=3000,tick=null,finished=false;
+let audioOn=true,ctx=null,flashIndex=0,flipped=false;
+const THEMES={
+ blue:["#eef3fb","#fff","#182a47","#536681","#345bdb","#e8efff","#ccd7e8"],
+ cream:["#fff6e6","#fffdf7","#453321","#725b43","#a45420","#f9e8d0","#e4cdae"],
+ mint:["#e9f8f2","#fff","#173e35","#496b62","#087d68","#d8f3e9","#b9ddd0"],
+ dark:["#101c31","#1d2d46","#f3f7ff","#c5d4e8","#89b1ff","#2c4062","#506789"]
+};
+function theme(v){
+ const colors=THEMES[v]||THEMES.blue;
+ ["--bg","--panel","--ink","--muted","--accent","--soft","--border"]
+ .forEach((k,i)=>document.documentElement.style.setProperty(k,colors[i]));
+ try{localStorage.setItem("reading03theme",v)}catch(e){}
+}
+$("theme").value=localStorage.getItem("reading03theme")||"blue";
+theme($("theme").value);
+$("theme").onchange=e=>theme(e.target.value);
+$("soundBtn").onclick=()=>{
+ audioOn=!audioOn;
+ $("soundBtn").textContent=audioOn?"🔊 Âm thanh":"🔇 Tắt tiếng";
+};
+function beep(ok){
+ if(!audioOn)return;
+ try{
+  ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();
+  const o=ctx.createOscillator(),g=ctx.createGain();
+  o.connect(g);g.connect(ctx.destination);
+  o.frequency.value=ok?660:260;
+  g.gain.setValueAtTime(.045,ctx.currentTime);
+  g.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+.17);
+  o.start();o.stop(ctx.currentTime+.18);
+ }catch(e){}
+}
+function show(id){
+ ["welcome","quiz","results","practice"].forEach(x=>$(x).classList.toggle("hidden",x!==id));
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+function timerRender(){
+ $("timer").textContent="⏱ "+fmt(seconds);
+ $("timer").style.color=seconds<300?"var(--bad)":"var(--accent)";
+}
+function startTimer(){
+ clearInterval(tick);timerRender();
+ tick=setInterval(()=>{
+  if(finished)return;
+  seconds--;timerRender();
+  if(seconds<=0)finish(true);
+ },1000);
+}
+function render(){
+ const q=QUESTIONS[index];
+ $("questionNumber").textContent="QUESTION "+q.n+" / 10";
+ $("questionTitle").textContent="Question "+q.n+". Choose the best answer.";
+ $("answeredCount").textContent=locked.filter(Boolean).length+"/5 đã trả lời";
+ $("progressBar").style.width=(locked.filter(Boolean).length/5*100)+"%";
+ $("options").innerHTML="";
+ q.options.forEach((opt,i)=>{
+  const b=document.createElement("button");
+  b.type="button";
+  b.className="option"+(answers[index]===i?" selected":"");
+  if(locked[index]){
+   if(i===q.key)b.classList.add("correct");
+   else if(i===answers[index])b.classList.add("wrong");
+  }
+  const letter=document.createElement("b");
+  letter.textContent="ABCD"[i];
+  const span=document.createElement("span");
+  span.textContent=opt;
+  if(answers[index]===i||locked[index]){
+   const m=document.createElement("span");
+   m.className="meaning";m.textContent="Nghĩa: "+q.meanings[i];
+   span.appendChild(m);
+  }
+  b.append(letter,span);
+  b.onclick=()=>{
+   if(locked[index]||finished)return;
+   answers[index]=i;render();
+  };
+  $("options").appendChild(b);
+ });
+ $("confirmBtn").disabled=locked[index]||finished||answers[index]===null;
+ $("explainBtn").disabled=!locked[index];
+ $("explanation").classList.add("hidden");
+ $("feedback").innerHTML="";
+ if(locked[index]){
+  const ok=answers[index]===q.key;
+  const f=document.createElement("div");
+  f.className="feedback "+(ok?"good":"bad");
+  f.textContent=ok?"✓ Chính xác! Bạn đang tiến bộ rất tốt!":
+   "✦ Chưa chính xác. Không sao, hãy khám phá cách giải để tiến bộ!";
+  $("feedback").appendChild(f);
+ }
+ $("prevBtn").disabled=index===0;
+ $("nextBtn").disabled=index===4;
+ $("checkBtn").disabled=finished;
+ $("checkBtn").textContent=locked.every(Boolean)?"🏁 Hoàn thành bài":"🏁 Check My Answers";
+}
+$("startBtn").onclick=()=>{
+ name=$("student").value.trim();klass=$("className").value;
+ if(!name||!klass){$("startError").textContent="Vui lòng nhập họ tên và chọn lớp.";return}
+ index=0;answers=Array(5).fill(null);locked=Array(5).fill(false);
+ seconds=3000;finished=false;
+ $("studentLabel").textContent=name+" • "+klass;
+ show("quiz");render();startTimer();
+};
+$("confirmBtn").onclick=()=>{
+ if(answers[index]===null||locked[index])return;
+ locked[index]=true;
+ beep(answers[index]===QUESTIONS[index].key);
+ render();
+};
+$("explainBtn").onclick=()=>{
+ if(!locked[index])return;
+ const q=QUESTIONS[index];
+ const lines=q.options.map((v,i)=>
+  "<p><strong>"+("ABCD"[i])+". "+v+"</strong> — "+
+  q.meanings[i]+(i===q.key?" ✓":"")+"</p>").join("");
+ $("explanation").innerHTML=
+  "<h3>📖 Correct Answer: "+("ABCD"[q.key])+"</h3>"+
+  "<p><strong>Giải thích:</strong> "+q.why+"</p>"+
+  "<h4>Dịch nghĩa 4 phương án</h4>"+lines+
+  "<p><strong>📌 Cụm từ cần học:</strong> "+q.vocab+"</p>"+
+  "<p><strong>📐 Ngữ pháp cần nhớ:</strong> "+q.grammar+"</p>";
+ $("explanation").classList.remove("hidden");
+};
+$("prevBtn").onclick=()=>{if(index>0){index--;render()}};
+$("nextBtn").onclick=()=>{if(index<4){index++;render()}};
+$("translateBtn").onclick=()=>{
+ $("translation").classList.toggle("hidden");
+ $("translateBtn").textContent=$("translation").classList.contains("hidden")?
+ "🌐 Dịch bài đọc sang tiếng Việt":"Ẩn bản dịch tiếng Việt";
+};
+function finish(timeout=false){
+ if(finished)return;
+ const missing=locked.filter(x=>!x).length;
+ if(!timeout&&missing){
+  if(!confirm("Bạn còn "+missing+" câu chưa xác nhận. Những câu này sẽ tính là sai. Vẫn nộp bài?"))return;
+ }
+ finished=true;clearInterval(tick);
+ const correct=answers.reduce((sum,a,i)=>sum+(locked[i]&&a===QUESTIONS[i].key?1:0),0);
+ const points=(correct/5*10).toFixed(2);
+ $("resultName").textContent=name+" • "+klass;
+ $("score").textContent=points+"/10";
+ $("scoreDetail").textContent="Đúng "+correct+"/5 câu • "+(correct*20)+"%";
+ $("comment").textContent=correct===5?"Xuất sắc! Bạn đã làm chủ bài học!":
+ correct>=4?"Rất tốt! Bạn đã nắm vững kiến thức!":
+ correct>=2?"Bạn đã có nền tảng. Hãy ôn lại các cấu trúc nhé!":
+ "Mỗi lần luyện tập là một cơ hội tiến bộ. Cố gắng lên!";
+ $("review").textContent=timeout?"Đã hết 50 phút. Bài được tự động chấm.":
+ "Hãy tiếp tục ôn luyện qua Matching và Flashcards!";
+ const eligible=correct/5>.70;
+ $("certificate").classList.toggle("hidden",!eligible);
+ if(eligible){
+  $("certName").textContent=name;
+  $("certClass").textContent="Class: "+klass;
+  $("certScore").textContent="Achievement: "+correct+"/5 • "+points+"/10";
+  $("certDate").textContent="Date: "+new Date().toLocaleDateString("vi-VN");
+ }
+ show("results");
+ beep(eligible);
+}
+$("checkBtn").onclick=()=>finish(false);
+function reset(){
+ if(!confirm("Bạn muốn làm lại bài từ đầu? Kết quả hiện tại sẽ bị xóa."))return;
+ clearInterval(tick);finished=false;answers=Array(5).fill(null);
+ locked=Array(5).fill(false);seconds=3000;index=0;
+ $("translation").classList.add("hidden");
+ $("translateBtn").textContent="🌐 Dịch bài đọc sang tiếng Việt";
+ show("welcome");
+}
+$("resetBtn").onclick=reset;
+$("againBtn").onclick=reset;
+$("reviewBtn").onclick=()=>{
+ show("quiz");render();
+ $("confirmBtn").disabled=true;
+ $("checkBtn").disabled=true;
+ $("options").querySelectorAll("button").forEach(b=>b.disabled=true);
+};
+$("printBtn").onclick=()=>window.print();
+$("practiceBtn").onclick=()=>{buildMatching();renderFlash();show("practice")};
+$("backResults").onclick=()=>show("results");
+const ORDER=[3,8,0,6,1,9,4,2,7,5];
+function buildMatching(){
+ $("matchQuestions").innerHTML="";
+ $("matchMeanings").innerHTML="";
+ WORDS.forEach((w,i)=>{
+  const row=document.createElement("div");row.className="matchrow";
+  const text=document.createElement("span");
+  text.textContent=(i+1)+". "+w[0];
+  const select=document.createElement("select");
+  select.id="match"+i;
+  select.innerHTML='<option value="">—</option>'+
+   ORDER.map((n,j)=>'<option value="'+n+'">'+("ABCDEFGHIJ"[j])+'</option>').join("");
+  row.append(text,select);$("matchQuestions").appendChild(row);
+ });
+ ORDER.forEach((n,j)=>{
+  const p=document.createElement("p");
+  p.textContent="ABCDEFGHIJ"[j]+". "+WORDS[n][2];
+  $("matchMeanings").appendChild(p);
+ });
+ $("matchResult").textContent="";
+}
+$("matchCheck").onclick=()=>{
+ let score=0;
+ WORDS.forEach((w,i)=>{
+  const sel=$("match"+i);
+  const ok=sel.value!==""&&Number(sel.value)===i;
+  if(ok)score++;
+  sel.style.borderColor=ok?"var(--good)":"var(--bad)";
+ });
+ $("matchResult").textContent="Kết quả: "+score+"/10 — "+
+ (score===10?"Tuyệt vời! Bạn đã ghi nhớ toàn bộ!":"Hãy thử lại để ghi nhớ sâu hơn nhé!");
+ beep(score>=7);
+};
+$("matchReset").onclick=buildMatching;
+function renderFlash(){
+ const w=WORDS[flashIndex];
+ $("flashCounter").textContent="Thẻ "+(flashIndex+1)+"/10";
+ $("flashcard").innerHTML="";
+ const label=document.createElement("span");label.className="tag";
+ label.textContent=flipped?"NGHĨA & GHI NHỚ":"ENGLISH PHRASE";
+ const title=document.createElement("strong");
+ title.textContent=flipped?w[2]:w[0];
+ const detail=document.createElement("div");
+ detail.textContent=flipped?w[3]:w[1];
+ const hint=document.createElement("span");hint.className="small";
+ hint.textContent="Chạm để lật thẻ";
+ $("flashcard").append(label,title,detail,hint);
+}
+function flip(){flipped=!flipped;renderFlash()}
+function moveFlash(d){
+ flashIndex=(flashIndex+d+WORDS.length)%WORDS.length;
+ flipped=false;renderFlash();
+}
+$("flashcard").onclick=flip;
+$("flashcard").onkeydown=e=>{
+ if(e.key==="Enter"||e.key===" "){e.preventDefault();flip()}
+};
+$("flashFlip").onclick=flip;
+$("flashPrev").onclick=()=>moveFlash(-1);
+$("flashNext").onclick=()=>moveFlash(1);
+document.addEventListener("keydown",e=>{
+ if($("quiz").classList.contains("hidden")||finished)return;
+ if(e.target.tagName==="INPUT"||e.target.tagName==="SELECT")return;
+ const key=e.key.toUpperCase();
+ if("ABCD".includes(key)&&key.length===1&&!locked[index]){
+  answers[index]="ABCD".indexOf(key);render();
+ }
+});
+</script>
+  <script src="../assets/js/shared-nav.js"></script>
+</body>
+</html>
+

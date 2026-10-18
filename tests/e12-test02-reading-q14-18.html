@@ -1,0 +1,376 @@
+﻿
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Test 02 – Reading Q14-18 | Ms.Duyen</title>
+<style>
+:root{--bg:#eef3ff;--panel:#fff;--ink:#182744;--muted:#53627a;--accent:#4355c8;--soft:#e8ebff;--line:#d8dfef;--good:#167448;--bad:#b63c43}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,"Segoe UI",Arial,sans-serif;transition:background .3s}
+body[data-theme="mint"]{--bg:#e7f6ef;--panel:#fff;--ink:#173c32;--muted:#45675c;--accent:#08765d;--soft:#d9f4e9;--line:#bedfd1}
+body[data-theme="peach"]{--bg:#fff0e8;--panel:#fffdfa;--ink:#493025;--muted:#77584a;--accent:#a84827;--soft:#ffe1d2;--line:#ebcdbd}
+body[data-theme="dark"]{--bg:#111a2e;--panel:#202c44;--ink:#f5f7ff;--muted:#c6d2e9;--accent:#a6b6ff;--soft:#303d61;--line:#465475;--good:#8ee6b6;--bad:#ffaaa9}
+button,input,select{font:inherit}
+button{cursor:pointer;border:0;border-radius:13px;padding:11px 17px;font-weight:700;background:var(--accent);color:var(--bg)}
+button:disabled{opacity:.55;cursor:not-allowed}
+button.secondary{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+button:hover:not(:disabled){filter:brightness(.94)}
+input,select{padding:12px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink);width:100%}
+label{font-weight:650}
+header{padding:14px 4%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;background:var(--panel);border-bottom:1px solid var(--line)}
+.brand{font-weight:800}
+header .controls{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+header select{width:auto}
+main{max-width:1450px;margin:auto;padding:20px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 9px 25px #1727440c}
+.hidden{display:none!important}
+.center{text-align:center}
+.hero{max-width:820px;margin:7vh auto;padding:45px 28px}
+.script{font-family:"Brush Script MT","Segoe Script",cursive;font-size:clamp(34px,5vw,65px);line-height:1.25;color:var(--accent);margin:12px 0}
+h2{margin:0 0 15px}
+.sub{color:var(--muted)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px;max-width:600px;margin:25px auto;text-align:left}
+.field{display:grid;gap:5px}
+.layout{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(0,1fr);gap:18px;align-items:start}
+.passage{font-size:17px;line-height:1.95}
+.passage p{margin:0 0 20px}
+.blank{color:var(--accent);font-weight:850;white-space:nowrap}
+.qtop{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.option{display:block;width:100%;margin:11px 0;padding:15px;text-align:left;background:var(--panel);border:2px solid var(--line);color:var(--ink);border-radius:14px;font-weight:500;line-height:1.6}
+.option.selected{border-color:var(--accent);background:var(--soft)}
+.option.correct{border-color:var(--good)}
+.option.wrong{border-color:var(--bad)}
+.option small{display:block;color:var(--muted);font-weight:400;margin-top:7px}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.notice{padding:12px 15px;background:var(--soft);border-radius:12px;margin:15px 0}
+.explain{background:var(--soft);padding:18px;border-radius:15px;margin-top:16px}
+.explain p{margin:9px 0}
+.nav{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0}
+.nav button{min-width:42px}
+.progress{height:9px;background:var(--line);border-radius:20px;overflow:hidden;margin:12px 0}
+.progress div{height:100%;background:var(--accent);transition:width .3s}
+.tabs{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0}
+.tabs button.active{outline:3px solid var(--line)}
+#translation{white-space:pre-line}
+.matchgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.matchrow{padding:12px;border:1px solid var(--line);border-radius:12px}
+.matchrow select{margin-top:8px}
+.flash{max-width:650px;margin:20px auto;min-height:230px;display:grid;place-content:center;text-align:center;background:var(--soft);border:2px solid var(--line);border-radius:20px;padding:25px;cursor:pointer}
+.flash strong{font-size:26px}
+.certificate{max-width:760px;margin:20px auto;padding:35px;border:8px double var(--accent);text-align:center;background:var(--panel)}
+.score{font-size:45px;font-weight:900;color:var(--accent)}
+footer{text-align:center;color:var(--muted);padding:25px}
+@media(max-width:800px){.layout,.fields,.matchgrid{grid-template-columns:1fr}.panel{padding:17px}main{padding:10px}.hero{margin:25px auto}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;animation:none!important}}
+@media print{header,footer,.actions,.tabs,.no-print{display:none!important}body{background:white;color:black}main>*:not(#result){display:none!important}#result{display:block!important;border:0;box-shadow:none}.certificate{color:black;display:block!important}}
+</style>
+  <link rel="stylesheet" href="../assets/css/shared-nav.css">
+</head>
+<body data-theme="blue">
+<header>
+<div class="brand">📖 Test 02 – Reading Q14-18</div>
+<div class="controls">
+<span id="clock">⏱ 50:00</span>
+<select id="theme" aria-label="Chọn màu nền">
+<option value="blue">💙 Xanh</option>
+<option value="mint">🌿 Xanh lá</option>
+<option value="peach">🌸 Cam nhạt</option>
+<option value="dark">🌙 Tối</option>
+</select>
+<button class="secondary" id="soundBtn">🔊 Âm thanh</button>
+</div>
+</header>
+<main>
+<section id="welcome" class="panel hero center">
+<div style="font-size:48px">🌟 📚 🌟</div>
+<h1 class="script">Reading Adventure</h1>
+<h2>Test 02 – Reading Q14-18</h2>
+<p class="sub">Ôn tập giữa học kỳ I • Lớp 12A1, 12A4</p>
+<p><strong>Kiểm tra mà như chơi – chơi mà vẫn học được!</strong></p>
+<div class="fields">
+<div class="field"><label for="student">Họ và tên</label><input id="student" placeholder="Nhập họ tên"></div>
+<div class="field"><label for="className">Lớp</label><input id="className" list="classes" placeholder="12A1 hoặc 12A4"><datalist id="classes"><option value="12A1"><option value="12A4"></datalist></div>
+</div>
+<p>5 câu hỏi • 50 phút • Tự học qua giải thích và bản dịch</p>
+<button id="startBtn">🚀 Bắt đầu khám phá</button>
+<p class="sub">Giáo viên thiết kế: <b>Ms.Duyen</b></p>
+</section>
+
+<section id="test" class="hidden">
+<div class="notice center" id="motivation" aria-live="polite">Mỗi câu hỏi là một cơ hội học thêm điều mới!</div>
+<div class="progress"><div id="progressBar"></div></div>
+<div class="layout">
+<article class="panel">
+<h2>📜 Reading Passage</h2>
+<p class="sub">Read the following text and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks</p>
+<div class="passage">
+<p>Vo Thi Sau, who was born in 1933 in Ba Ria – Vung Tau province, <span class="blank">(14) __________</span>. She became a symbol of bravery and resistance against French colonial forces, even though she was just a teenager at the time. Having joined a local guerilla unit at the age of 14, <span class="blank">(15) __________</span>, killing one and injuring many others.</p>
+<p>Her actions led to her arrest, but she was not afraid. In 1952, when she was only 19 years old, Vo Thi Sau was sentenced to death. Despite this, she remained strong and fearless. <span class="blank">(16) __________</span>. Her song still echoes in the hearts of those who visit her grave at Con Dao Island, where thousands of people come every year to pay homage to her courage.</p>
+<p>Vo Thi Sau's grave, <span class="blank">(17) __________</span>, has now become a famous tourist destination. Demonstrating her lasting legacy, the place is not only a memorial but also a testament to her unwavering spirit. People bring fresh flowers and incense sticks to honor her, remembering a young girl who fought until her last breath. Vo Thi Sau is not just a historical figure; she is a hero who continues to inspire generations of Vietnamese people.</p>
+<p><span class="blank">(18) __________</span>, Vo Thi Sau's life is a powerful reminder of the price of freedom and the strength of the human spirit.</p>
+<p class="sub">[Adapted from https://saigoneer.com]</p>
+</div>
+<button class="secondary" id="translateBtn">🌏 Dịch bài đọc sang tiếng Việt</button>
+<div id="translation" class="explain hidden"></div>
+</article>
+<article class="panel">
+<div class="qtop"><h2 id="qtitle"></h2><span id="answeredCount" class="sub"></span></div>
+<div id="questionOptions"></div>
+<div id="feedback" aria-live="polite"></div>
+<div class="actions">
+<button class="secondary" id="correctBtn">📖 Correct Answer</button>
+<button id="nextBtn">Câu tiếp theo →</button>
+</div>
+<div id="explanation" class="explain hidden"></div>
+<div class="nav" id="questionNav"></div>
+<div class="actions">
+<button id="submitBtn">✅ Check My Answers</button>
+<button class="secondary" id="resetBtn">↻ Reset Test</button>
+</div>
+</article>
+</div>
+</section>
+
+<section id="result" class="panel hidden center">
+<h1 class="script">Your Learning Journey</h1>
+<h2>🎉 Hoàn thành bài luyện tập!</h2>
+<p id="resultName"></p>
+<div class="score" id="score"></div>
+<p id="comment"></p>
+<div id="review"></div>
+<div id="certificate" class="certificate hidden">
+<div style="font-size:42px">🏆</div>
+<h1 class="script">Certificate of Achievement</h1>
+<h2>GIẤY CHỨNG NHẬN HOÀN THÀNH</h2>
+<p>Trân trọng chứng nhận học sinh</p>
+<h2 id="certName"></h2>
+<p id="certClass"></p>
+<p>Đã hoàn thành xuất sắc bài luyện tập</p>
+<strong>Test 02 – Reading Q14-18</strong>
+<p id="certScore"></p>
+<p id="certDate"></p>
+<p>Teacher's Signature</p>
+<h2 class="script">Ms.Duyên</h2>
+<p>Giáo viên thiết kế: Ms.Duyen</p>
+</div>
+<div class="actions no-print" style="justify-content:center">
+<button id="printBtn" class="hidden">🖨 In / Lưu giấy chứng nhận PDF</button>
+<button id="restartBtn" class="secondary">↻ Làm lại bài</button>
+<button id="practiceBtn">🧠 Luyện từ vựng</button>
+</div>
+</section>
+
+<section id="practice" class="panel hidden">
+<h1 class="script center">Vocabulary Playground</h1>
+<p class="center">10 cụm từ được trích từ bài đọc Võ Thị Sáu.</p>
+<div class="tabs">
+<button id="matchingTab" class="active">🧩 Nối nghĩa</button>
+<button id="flashTab" class="secondary">🃏 Flashcards</button>
+</div>
+<div id="matchingArea">
+<p>Chọn nghĩa tiếng Việt đúng cho từng cụm từ.</p>
+<div id="matchingRows" class="matchgrid"></div>
+<div class="actions">
+<button id="checkMatching">Kiểm tra nối nghĩa</button>
+<button id="resetMatching" class="secondary">Làm lại nối nghĩa</button>
+</div>
+<div id="matchingFeedback" aria-live="polite"></div>
+</div>
+<div id="flashArea" class="hidden">
+<p class="center">Chạm vào thẻ để lật xem nghĩa, IPA và từ liên quan.</p>
+<div id="flashCard" class="flash" role="button" tabindex="0"></div>
+<p id="flashCounter" class="center"></p>
+<div class="actions" style="justify-content:center">
+<button class="secondary" id="prevFlash">← Trước</button>
+<button id="flipFlash">Lật thẻ</button>
+<button class="secondary" id="nextFlash">Tiếp →</button>
+</div>
+</div>
+<div class="actions"><button class="secondary" id="backBtn">← Quay về kết quả / bài làm</button></div>
+</section>
+</main>
+<footer>Made for 12A1 & 12A4 • Giáo viên thiết kế: Ms.Duyen • Học tập tích cực mỗi ngày ✨</footer>
+<script>
+"use strict";
+const $=id=>document.getElementById(id);
+const letters=["A","B","C","D"];
+const questions=[
+{n:14,key:0,options:[
+"is one of the most iconic figures in Vietnamese history",
+"having been one of the most typical historical heroes in Vietnamese",
+"was one of the national heroes in Vietnamese history",
+"where the most typical female generals in Vietnamese history died"
+],vi:[
+"là một trong những nhân vật mang tính biểu tượng nhất trong lịch sử Việt Nam",
+"từng là một trong những anh hùng lịch sử tiêu biểu nhất trong người Việt (cụm diễn đạt chưa tự nhiên)",
+"là một trong những anh hùng dân tộc trong lịch sử Việt Nam",
+"nơi những nữ tướng tiêu biểu nhất trong lịch sử Việt Nam qua đời"
+],why:"Theo đáp án của đề: A. Cụm 'one of the most iconic figures in Vietnamese history' phù hợp nội dung giới thiệu Võ Thị Sáu. Lưu ý biên tập: do chủ ngữ 'Vo Thi Sau' chỉ người đã mất, 'was' trong phương án C cũng hợp lý về thì. Đề có điểm chưa thật chặt chẽ, nhưng ứng dụng giữ nguyên key 14A.",grammar:"one of + the + tính từ so sánh nhất + danh từ số nhiều; mệnh đề quan hệ 'who was born...' bổ sung thông tin.",words:"iconic figures = những nhân vật biểu tượng; Vietnamese history = lịch sử Việt Nam."},
+{n:15,key:3,options:[
+"she joined the guerilla unit and was later recognized for her bravery",
+"she was captured by the French soldiers and taken to prison after killing the French soldiers",
+"she ran towards the soldiers and yelled for them to surrender",
+"she proved her courage by throwing a grenade at a group of French soldiers"
+],vi:[
+"cô tham gia đơn vị du kích và sau đó được công nhận vì lòng dũng cảm",
+"cô bị lính Pháp bắt và đưa vào tù sau khi giết những người lính Pháp",
+"cô chạy về phía những người lính và hét yêu cầu họ đầu hàng",
+"cô chứng tỏ lòng dũng cảm bằng cách ném một quả lựu đạn vào một nhóm lính Pháp"
+],why:"D. Cụm 'throwing a grenade at a group of French soldiers' nối trực tiếp với 'killing one and injuring many others', diễn tả nguyên nhân và kết quả.",grammar:"Having + V3/ed: phân từ hoàn thành, chỉ hành động xảy ra trước. by + V-ing: chỉ phương thức. V-ing 'killing..., injuring...' bổ sung kết quả.",words:"prove one's courage; throw a grenade; a group of soldiers."},
+{n:16,key:0,options:[
+"In her last moments, as she was tied to a pole and blindfolded, she sang revolutionary songs, refusing to show any fear.",
+"In her last moments, she was executed without saying a word, tied to a pole and blindfolded, not fighting back.",
+"When she was finally saved by the army, escaping from the French soldiers to keep fighting, her singing haunted them later.",
+"Vo Thi Sau spent her last years in prison, writing a song for her comrades, and her singing echoed in her final moments."
+],vi:[
+"Trong những khoảnh khắc cuối đời, khi bị trói vào cột và bị bịt mắt, cô hát những bài ca cách mạng, không hề tỏ ra sợ hãi.",
+"Trong những khoảnh khắc cuối đời, cô bị hành quyết mà không nói lời nào, bị trói vào cột và bị bịt mắt, không chống trả.",
+"Khi cuối cùng được quân đội cứu và thoát khỏi lính Pháp để tiếp tục chiến đấu, tiếng hát của cô về sau ám ảnh họ.",
+"Võ Thị Sáu trải qua những năm cuối đời trong tù, viết một bài hát cho đồng đội, và tiếng hát của cô vang vọng trong những khoảnh khắc cuối đời."
+],why:"A. Câu sau có 'Her song still echoes...' nên câu trước cần nói đến việc cô hát. Chi tiết 'refusing to show any fear' cũng nối với 'strong and fearless'.",grammar:"as + mệnh đề: khi; was tied / blindfolded: bị động; refusing to + V: cụm phân từ bổ sung hành động.",words:"last moments; revolutionary songs; show fear; be blindfolded."},
+{n:17,key:2,options:[
+"which is located on Con Dao Island and has become a tourist destination",
+"who visit her grave to pay their respects and pray every year",
+"where many people visit her grave every year to pay their respects",
+"visiting her grave to pay their respects and pray for good luck every year"
+],vi:[
+"nơi nằm trên đảo Côn Đảo và đã trở thành một điểm đến du lịch",
+"những người đến thăm mộ cô để bày tỏ lòng kính trọng và cầu nguyện hằng năm",
+"nơi nhiều người đến thăm mộ cô mỗi năm để bày tỏ lòng kính trọng",
+"đến thăm mộ cô để bày tỏ lòng kính trọng và cầu may mỗi năm"
+],why:"Theo key: C. 'where' giới thiệu mệnh đề liên quan đến địa điểm. Tuy nhiên 'where many people visit her grave' có sự lặp ý với 'Vo Thi Sau's grave', và A cũng đúng về cấu trúc nhưng lặp ý 'tourist destination' ở cuối câu. Câu hỏi chưa tối ưu; giữ nguyên đáp án 17C theo tài liệu.",grammar:"where + S + V: mệnh đề quan hệ chỉ nơi chốn; pay one's respects = bày tỏ lòng kính trọng.",words:"visit her grave; pay their respects; tourist destination."},
+{n:18,key:3,options:[
+"Despite her youth, having made no significant contributions to the war effort",
+"Known to everyone as the most beautiful female fighter during the revolutionary period",
+"She is widely recognized for her peaceful and diplomatic efforts",
+"Having been one of the most remarkable resistance fighters during the war"
+],vi:[
+"Mặc dù còn trẻ, nhưng đã không có đóng góp đáng kể nào cho nỗ lực chiến tranh",
+"Được mọi người biết đến là nữ chiến sĩ xinh đẹp nhất trong thời kỳ cách mạng",
+"Cô được công nhận rộng rãi vì những nỗ lực hòa bình và ngoại giao",
+"Từng là một trong những chiến sĩ kháng chiến nổi bật nhất trong thời chiến"
+],why:"D. Cụm phân từ hoàn thành khái quát vai trò chiến sĩ kháng chiến của Võ Thị Sáu, phù hợp câu kết về giá trị của tự do và sức mạnh tinh thần.",grammar:"Having been + cụm danh từ: phân từ hoàn thành, bổ nghĩa cho chủ ngữ 'Vo Thi Sau's life' theo cách diễn đạt của đề. Lưu ý về nghĩa: người chiến sĩ là Võ Thị Sáu, không phải 'life', nên câu gốc có vấn đề về chủ thể logic.",words:"remarkable resistance fighters; the price of freedom; the human spirit."}
+];
+const translation=`Võ Thị Sáu, sinh năm 1933 tại tỉnh Bà Rịa – Vũng Tàu, là một trong những nhân vật mang tính biểu tượng nhất trong lịch sử Việt Nam. Cô trở thành biểu tượng của lòng dũng cảm và tinh thần kháng chiến chống thực dân Pháp, dù khi đó cô mới chỉ là một thiếu niên. Sau khi gia nhập một đơn vị du kích địa phương lúc 14 tuổi, cô đã chứng tỏ lòng dũng cảm bằng cách ném lựu đạn vào một nhóm lính Pháp, khiến một người thiệt mạng và nhiều người khác bị thương.
+
+Hành động của cô dẫn đến việc cô bị bắt, nhưng cô không hề sợ hãi. Năm 1952, khi mới 19 tuổi, Võ Thị Sáu bị kết án tử hình. Dù vậy, cô vẫn mạnh mẽ và không nao núng. Trong những khoảnh khắc cuối đời, khi bị trói vào cột và bị bịt mắt, cô hát những bài ca cách mạng, không hề tỏ ra sợ hãi. Tiếng hát của cô vẫn vang vọng trong trái tim những người đến viếng mộ cô tại Côn Đảo, nơi hàng nghìn người đến mỗi năm để tưởng nhớ lòng dũng cảm của cô.
+
+Ngôi mộ của Võ Thị Sáu, nơi nhiều người đến viếng hằng năm để bày tỏ lòng thành kính, giờ đây đã trở thành một điểm du lịch nổi tiếng. Thể hiện di sản lâu dài của cô, nơi đây không chỉ là một khu tưởng niệm mà còn là minh chứng cho tinh thần kiên cường của cô. Mọi người mang hoa tươi và nhang đến để tưởng nhớ cô, nhớ về một cô gái trẻ đã chiến đấu đến hơi thở cuối cùng. Võ Thị Sáu không chỉ là một nhân vật lịch sử; cô còn là người anh hùng tiếp tục truyền cảm hứng cho nhiều thế hệ người Việt Nam.
+
+Từng là một trong những chiến sĩ kháng chiến nổi bật nhất trong thời chiến, cuộc đời Võ Thị Sáu là lời nhắc nhở sâu sắc về cái giá của tự do và sức mạnh của tinh thần con người.
+
+[Bản dịch tham khảo, điền theo đáp án của tài liệu.]`;
+const vocab=[
+["a symbol of bravery","/ə ˈsɪmbəl əv ˈbreɪvəri/","biểu tượng của lòng dũng cảm","Syn: a sign of courage"],
+["colonial forces","/kəˈləʊniəl ˈfɔːsɪz/","lực lượng thực dân","Related: colonial rule"],
+["a local guerilla unit","/ə ˈləʊkəl ɡəˈrɪlə ˈjuːnɪt/","một đơn vị du kích địa phương","Related: resistance group"],
+["throw a grenade","/θrəʊ ə ɡrəˈneɪd/","ném một quả lựu đạn","Related: grenade attack"],
+["revolutionary songs","/ˌrevəˈluːʃənəri sɒŋz/","những bài ca cách mạng","Related: patriotic songs"],
+["pay homage to","/peɪ ˈhɒmɪdʒ tuː/","bày tỏ lòng tôn kính đối với","Syn: pay tribute to"],
+["tourist destination","/ˈtʊərɪst ˌdestɪˈneɪʃən/","điểm đến du lịch","Syn: tourist attraction"],
+["unwavering spirit","/ʌnˈweɪvərɪŋ ˈspɪrɪt/","tinh thần kiên định","Syn: steadfast spirit"],
+["incense sticks","/ˈɪnsens stɪks/","những nén nhang","Related: burn incense"],
+["the price of freedom","/ðə praɪs əv ˈfriːdəm/","cái giá của tự do","Related: sacrifice"]
+];
+let answers=Array(5).fill(null),current=0,remaining=3000,timer=null,finished=false,sound=true,started=false;
+let flashIndex=0,flipped=false;
+const encouragement=["Bạn đang tiến bộ từng bước! 🌱","Tư duy thật tốt, tiếp tục nhé! ✨","Mỗi câu trả lời đều giúp bạn học thêm! 📚","Cố gắng đều đặn tạo nên thành công! 🌟","Bạn đã gần hoàn thành hành trình! 🎯"];
+function show(id){["welcome","test","result","practice"].forEach(x=>$(x).classList.toggle("hidden",x!==id));window.scrollTo({top:0,behavior:"smooth"})}
+function tone(ok=true){if(!sound)return;try{const C=window.AudioContext||window.webkitAudioContext;if(!C)return;let ctx=new C(),o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=ok?660:350;g.gain.value=.035;o.start();o.stop(ctx.currentTime+.12);o.onended=()=>ctx.close()}catch(e){}}
+function clock(){let m=Math.floor(remaining/60),s=remaining%60;$("clock").textContent="⏱ "+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
+function escapeHTML(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function render(){
+let q=questions[current],selected=answers[current];
+$("qtitle").textContent="Question "+q.n;
+$("answeredCount").textContent=answers.filter(a=>a!==null).length+"/5 đã chọn";
+$("progressBar").style.width=(answers.filter(a=>a!==null).length*20)+"%";
+$("motivation").textContent=encouragement[current];
+$("questionOptions").innerHTML=q.options.map((o,i)=>`<button class="option ${selected===i?"selected":""} ${selected!==null&&i===q.key?"correct":""} ${selected===i&&i!==q.key?"wrong":""}" data-choice="${i}" ${finished?"disabled":""}><b>${letters[i]}.</b> ${escapeHTML(o)}${selected===i?`<small>🇻🇳 ${escapeHTML(q.vi[i])}</small>`:""}</button>`).join("");
+document.querySelectorAll("[data-choice]").forEach(b=>b.onclick=()=>choose(Number(b.dataset.choice)));
+$("feedback").innerHTML=selected===null?"":`<div class="notice">${selected===q.key?"✅ Chính xác! Bạn làm tốt lắm!":"💡 Chưa trùng đáp án của đề. Hãy xem giải thích để hiểu thêm nhé!"}</div>`;
+$("questionNav").innerHTML=questions.map((x,i)=>`<button class="${i===current?"":"secondary"}" data-q="${i}">${x.n}${answers[i]===null?"":" ✓"}</button>`).join("");
+document.querySelectorAll("[data-q]").forEach(b=>b.onclick=()=>{current=Number(b.dataset.q);$("explanation").classList.add("hidden");render()});
+$("nextBtn").textContent=current===4?"Đến câu 14 →":"Câu tiếp theo →";
+}
+function choose(i){if(finished)return;answers[current]=i;tone(i===questions[current].key);render()}
+function explanation(){
+let q=questions[current];
+$("explanation").innerHTML=`<h3>📘 Đáp án theo đề: ${letters[q.key]}</h3><p>${escapeHTML(q.why)}</p><h4>🇻🇳 Nghĩa của 4 phương án</h4>${q.vi.map((v,i)=>`<p><b>${letters[i]}.</b> ${escapeHTML(v)}</p>`).join("")}<h4>🧩 Ngữ pháp cần nhớ</h4><p>${escapeHTML(q.grammar)}</p><h4>📌 Từ/cụm từ cần học</h4><p>${escapeHTML(q.words)}</p>`;
+$("explanation").classList.toggle("hidden");
+}
+function submit(force=false){
+if(!force&&answers.some(a=>a===null)&&!confirm("Bạn còn câu chưa chọn. Bạn vẫn muốn nộp bài?"))return;
+clearInterval(timer);finished=true;
+let correct=questions.filter((q,i)=>answers[i]===q.key).length;
+let name=$("student").value.trim(),cls=$("className").value.trim();
+$("resultName").textContent=name+" – Lớp "+cls;
+$("score").textContent=correct+"/5 • "+(correct*2).toFixed(2)+"/10";
+$("comment").textContent=correct===5?"Xuất sắc! Bạn đã nắm rất tốt nội dung bài đọc.":correct>=4?"Rất tốt! Bạn đã đạt mục tiêu và có thể tiếp tục nâng cao kỹ năng.":correct>=2?"Bạn đã có những bước tiến đáng ghi nhận. Hãy xem lại phần giải thích và thử thêm lần nữa!":"Mỗi lần luyện tập là một cơ hội tiến bộ. Hãy đọc bản dịch và ôn các cụm từ nhé!";
+$("review").innerHTML="<h3>Đối chiếu đáp án</h3>"+questions.map((q,i)=>`<p>Câu ${q.n}: Bạn chọn <b>${answers[i]===null?"Chưa chọn":letters[answers[i]]}</b> • Đáp án đề: <b>${letters[q.key]}</b> ${answers[i]===q.key?"✓":"·"}</p>`).join("");
+let pass=correct>=4;
+$("certificate").classList.toggle("hidden",!pass);
+$("printBtn").classList.toggle("hidden",!pass);
+if(pass){
+$("certName").textContent=name;
+$("certClass").textContent="Lớp: "+cls;
+$("certScore").textContent="Kết quả: "+correct+"/5 – "+(correct*20)+"%";
+$("certDate").textContent="Ngày: "+new Date().toLocaleDateString("vi-VN");
+}
+tone(pass);show("result");
+}
+function reset(){clearInterval(timer);answers=Array(5).fill(null);current=0;remaining=3000;finished=false;started=false;clock();$("explanation").classList.add("hidden");$("translation").classList.add("hidden");$("translateBtn").textContent="🌏 Dịch bài đọc sang tiếng Việt";show("welcome")}
+$("startBtn").onclick=()=>{
+if(!$("student").value.trim()||!$("className").value.trim()){alert("Vui lòng nhập Họ tên và Lớp trước khi bắt đầu.");return}
+if(started)return;started=true;show("test");render();clock();
+timer=setInterval(()=>{remaining--;clock();if(remaining<=0){clearInterval(timer);alert("Đã hết 50 phút. Hệ thống sẽ chấm những câu bạn đã trả lời.");submit(true)}},1000);
+};
+$("correctBtn").onclick=explanation;
+$("nextBtn").onclick=()=>{current=(current+1)%5;$("explanation").classList.add("hidden");render()};
+$("submitBtn").onclick=()=>submit(false);
+$("resetBtn").onclick=()=>{if(confirm("Bạn muốn làm lại toàn bộ bài kiểm tra?"))reset()};
+$("restartBtn").onclick=reset;
+$("translateBtn").onclick=()=>{
+$("translation").textContent=translation;
+let hidden=$("translation").classList.toggle("hidden");
+$("translateBtn").textContent=hidden?"🌏 Dịch bài đọc sang tiếng Việt":"Ẩn bản dịch tiếng Việt";
+};
+$("printBtn").onclick=()=>window.print();
+$("soundBtn").onclick=()=>{sound=!sound;$("soundBtn").textContent=sound?"🔊 Âm thanh":"🔇 Tắt âm"};
+$("theme").onchange=e=>{document.body.dataset.theme=e.target.value;try{localStorage.setItem("readingTheme",e.target.value)}catch(err){}};
+try{let t=localStorage.getItem("readingTheme");if(["blue","mint","peach","dark"].includes(t)){$("theme").value=t;document.body.dataset.theme=t}}catch(err){}
+function buildMatching(){
+let order=[5,2,8,0,7,4,9,1,6,3];
+$("matchingRows").innerHTML=vocab.map((v,i)=>`<div class="matchrow"><b>${i+1}. ${escapeHTML(v[0])}</b><select data-match="${i}"><option value="">-- Chọn nghĩa --</option>${order.map(j=>`<option value="${j}">${escapeHTML(vocab[j][2])}</option>`).join("")}</select></div>`).join("");
+$("matchingFeedback").innerHTML="";
+}
+$("checkMatching").onclick=()=>{
+let selects=[...document.querySelectorAll("[data-match]")];
+let score=selects.filter((s,i)=>Number(s.value)===i&&s.value!=="").length;
+selects.forEach((s,i)=>s.style.borderColor=s.value!==""&&Number(s.value)===i?"var(--good)":"var(--bad)");
+$("matchingFeedback").innerHTML=`<div class="notice">🎯 Kết quả nối nghĩa: <b>${score}/10</b>. ${score===10?"Tuyệt vời!":"Hãy xem lại những cụm từ chưa chính xác nhé!"}</div>`;
+tone(score===10);
+};
+$("resetMatching").onclick=buildMatching;
+function renderFlash(){
+let v=vocab[flashIndex];
+$("flashCounter").textContent="Thẻ "+(flashIndex+1)+"/10";
+$("flashCard").innerHTML=flipped?`<div><strong>${escapeHTML(v[2])}</strong><p>${escapeHTML(v[3])}</p><p>${escapeHTML(v[0])}</p></div>`:`<div><strong>${escapeHTML(v[0])}</strong><p>${escapeHTML(v[1])}</p><p class="sub">Chạm để xem nghĩa</p></div>`;
+}
+function flip(){flipped=!flipped;renderFlash()}
+$("flashCard").onclick=flip;
+$("flashCard").onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();flip()}};
+$("flipFlash").onclick=flip;
+$("prevFlash").onclick=()=>{flashIndex=(flashIndex+9)%10;flipped=false;renderFlash()};
+$("nextFlash").onclick=()=>{flashIndex=(flashIndex+1)%10;flipped=false;renderFlash()};
+$("matchingTab").onclick=()=>{$("matchingArea").classList.remove("hidden");$("flashArea").classList.add("hidden");$("matchingTab").className="active";$("flashTab").className="secondary"};
+$("flashTab").onclick=()=>{$("matchingArea").classList.add("hidden");$("flashArea").classList.remove("hidden");$("matchingTab").className="secondary";$("flashTab").className="active";renderFlash()};
+$("practiceBtn").onclick=()=>{buildMatching();show("practice")};
+$("backBtn").onclick=()=>show(finished?"result":"test");
+buildMatching();clock();
+</script>
+  <script src="../assets/js/shared-nav.js"></script>
+</body>
+</html>
+

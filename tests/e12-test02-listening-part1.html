@@ -1,0 +1,1024 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Test 02 – Listening – Part 1 | Ms.Duyen</title>
+<style>
+:root{
+ --bg:#eef4ff;--panel:#ffffff;--ink:#172544;
+ --muted:#50617c;--accent:#3457cf;--soft:#eaf0ff;
+ --line:#d6dfef;--good:#13764c;--bad:#b63b44;
+ --gold:#b47b16;--shadow:0 12px 35px #17254415;
+}
+*{box-sizing:border-box}
+body{
+ margin:0;background:var(--bg);color:var(--ink);
+ font:16px/1.65 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+ transition:background .3s,color .3s;
+}
+body[data-theme="dark"]{
+ --bg:#101a2b;--panel:#1d2a40;--ink:#f3f6ff;
+ --muted:#cad5eb;--accent:#9db7ff;--soft:#293d61;
+ --line:#43536d;--good:#80e5b2;--bad:#ff9aa2;
+ --gold:#f3c36d;--shadow:0 12px 35px #0004;
+}
+body[data-theme="mint"]{
+ --bg:#e8f7ef;--panel:#fff;--ink:#173b31;
+ --muted:#456b60;--accent:#087d65;--soft:#d8f4e8;
+ --line:#b9dccc;--good:#086e43;--bad:#ad3445;
+ --gold:#946214;
+}
+body[data-theme="rose"]{
+ --bg:#fff0f5;--panel:#fff;--ink:#47253d;
+ --muted:#79566e;--accent:#a72f70;--soft:#ffe2ee;
+ --line:#edc9dc;--good:#176e4a;--bad:#ad3445;
+ --gold:#98650b;
+}
+body[data-theme="cream"]{
+ --bg:#fff7e8;--panel:#fffdf8;--ink:#40311f;
+ --muted:#6b5942;--accent:#86541b;--soft:#fff0d2;
+ --line:#e8d5b2;--good:#176e4a;--bad:#ad3445;
+ --gold:#8d5c0a;
+}
+button,input,select{font:inherit}
+button{
+ border:1px solid var(--line);border-radius:12px;
+ padding:10px 15px;cursor:pointer;font-weight:650;
+ color:var(--ink);background:var(--panel);
+ transition:transform .15s,background .15s;
+}
+button:hover:not(:disabled){transform:translateY(-1px)}
+button:focus-visible,input:focus-visible,select:focus-visible{
+ outline:3px solid var(--accent);outline-offset:2px;
+}
+button:disabled{opacity:.55;cursor:not-allowed}
+.primary{background:#3457cf;color:white;border-color:#3457cf}
+body[data-theme="dark"] .primary{background:#9db7ff;color:#101a2b}
+.secondary{background:var(--soft)}
+.success{background:#176b4b;color:white;border-color:#176b4b}
+.danger{border-color:var(--bad);color:var(--bad)}
+input,select{
+ background:var(--panel);color:var(--ink);
+ border:1px solid var(--line);border-radius:10px;
+ padding:11px;width:100%;min-width:0;
+}
+input[type="file"]{font-size:14px}
+input[type="range"]{padding:0;accent-color:var(--accent)}
+label{font-weight:650;display:block;margin-bottom:5px}
+h1,h2,h3{line-height:1.3;margin:0 0 14px}
+h1,.calligraphy{
+ font-family:"Segoe Script","Brush Script MT",
+ "Palatino Linotype",Georgia,serif;
+ font-style:italic;letter-spacing:.3px;
+}
+h1{font-size:clamp(35px,6vw,65px);color:var(--accent)}
+h2{font-size:clamp(23px,3vw,31px)}
+h3{font-size:20px}
+p{margin:8px 0 15px}
+small,.muted{color:var(--muted)}
+.shell{max-width:1100px;margin:auto;padding:18px}
+.card{
+ background:var(--panel);border:1px solid var(--line);
+ border-radius:22px;padding:24px;margin-bottom:18px;
+ box-shadow:var(--shadow);
+}
+.hero{text-align:center;padding:55px 25px}
+.hero .eyebrow{letter-spacing:3px;font-weight:800;color:var(--accent)}
+.hero .subtitle{font-size:20px;font-weight:650}
+.hero .motto{font-style:italic;color:var(--muted)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+.form-grid>div{min-width:0}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.center{justify-content:center;text-align:center}
+.topbar{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:12px;flex-wrap:wrap;
+}
+.timer{font-size:24px;font-weight:800;font-variant-numeric:tabular-nums}
+.timer.warning{color:var(--bad)}
+.progress{height:10px;background:var(--soft);border-radius:20px;overflow:hidden;margin-top:12px}
+.progress>div{height:100%;width:0;background:var(--accent);transition:width .25s}
+audio{width:100%;margin:10px 0}
+.media-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.question{border:1px solid var(--line);border-radius:17px;padding:20px;margin:16px 0}
+.question h3{font-size:18px}
+.option{
+ display:flex;align-items:flex-start;gap:12px;
+ width:100%;text-align:left;margin:9px 0;
+ border:2px solid var(--line);padding:12px;
+ background:var(--panel);
+}
+.option .letter{
+ display:inline-grid;place-items:center;flex:0 0 30px;
+ height:30px;border-radius:50%;background:var(--soft);
+ font-weight:800;
+}
+.option.selected{border-color:var(--accent);background:var(--soft)}
+.option.correct{border-color:var(--good)}
+.option.incorrect{border-color:var(--bad)}
+.translation,.feedback,.study-box{
+ margin-top:12px;padding:13px 15px;
+ border-radius:12px;background:var(--soft);
+ border-left:4px solid var(--accent);
+}
+.feedback.right{border-left-color:var(--good)}
+.feedback.wrong{border-left-color:var(--bad)}
+.feedback p:last-child{margin-bottom:0}
+.hidden{display:none!important}
+.transcript-line{
+ padding:11px;border-bottom:1px solid var(--line);
+ cursor:pointer;border-radius:8px;
+}
+.transcript-line:hover{background:var(--soft)}
+.transcript-line.active{background:var(--soft)}
+.tag{display:inline-block;padding:4px 10px;border-radius:30px;background:var(--soft);font-size:13px;font-weight:750}
+.phrase-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.match-item{
+ padding:12px;border:2px solid var(--line);
+ border-radius:12px;cursor:pointer;background:var(--panel);
+}
+.match-item.active{border-color:var(--accent);background:var(--soft)}
+.match-item.done{border-color:var(--good);opacity:.65}
+.flashcard{
+ min-height:220px;display:flex;flex-direction:column;
+ align-items:center;justify-content:center;text-align:center;
+ padding:25px;border:2px solid var(--accent);
+ border-radius:20px;background:var(--soft);cursor:pointer;
+}
+.flashcard .front{font-size:clamp(23px,4vw,35px);font-weight:800}
+.flashcard .back{font-size:18px}
+.certificate{
+ border:9px double var(--gold);padding:30px;
+ background:var(--panel);text-align:center;
+}
+.certificate h2{font-family:Georgia,serif;color:var(--gold);font-size:32px}
+.certificate .student{font-family:Georgia,serif;font-size:30px;font-weight:bold;color:var(--accent)}
+.signature{font-family:"Segoe Script",cursive;font-size:25px;font-style:italic;color:var(--accent)}
+footer{text-align:center;color:var(--muted);padding:20px}
+.fade{animation:fade .35s ease}
+@keyframes fade{from{opacity:.3;transform:translateY(7px)}to{opacity:1;transform:none}}
+@media(max-width:700px){
+ .shell{padding:10px}.card{padding:17px;border-radius:16px}
+ .form-grid,.media-grid,.phrase-grid{grid-template-columns:1fr}
+ .hero{padding:35px 16px}
+ button{min-height:44px}
+}
+@media(prefers-reduced-motion:reduce){
+ *,*:before,*:after{animation:none!important;transition:none!important}
+}
+@media print{
+ body{background:white!important;color:#111!important}
+ .no-print,header,footer,#startScreen,#appScreen{display:none!important}
+ #resultScreen{display:block!important}
+ #certificate{display:block!important;box-shadow:none;border-color:#9a741a}
+ #resultScreen>.card:not(#certificate){display:none!important}
+ .shell{max-width:100%;padding:0}
+}
+</style>
+  <link rel="stylesheet" href="../assets/css/shared-nav.css">
+</head>
+<body data-theme="light">
+<div class="shell">
+
+<header class="card topbar no-print">
+ <div><strong>🎧 LISTEN & LEARN</strong><br><small>Grade 12 · GKI Revision</small></div>
+ <div style="min-width:160px">
+  <label for="theme">🎨 Màu nền</label>
+  <select id="theme">
+   <option value="light">Xanh sáng</option>
+   <option value="dark">Xanh đêm</option>
+   <option value="mint">Xanh bạc hà</option>
+   <option value="rose">Hồng dịu</option>
+   <option value="cream">Kem ấm</option>
+  </select>
+ </div>
+</header>
+
+<section id="startScreen" class="card hero fade">
+ <div class="eyebrow">ENGLISH LISTENING CHALLENGE</div>
+ <h1>Test 02<br>Listening – Part 1</h1>
+ <p class="subtitle">Halloween Interview</p>
+ <p>Ôn tập đề cương giữa học kỳ I · Lớp 12A1, 12A4</p>
+ <p class="motto">“Kiểm tra mà như chơi – chơi mà vẫn học được.”</p>
+ <div style="max-width:600px;margin:30px auto;text-align:left">
+  <div class="form-grid">
+   <div><label for="studentName">Họ và tên</label><input id="studentName" placeholder="Nhập họ và tên" maxlength="80"></div>
+   <div><label for="studentClass">Lớp</label><input id="studentClass" placeholder="12A1 hoặc 12A4" maxlength="20"></div>
+  </div>
+  <div class="study-box">
+   <strong>Hướng dẫn</strong>
+   <p>4 câu hỏi · 50 phút · 10 điểm. Nghe, chọn đáp án, kiểm tra và mở phần giải thích để tự học. Hoàn thành với tỷ lệ đúng trên 70% sẽ nhận giấy chứng nhận.</p>
+   <p>Ứng dụng chạy không cần Internet. Hãy chọn file nghe gốc nếu có; transcript và bài tập vẫn sử dụng được khi chưa có file âm thanh.</p>
+  </div>
+ </div>
+ <button class="primary" id="startBtn">✨ BẮT ĐẦU THỬ THÁCH</button>
+ <p style="margin-top:25px"><small>Giáo viên thiết kế: <strong>Ms.Duyen</strong></small></p>
+</section>
+
+<main id="appScreen" class="hidden fade">
+
+ <section class="card no-print">
+  <div class="topbar">
+   <div><strong id="playerLabel"></strong><br><small>Test 02 – Listening – Part 1</small></div>
+   <div class="timer" id="timer" role="timer">50:00</div>
+  </div>
+  <div class="progress"><div id="progressBar"></div></div>
+  <p id="motivation" class="muted" aria-live="polite">Every word you understand is progress!</p>
+ </section>
+
+ <section class="card">
+  <h2>🎧 Media Controller</h2>
+  <p><strong>Task 1:</strong> Listen to an interview about Halloween.</p>
+  <label for="audioFile">Chọn file âm thanh gốc từ thiết bị</label>
+  <input type="file" id="audioFile" accept="audio/*">
+  <audio id="mainAudio" src="../audio/test2-part1.mp3" controls preload="metadata"></audio>
+  <p id="audioStatus" class="muted">Chưa có file âm thanh. Vui lòng chọn file nghe gốc để phát.</p>
+  <div class="actions no-print">
+   <button id="back10">↶ 10 giây</button>
+   <button id="forward10">10 giây ↷</button>
+   <button id="slowAudio">🐢 Tốc độ 0.8×</button>
+   <button id="normalAudio">▶ Tốc độ 1×</button>
+  </div>
+ </section>
+
+ <section class="card">
+  <h2>📝 Listening Comprehension</h2>
+  <p>Choose the best answer A, B, C or D. Nhấn vào từng phương án để xem nghĩa tiếng Việt.</p>
+  <div id="questions"></div>
+  <div class="actions">
+   <button class="primary" id="checkAll">✓ Check My Answers</button>
+   <button id="finishBtn">🏁 Hoàn thành bài</button>
+  </div>
+  <p id="checkSummary" aria-live="polite"></p>
+ </section>
+
+ <section class="card">
+  <h2>🔊 Listening for Self-study</h2>
+  <p>Nghe lại đoạn âm thanh chứa bằng chứng cho từng câu hỏi. Để giữ nguyên file gốc, hãy chọn thời điểm bắt đầu và kết thúc bằng cách nghe và đánh dấu trực tiếp.</p>
+  <label for="clipQuestion">Câu hỏi cần luyện</label>
+  <select id="clipQuestion">
+   <option value="0">Question 1</option>
+   <option value="1">Question 2</option>
+   <option value="2">Question 3</option>
+   <option value="3">Question 4</option>
+  </select>
+  <div class="form-grid">
+   <div><label for="clipStart">Bắt đầu (giây)</label><input id="clipStart" type="number" min="0" step=".1" value="0"></div>
+   <div><label for="clipEnd">Kết thúc (giây)</label><input id="clipEnd" type="number" min="0" step=".1" value="0"></div>
+  </div>
+  <div class="actions">
+   <button id="markStart">Đánh dấu bắt đầu tại vị trí nghe</button>
+   <button id="markEnd">Đánh dấu kết thúc tại vị trí nghe</button>
+   <button class="primary" id="playClip">▶ Listening for Self-study</button>
+   <button id="stopClip">■ Dừng đoạn</button>
+  </div>
+  <p id="clipStatus" class="muted" aria-live="polite">Chưa thiết lập đoạn nghe.</p>
+  <p><small>Đoạn luyện tập phát trực tiếp từ file âm thanh gốc trong khoảng thời gian đã chọn, không tạo file âm thanh thay thế.</small></p>
+ </section>
+
+ <section class="card">
+  <h2>📖 Bài nghe hoàn chỉnh</h2>
+  <p>Nhấn vào từng câu tiếng Anh để xem bản dịch tiếng Việt tương ứng.</p>
+  <div class="actions">
+   <button id="showTranscript">📜 Bài nghe hoàn chỉnh</button>
+   <button id="showTranslation">🇻🇳 Dịch bài nghe sang tiếng Việt</button>
+  </div>
+  <div id="transcriptBox" class="hidden" style="margin-top:18px"></div>
+ </section>
+
+ <section class="card">
+  <h2>🧩 Matching Challenge</h2>
+  <p>Nối 10 cụm từ được trích từ bài nghe với nghĩa tiếng Việt. Chọn một cụm tiếng Anh ở cột trái, sau đó chọn nghĩa tương ứng ở cột phải.</p>
+  <div class="phrase-grid">
+   <div><h3>English phrases</h3><div id="matchLeft"></div></div>
+   <div><h3>Vietnamese meanings</h3><div id="matchRight"></div></div>
+  </div>
+  <p id="matchScore" aria-live="polite">Đã nối đúng: 0/10</p>
+  <button id="resetMatching">↻ Làm lại Matching</button>
+ </section>
+
+ <section class="card">
+  <h2>🃏 Flashcards – B1 Revision</h2>
+  <p>10 cụm từ từ bài nghe. Nhấn vào thẻ để xem phiên âm IPA, nghĩa tiếng Việt và ghi chú từ vựng.</p>
+  <div id="flashcard" class="flashcard" role="button" tabindex="0" aria-label="Lật thẻ từ vựng">
+   <div class="front" id="flashFront"></div>
+   <div class="back hidden" id="flashBack"></div>
+  </div>
+  <div class="actions center">
+   <button id="prevCard">← Trước</button>
+   <span id="flashCount" class="tag"></span>
+   <button id="nextCard">Tiếp →</button>
+  </div>
+ </section>
+
+</main>
+
+<section id="resultScreen" class="hidden fade">
+ <div class="card center no-print">
+  <h1>Wonderful Journey!</h1>
+  <h2>🎉 Kết quả luyện nghe</h2>
+  <p id="resultName"></p>
+  <div id="resultScore" style="font-size:40px;font-weight:850;color:var(--accent)"></div>
+  <p id="resultComment" style="font-size:19px"></p>
+  <p id="resultDetail"></p>
+  <div class="actions center">
+   <button id="reviewBtn">📚 Xem lại bài và tự học</button>
+   <button id="restartBtn">↻ Làm bài mới</button>
+   <button id="printBtn" class="primary hidden">🖨 In giấy chứng nhận / Lưu PDF</button>
+  </div>
+ </div>
+
+ <div id="certificate" class="card certificate hidden">
+  <div style="font-size:35px">🏅</div>
+  <h2>CERTIFICATE OF COMPLETION</h2>
+  <h3>GIẤY CHỨNG NHẬN HOÀN THÀNH</h3>
+  <p>This certificate is proudly presented to</p>
+  <div class="student" id="certName"></div>
+  <p id="certClass"></p>
+  <p>For successfully completing</p>
+  <h3>TEST 02 – LISTENING – PART 1</h3>
+  <p>Grade 12 · GKI English Revision</p>
+  <p id="certScore"></p>
+  <p id="certDate"></p>
+  <p id="certId" class="muted"></p>
+  <div style="margin-top:35px">
+   <strong>Teacher's Signature</strong>
+   <div class="signature">Ms.Duyên</div>
+   <small>Giáo viên thiết kế: Ms.Duyen</small>
+  </div>
+  <p style="margin-top:30px;font-style:italic">Keep learning. Keep growing. Keep shining!</p>
+ </div>
+</section>
+
+<footer class="no-print">Designed by Ms.Duyen · Learn with confidence, grow with every question.</footer>
+</div>
+
+<script>
+"use strict";
+
+/* =====================================================
+   OFFICIAL QUESTIONS, OPTIONS AND ANSWER KEY
+   ===================================================== */
+const QUESTIONS=[
+ {
+  q:"What is Minh helping his classmates create for the school event?",
+  vi:"Minh đang giúp các bạn cùng lớp tạo ra thứ gì cho sự kiện của trường?",
+  options:[
+   "A traditional festival stage",
+   "A Halloween haunted house",
+   "A costume exhibition",
+   "An international food stall"
+  ],
+  translations:[
+   "Một sân khấu lễ hội truyền thống",
+   "Một ngôi nhà ma Halloween",
+   "Một cuộc triển lãm trang phục",
+   "Một gian hàng ẩm thực quốc tế"
+  ],
+  answer:1,
+  evidence:"I'm helping my classmates create a Halloween haunted house.",
+  explanation:"Minh nói trực tiếp rằng mình đang giúp các bạn tạo một ngôi nhà ma Halloween. Vì vậy đáp án B đúng.",
+  vocab:"help somebody (to) do something: giúp ai làm gì; classmate: bạn cùng lớp; haunted house: ngôi nhà ma.",
+  grammar:"Present continuous: am/is/are + V-ing. Ví dụ trong bài: I'm helping my classmates create ...",
+  note:"create a haunted house; help my classmates"
+ },
+ {
+  q:"According to Minh, what is he most interested in when it comes to Halloween?",
+  vi:"Theo Minh, điều gì khiến cậu ấy quan tâm nhất khi nói đến Halloween?",
+  options:[
+   "Dressing up in scary costumes",
+   "Playing trick-or-treating games",
+   "Discovering the historical origin of the festival",
+   "Organizing annual parties at school"
+  ],
+  translations:[
+   "Hóa trang bằng những bộ trang phục đáng sợ",
+   "Chơi các trò chơi xin kẹo Halloween",
+   "Khám phá nguồn gốc lịch sử của lễ hội",
+   "Tổ chức các bữa tiệc hằng năm ở trường"
+  ],
+  answer:2,
+  evidence:"But I'm more interested in its origin. Halloween is believed to originate from an ancient festival in Ireland.",
+  explanation:"Minh thích các bữa tiệc nhưng nhấn mạnh rằng cậu quan tâm hơn đến nguồn gốc của Halloween. Đáp án C diễn đạt lại ý này.",
+  vocab:"origin: nguồn gốc; ancient festival: lễ hội cổ xưa; originate from: bắt nguồn từ.",
+  grammar:"be interested in + noun/V-ing: quan tâm đến điều gì. be believed to + V: được cho là ...",
+  note:"be interested in its origin; originate from an ancient festival"
+ },
+ {
+  q:"Why does Mai NOT want to go to any Halloween parties?",
+  vi:"Tại sao Mai không muốn tham dự bất kỳ bữa tiệc Halloween nào?",
+  options:[
+   "She thinks activities like dressing up and trick-or-treating are childish.",
+   "She is too busy preparing for traditional Vietnamese festivals.",
+   "Her school does not permit students to celebrate foreign holidays.",
+   "She is afraid of ghosts and scary costumes."
+  ],
+  translations:[
+   "Cô ấy cho rằng những hoạt động như hóa trang và đi xin kẹo là trẻ con.",
+   "Cô ấy quá bận chuẩn bị cho các lễ hội truyền thống Việt Nam.",
+   "Trường của cô ấy không cho phép học sinh tổ chức các ngày lễ nước ngoài.",
+   "Cô ấy sợ ma và những bộ trang phục đáng sợ."
+  ],
+  answer:0,
+  evidence:"Wearing scary costumes is very childish. I also find the Halloween custom of trick or treating a bit childish.",
+  explanation:"Mai nhận xét việc mặc trang phục đáng sợ và tục xin kẹo đều mang tính trẻ con. Đây là lý do được nêu trực tiếp trong bài nghe.",
+  vocab:"scary costume: trang phục đáng sợ; childish: trẻ con; custom: phong tục; trick or treating: tục đi xin kẹo Halloween.",
+  grammar:"V-ing làm chủ ngữ: Wearing scary costumes is ...; find + object + adjective: nhận thấy điều gì như thế nào.",
+  note:"wear scary costumes; find something childish"
+ },
+ {
+  q:"Which of the following statements is TRUE according to the conversation?",
+  vi:"Phát biểu nào sau đây ĐÚNG theo cuộc hội thoại?",
+  options:[
+   "Mai believes celebrating international festivals will ruin Vietnamese traditions.",
+   "Minh claims that Halloween originally started to mark the Celtic New Year.",
+   "Mai thinks other countries should also celebrate the Vietnamese Tet holiday.",
+   "Halloween is considered an entirely brand-new event at New Era Secondary School."
+  ],
+  translations:[
+   "Mai tin rằng việc tổ chức các lễ hội quốc tế sẽ phá hủy truyền thống Việt Nam.",
+   "Minh nói rằng Halloween ban đầu đánh dấu năm mới của người Celt.",
+   "Mai cho rằng các nước khác cũng nên tổ chức Tết Việt Nam.",
+   "Halloween được xem là một sự kiện hoàn toàn mới tại Trường THCS New Era."
+  ],
+  answer:1,
+  evidence:"It marked the beginning of the Celtic new year.",
+  explanation:"B đúng vì Minh cho biết lễ hội cổ xưa mà Halloween được cho là bắt nguồn từ đó đánh dấu sự khởi đầu của năm mới Celtic. A sai vì Mai cho rằng không cần quá lo lắng về ảnh hưởng văn hóa. C không được Mai khẳng định như một đề xuất trực tiếp; cô chỉ đặt câu hỏi về việc các nước khác không tổ chức Tết. D sai vì Halloween là sự kiện hằng năm tại trường.",
+  vocab:"mark: đánh dấu; beginning: sự khởi đầu; annual event: sự kiện hằng năm; ruin: phá hủy; appeal: sức hấp dẫn.",
+  grammar:"Past simple: It marked ...; present perfect: Our traditional festivals haven't lost their appeal.",
+  note:"mark the beginning of; an annual event; lose one's appeal"
+ }
+];
+
+/* =====================================================
+   COMPLETE ORIGINAL TRANSCRIPT + VIETNAMESE TRANSLATION
+   ===================================================== */
+const TRANSCRIPT=[
+ ["Interviewer","Hello, we're at the New Era Secondary School in Ha Noi and the students are preparing for a special event. I'm going to talk to some of them. Hi, Minh, what are you doing?",
+ "Xin chào, chúng tôi đang ở Trường THCS New Era tại Hà Nội và các học sinh đang chuẩn bị cho một sự kiện đặc biệt. Tôi sẽ trò chuyện với một vài em. Chào Minh, em đang làm gì vậy?"],
+ ["Minh","I'm helping my classmates create a Halloween haunted house.",
+ "Em đang giúp các bạn cùng lớp tạo một ngôi nhà ma Halloween."],
+ ["Interviewer","Really? I didn't know you celebrated Halloween in Viet Nam.",
+ "Thật sao? Tôi không biết rằng các em tổ chức Halloween ở Việt Nam."],
+ ["Minh","Actually, it's an annual event at my school, and it's very popular among my classmates.",
+ "Thực ra, đó là một sự kiện hằng năm ở trường em và rất được các bạn cùng lớp yêu thích."],
+ ["Interviewer","Do you like taking part in Halloween parties?",
+ "Em có thích tham gia các bữa tiệc Halloween không?"],
+ ["Minh","Yes, it's great fun! But I'm more interested in its origin. Halloween is believed to originate from an ancient festival in Ireland. It marked the beginning of the Celtic new year.",
+ "Có ạ, rất vui! Nhưng em quan tâm nhiều hơn đến nguồn gốc của nó. Halloween được cho là bắt nguồn từ một lễ hội cổ xưa ở Ireland. Lễ hội đó đánh dấu sự bắt đầu năm mới của người Celt."],
+ ["Interviewer","Wow! You know so much about Halloween. Thank you. Now, let's interview another student. Hi, Mai, are you going to any Halloween parties today?",
+ "Ồ! Em biết rất nhiều về Halloween. Cảm ơn em. Bây giờ, chúng ta hãy phỏng vấn một học sinh khác. Chào Mai, hôm nay em có định tham dự bữa tiệc Halloween nào không?"],
+ ["Mai","Not really. Wearing scary costumes is very childish. I also find the Halloween custom of trick or treating a bit childish.",
+ "Không hẳn ạ. Việc mặc những bộ trang phục đáng sợ rất trẻ con. Em cũng thấy phong tục đi xin kẹo Halloween hơi trẻ con."],
+ ["Interviewer","So what do you think about celebrating Halloween in Viet Nam?",
+ "Vậy em nghĩ gì về việc tổ chức Halloween ở Việt Nam?"],
+ ["Mai","It's a waste of time. Why should we celebrate it here when other countries don't celebrate Tet or other Vietnamese festivals?",
+ "Đó là một sự lãng phí thời gian. Tại sao chúng ta phải tổ chức lễ hội đó ở đây khi các nước khác không tổ chức Tết hoặc những lễ hội khác của Việt Nam?"],
+ ["Interviewer","You have a point, but Halloween is popular in Asia. There are more international festivals celebrated in Viet Nam now. Do you think they have any negative impacts on your culture?",
+ "Ý em cũng có lý, nhưng Halloween phổ biến ở châu Á. Hiện nay có nhiều lễ hội quốc tế hơn được tổ chức tại Việt Nam. Em có nghĩ chúng gây ra tác động tiêu cực nào đến văn hóa của mình không?"],
+ ["Mai","Not really. Many people worry that our culture will be ruined by international festivals, but they needn't worry too much. Our traditional festivals haven't lost their appeal.",
+ "Không hẳn ạ. Nhiều người lo rằng văn hóa của chúng ta sẽ bị các lễ hội quốc tế làm mai một, nhưng họ không cần lo lắng quá nhiều. Những lễ hội truyền thống của chúng ta vẫn chưa mất đi sức hấp dẫn."],
+ ["Interviewer","That's interesting. Thanks for sharing.",
+ "Điều đó thật thú vị. Cảm ơn em đã chia sẻ."]
+];
+
+/* =====================================================
+   10 PHRASES EXTRACTED FROM THE ORIGINAL TRANSCRIPT
+   IPA: general British English approximations
+   ===================================================== */
+const PHRASES=[
+ ["special event","sự kiện đặc biệt","/ˈspeʃəl ɪˈvent/","Similar: special occasion"],
+ ["my classmates","các bạn cùng lớp của tôi","/maɪ ˈklɑːsmeɪts/","Similar: fellow students"],
+ ["haunted house","ngôi nhà ma","/ˈhɔːntɪd haʊs/","Halloween vocabulary"],
+ ["annual event","sự kiện hằng năm","/ˈænjuəl ɪˈvent/","Similar: yearly event"],
+ ["take part in","tham gia","/teɪk pɑːt ɪn/","Synonym: participate in"],
+ ["be interested in","quan tâm đến","/bi ˈɪntrəstɪd ɪn/","Similar: be keen on"],
+ ["originate from","bắt nguồn từ","/əˈrɪdʒɪneɪt frɒm/","Synonym: come from"],
+ ["a waste of time","sự lãng phí thời gian","/ə weɪst əv taɪm/","Opposite idea: time well spent"],
+ ["negative impacts","những tác động tiêu cực","/ˈneɡətɪv ˈɪmpækts/","Opposite: positive impacts"],
+ ["lost their appeal","đã mất đi sức hấp dẫn","/lɒst ðeər əˈpiːl/","Opposite idea: retain their appeal"]
+];
+
+const $=id=>document.getElementById(id);
+const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({
+ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+}[c]));
+const LETTERS=["A","B","C","D"];
+
+let answers=Array(4).fill(null);
+let checked=Array(4).fill(false);
+let student="",studentClass="";
+let secondsLeft=3000,timerId=null,started=false,finished=false;
+let audioURL=null,clipActive=false,clipRAF=null;
+let showAllTranslations=false;
+let matchSelected=null,matched=new Set(),matchOrder=[];
+let flashIndex=0,flashFlipped=false;
+let audioContext=null;
+
+const ENCOURAGEMENTS=[
+ "Every word you understand is progress!",
+ "Great effort! Listen for key information.",
+ "Keep going! You're building your listening skills.",
+ "Small steps lead to big improvements.",
+ "Learning from an answer is also a success.",
+ "Stay curious and keep exploring English."
+];
+
+function message(text){$("motivation").textContent=text}
+
+function sound(correct=true){
+ try{
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC)return;
+  audioContext=audioContext||new AC();
+  if(audioContext.state==="suspended")audioContext.resume();
+  const osc=audioContext.createOscillator();
+  const gain=audioContext.createGain();
+  osc.type="sine";
+  osc.frequency.value=correct?650:330;
+  gain.gain.setValueAtTime(.035,audioContext.currentTime);
+  gain.gain.exponentialRampToValueAtTime(.001,audioContext.currentTime+.13);
+  osc.connect(gain).connect(audioContext.destination);
+  osc.start();osc.stop(audioContext.currentTime+.14);
+ }catch(e){}
+}
+
+function updateProgress(){
+ const n=answers.filter(x=>x!==null).length;
+ $("progressBar").style.width=(n/4*100)+"%";
+ $("progressBar").setAttribute("aria-label",n+" trên 4 câu đã trả lời");
+}
+
+function renderQuestions(){
+ $("questions").innerHTML=QUESTIONS.map((q,i)=>`
+ <article class="question" id="question${i}">
+  <span class="tag">Question ${i+1} / 4</span>
+  <h3 style="margin-top:12px">${escapeHTML(q.q)}</h3>
+  <button class="secondary" data-qvi="${i}">🇻🇳 Nghĩa câu hỏi</button>
+  <div id="qvi${i}" class="translation hidden">${escapeHTML(q.vi)}</div>
+  <div>
+   ${q.options.map((op,j)=>`
+    <button class="option" data-q="${i}" data-a="${j}" aria-pressed="false">
+     <span class="letter">${LETTERS[j]}</span>
+     <span>${escapeHTML(op)}</span>
+    </button>
+    <div id="meaning${i}_${j}" class="translation hidden">
+     <strong>${LETTERS[j]}:</strong> ${escapeHTML(q.translations[j])}
+    </div>
+   `).join("")}
+  </div>
+  <div class="actions">
+   <button class="primary" data-check="${i}">✓ Check Answer</button>
+   <button data-explain="${i}">📘 Correct Answer</button>
+   <button data-study="${i}">🎧 Listening for Self-study</button>
+  </div>
+  <div id="feedback${i}" class="feedback hidden" aria-live="polite"></div>
+  <div id="explain${i}" class="study-box hidden"></div>
+ </article>`).join("");
+ updateProgress();
+}
+
+function selectAnswer(i,j){
+ if(finished||checked[i])return;
+ answers[i]=j;
+ document.querySelectorAll(`[data-q="${i}"]`).forEach(b=>{
+  const selected=Number(b.dataset.a)===j;
+  b.classList.toggle("selected",selected);
+  b.setAttribute("aria-pressed",String(selected));
+ });
+ updateProgress();
+ const m=$("meaning"+i+"_"+j);
+ m.classList.toggle("hidden");
+ message(ENCOURAGEMENTS[(i+j)%ENCOURAGEMENTS.length]);
+}
+
+function checkAnswer(i){
+ if(finished&&checked[i])return;
+ if(checked[i])return;
+ if(answers[i]===null){
+  $("feedback"+i).className="feedback";
+  $("feedback"+i).textContent="Hãy chọn một đáp án trước khi kiểm tra nhé!";
+  return;
+ }
+ checked[i]=true;
+ const correct=answers[i]===QUESTIONS[i].answer;
+ const f=$("feedback"+i);
+ f.className="feedback "+(correct?"right":"wrong");
+ f.textContent=correct?
+  "✓ Chính xác! Excellent work! Bạn đã nghe được thông tin quan trọng.":
+  "✦ Chưa chính xác. Không sao, hãy mở Correct Answer để học từ bằng chứng trong bài nghe.";
+ document.querySelectorAll(`[data-q="${i}"]`).forEach(b=>{
+  const j=Number(b.dataset.a);
+  b.disabled=true;
+  if(j===QUESTIONS[i].answer)b.classList.add("correct");
+  if(j===answers[i]&&!correct)b.classList.add("incorrect");
+ });
+ sound(correct);
+ message(correct?"Wonderful! Keep up the good work!":
+  "Mistakes help us learn. Review the evidence and try again next time.");
+}
+
+function showExplanation(i){
+ const q=QUESTIONS[i];
+ const box=$("explain"+i);
+ box.classList.remove("hidden");
+ box.innerHTML=`
+ <h3>📘 Correct Answer: ${LETTERS[q.answer]}</h3>
+ <p><strong>Giải thích:</strong> ${escapeHTML(q.explanation)}</p>
+ <p><strong>Bằng chứng trong bài nghe:</strong></p>
+ <blockquote style="margin:8px 0;padding:12px;border-left:3px solid var(--accent)">
+ ${escapeHTML(q.evidence)}</blockquote>
+ <h3>🇻🇳 Dịch nghĩa 4 phương án</h3>
+ ${q.translations.map((t,j)=>`
+ <p><strong>${LETTERS[j]}.</strong> ${escapeHTML(t)}
+ ${j===q.answer?" ✓ Đáp án đúng":""}</p>`).join("")}
+ <h3>📚 Vocabulary</h3><p>${escapeHTML(q.vocab)}</p>
+ <h3>🧠 Grammar Focus</h3><p>${escapeHTML(q.grammar)}</p>
+ <h3>⭐ Useful Phrases</h3><p>${escapeHTML(q.note)}</p>
+ <p><strong>Learning tip:</strong> Nghe lại câu chứa bằng chứng, sau đó tự nói lại bằng tiếng Anh.</p>`;
+}
+
+function checkAll(){
+ for(let i=0;i<4;i++){
+  if(answers[i]!==null&&!checked[i])checkAnswer(i);
+ }
+ const completed=answers.filter(x=>x!==null).length;
+ const correct=answers.filter((x,i)=>x===QUESTIONS[i].answer).length;
+ $("checkSummary").textContent=
+ `Đã trả lời ${completed}/4 câu. Số câu đúng hiện tại: ${correct}/4. Hãy xem lại phần giải thích để ghi nhớ kiến thức.`;
+}
+
+function formatTime(s){
+ return String(Math.floor(s/60)).padStart(2,"0")+":"+
+ String(s%60).padStart(2,"0");
+}
+function tick(){
+ if(!started||finished)return;
+ secondsLeft--;
+ $("timer").textContent=formatTime(Math.max(0,secondsLeft));
+ $("timer").classList.toggle("warning",secondsLeft<=300);
+ if(secondsLeft<=0)finish(true);
+}
+function start(){
+ student=$("studentName").value.trim();
+ studentClass=$("studentClass").value.trim();
+ if(!student||!studentClass){
+  alert("Vui lòng nhập đầy đủ Họ tên và Lớp.");
+  return;
+ }
+ started=true;finished=false;
+ $("startScreen").classList.add("hidden");
+ $("appScreen").classList.remove("hidden");
+ $("playerLabel").textContent=student+" · "+studentClass;
+ renderQuestions();
+ renderMatching();
+ renderFlashcard();
+ renderTranscript();
+ $("timer").textContent="50:00";
+ timerId=setInterval(tick,1000);
+ window.scrollTo(0,0);
+}
+
+function finish(timeout=false){
+ if(finished)return;
+ const unanswered=answers.filter(x=>x===null).length;
+ if(!timeout&&unanswered>0){
+  if(!confirm(`Còn ${unanswered} câu chưa trả lời. Những câu này được tính sai. Bạn muốn hoàn thành bài?`))return;
+ }
+ finished=true;
+ clearInterval(timerId);
+ stopClip();
+ $("mainAudio").pause();
+ const correct=answers.filter((x,i)=>x===QUESTIONS[i].answer).length;
+ const score=(correct/4*10).toFixed(2);
+ const percent=correct/4*100;
+ const eligible=percent>70;
+ $("resultName").textContent=student+" · "+studentClass;
+ $("resultScore").textContent=score+" / 10";
+ $("resultDetail").textContent=
+ `${correct}/4 câu đúng · ${percent}% · ${unanswered} câu chưa trả lời`+
+ (timeout?" · Đã hết 50 phút":"");
+ $("resultComment").textContent=
+ correct===4?"Outstanding! Bạn đã nắm rất tốt thông tin bài nghe. Hãy tiếp tục duy trì phong độ!":
+ correct===3?"Great job! Bạn đã đạt kết quả tốt. Hãy nghe lại những chi tiết còn nhầm lẫn.":
+ correct===2?"Good effort! Bạn đã có nền tảng. Hãy tập trung nghe từ khóa và cách diễn đạt tương đương.":
+ "Every step counts! Hãy nghe từng đoạn ngắn, đọc bằng chứng và luyện lại. Bạn hoàn toàn có thể tiến bộ.";
+ $("appScreen").classList.add("hidden");
+ $("resultScreen").classList.remove("hidden");
+ $("certificate").classList.toggle("hidden",!eligible);
+ $("printBtn").classList.toggle("hidden",!eligible);
+ if(eligible){
+  $("certName").textContent=student;
+  $("certClass").textContent="Class: "+studentClass;
+  $("certScore").textContent=`Achievement: ${correct}/4 correct answers · Score: ${score}/10`;
+  $("certDate").textContent="Date: "+new Date().toLocaleDateString("vi-VN");
+  $("certId").textContent="Certificate ID: MD-T02P1-"+Date.now();
+ }
+ window.scrollTo(0,0);
+ sound(eligible);
+}
+
+function review(){
+ $("resultScreen").classList.add("hidden");
+ $("appScreen").classList.remove("hidden");
+ $("checkAll").disabled=true;
+ $("finishBtn").disabled=true;
+ for(let i=0;i<4;i++){
+  if(answers[i]!==null&&!checked[i]){
+   checked[i]=true;
+  }
+  document.querySelectorAll(`[data-q="${i}"]`).forEach(b=>{
+   b.disabled=true;
+   const j=Number(b.dataset.a);
+   b.classList.toggle("selected",j===answers[i]);
+   if(j===QUESTIONS[i].answer)b.classList.add("correct");
+   if(j===answers[i]&&j!==QUESTIONS[i].answer)b.classList.add("incorrect");
+  });
+  const f=$("feedback"+i);
+  f.classList.remove("hidden");
+  f.className="feedback "+(answers[i]===QUESTIONS[i].answer?"right":"wrong");
+  f.textContent=answers[i]===QUESTIONS[i].answer?
+   "✓ Đáp án chính xác.":"Đáp án cần ghi nhớ: "+LETTERS[QUESTIONS[i].answer];
+  showExplanation(i);
+ }
+ window.scrollTo(0,0);
+}
+
+/* =====================================================
+   AUDIO PLAYER + SEGMENT PLAYBACK
+   ===================================================== */
+function loadAudio(file){
+ if(audioURL)URL.revokeObjectURL(audioURL);
+ stopClip();
+ audioURL=URL.createObjectURL(file);
+ $("mainAudio").src=audioURL;
+ $("audioStatus").textContent="Đã chọn file gốc: "+file.name;
+}
+
+function stopClip(){
+ clipActive=false;
+ if(clipRAF)cancelAnimationFrame(clipRAF);
+ clipRAF=null;
+ $("mainAudio").pause();
+}
+
+function playClip(){
+ const a=$("mainAudio");
+ if(!a.src){
+  $("clipStatus").textContent="Cần chọn file nghe gốc trước khi luyện đoạn.";
+  return;
+ }
+ const s=Number($("clipStart").value);
+ const e=Number($("clipEnd").value);
+ if(!Number.isFinite(s)||!Number.isFinite(e)||s<0||e<=s||
+ (Number.isFinite(a.duration)&&e>a.duration+.1)){
+  $("clipStatus").textContent="Khoảng thời gian không hợp lệ. Hãy chọn thời điểm bắt đầu nhỏ hơn kết thúc và nằm trong file.";
+  return;
+ }
+ stopClip();
+ a.currentTime=s;
+ clipActive=true;
+ $("clipStatus").textContent=`Đang nghe đoạn từ ${s.toFixed(1)}s đến ${e.toFixed(1)}s.`;
+ const monitor=()=>{
+  if(!clipActive)return;
+  if(a.currentTime>=e||a.ended){
+   stopClip();
+   $("clipStatus").textContent="Đã hoàn thành đoạn nghe. Great listening!";
+   return;
+  }
+  clipRAF=requestAnimationFrame(monitor);
+ };
+ a.play().then(monitor).catch(()=>{
+  clipActive=false;
+  $("clipStatus").textContent="Không thể phát file. Hãy kiểm tra định dạng âm thanh.";
+ });
+}
+
+/* =====================================================
+   TRANSCRIPT
+   ===================================================== */
+function renderTranscript(){
+ const box=$("transcriptBox");
+ box.innerHTML=TRANSCRIPT.map(([speaker,en,vi],i)=>`
+ <div class="transcript-line" data-line="${i}" tabindex="0"
+ role="button" aria-expanded="${showAllTranslations}">
+  <strong>${escapeHTML(speaker)}:</strong> ${escapeHTML(en)}
+  <div class="translation ${showAllTranslations?"":"hidden"}" id="linevi${i}">
+   ${escapeHTML(vi)}
+  </div>
+ </div>`).join("");
+}
+function toggleLine(i){
+ const el=$("linevi"+i);
+ el.classList.toggle("hidden");
+ const parent=el.closest(".transcript-line");
+ parent.classList.toggle("active",!el.classList.contains("hidden"));
+ parent.setAttribute("aria-expanded",String(!el.classList.contains("hidden")));
+}
+
+/* =====================================================
+   MATCHING GAME
+   ===================================================== */
+function shuffle(arr){
+ const copy=[...arr];
+ for(let i=copy.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [copy[i],copy[j]]=[copy[j],copy[i]];
+ }
+ return copy;
+}
+function renderMatching(){
+ matched=new Set();matchSelected=null;
+ matchOrder=shuffle(PHRASES.map((_,i)=>i));
+ $("matchLeft").innerHTML=PHRASES.map((p,i)=>`
+ <div class="match-item" role="button" tabindex="0"
+ data-match-left="${i}">${i+1}. ${escapeHTML(p[0])}</div>`).join("");
+ $("matchRight").innerHTML=matchOrder.map((i,j)=>`
+ <div class="match-item" role="button" tabindex="0"
+ data-match-right="${i}">${j+1}. ${escapeHTML(PHRASES[i][1])}</div>`).join("");
+ $("matchScore").textContent="Đã nối đúng: 0/10";
+}
+function matchClick(side,i){
+ if(matched.has(i))return;
+ if(side==="left"){
+  matchSelected=i;
+  document.querySelectorAll("[data-match-left]").forEach(el=>
+   el.classList.toggle("active",Number(el.dataset.matchLeft)===i));
+  return;
+ }
+ if(matchSelected===null){
+  $("matchScore").textContent="Hãy chọn cụm tiếng Anh ở cột trái trước nhé!";
+  return;
+ }
+ if(matchSelected===i){
+  matched.add(i);
+  document.querySelector(`[data-match-left="${i}"]`).classList.add("done");
+  document.querySelector(`[data-match-right="${i}"]`).classList.add("done");
+  sound(true);
+  $("matchScore").textContent=`Đã nối đúng: ${matched.size}/10`+
+   (matched.size===10?" · Excellent! Hoàn thành thử thách!":" · Well done!");
+ }else{
+  sound(false);
+  $("matchScore").textContent=`Đã nối đúng: ${matched.size}/10 · Hãy thử ghép lại, bạn sẽ làm được!`;
+ }
+ matchSelected=null;
+ document.querySelectorAll("[data-match-left]").forEach(el=>el.classList.remove("active"));
+}
+
+/* =====================================================
+   FLASHCARDS
+   ===================================================== */
+function renderFlashcard(){
+ const p=PHRASES[flashIndex];
+ $("flashFront").textContent=p[0];
+ $("flashBack").innerHTML=`
+ <strong>${escapeHTML(p[0])}</strong><br>
+ <span>${escapeHTML(p[2])}</span><br><br>
+ <strong>${escapeHTML(p[1])}</strong><br>
+ <small>${escapeHTML(p[3])}</small>`;
+ $("flashFront").classList.toggle("hidden",flashFlipped);
+ $("flashBack").classList.toggle("hidden",!flashFlipped);
+ $("flashCount").textContent=(flashIndex+1)+" / 10";
+}
+function flipCard(){
+ flashFlipped=!flashFlipped;
+ renderFlashcard();
+}
+function moveCard(delta){
+ flashIndex=(flashIndex+delta+PHRASES.length)%PHRASES.length;
+ flashFlipped=false;
+ renderFlashcard();
+}
+
+/* =====================================================
+   EVENT HANDLERS
+   ===================================================== */
+$("theme").addEventListener("change",e=>{
+ document.body.dataset.theme=e.target.value;
+ try{localStorage.setItem("msduyen_theme",e.target.value)}catch(err){}
+});
+try{
+ const saved=localStorage.getItem("msduyen_theme");
+ if(["light","dark","mint","rose","cream"].includes(saved)){
+  $("theme").value=saved;
+  document.body.dataset.theme=saved;
+ }
+}catch(err){}
+
+$("startBtn").addEventListener("click",start);
+
+$("questions").addEventListener("click",e=>{
+ const option=e.target.closest("[data-q][data-a]");
+ if(option){
+  selectAnswer(Number(option.dataset.q),Number(option.dataset.a));
+  return;
+ }
+ const qvi=e.target.closest("[data-qvi]");
+ if(qvi){
+  $("qvi"+qvi.dataset.qvi).classList.toggle("hidden");
+  return;
+ }
+ const check=e.target.closest("[data-check]");
+ if(check){checkAnswer(Number(check.dataset.check));return}
+ const explain=e.target.closest("[data-explain]");
+ if(explain){showExplanation(Number(explain.dataset.explain));return}
+ const study=e.target.closest("[data-study]");
+ if(study){
+  const i=Number(study.dataset.study);
+  $("clipQuestion").value=i;
+  $("clipStatus").textContent=
+   `Đã chọn Question ${i+1}. Hãy đánh dấu đoạn âm thanh chứa bằng chứng rồi nhấn Listening for Self-study.`;
+  $("clipQuestion").scrollIntoView({behavior:"smooth",block:"center"});
+ }
+});
+
+$("checkAll").addEventListener("click",checkAll);
+$("finishBtn").addEventListener("click",()=>finish(false));
+$("reviewBtn").addEventListener("click",review);
+$("restartBtn").addEventListener("click",()=>location.reload());
+$("printBtn").addEventListener("click",()=>window.print());
+
+$("audioFile").addEventListener("change",e=>{
+ if(e.target.files&&e.target.files[0])loadAudio(e.target.files[0]);
+});
+$("back10").addEventListener("click",()=>{
+ const a=$("mainAudio");a.currentTime=Math.max(0,a.currentTime-10);
+});
+$("forward10").addEventListener("click",()=>{
+ const a=$("mainAudio");
+ if(Number.isFinite(a.duration))a.currentTime=Math.min(a.duration,a.currentTime+10);
+});
+$("slowAudio").addEventListener("click",()=>{$("mainAudio").playbackRate=.8});
+$("normalAudio").addEventListener("click",()=>{$("mainAudio").playbackRate=1});
+
+$("markStart").addEventListener("click",()=>{
+ $("clipStart").value=$("mainAudio").currentTime.toFixed(1);
+});
+$("markEnd").addEventListener("click",()=>{
+ $("clipEnd").value=$("mainAudio").currentTime.toFixed(1);
+});
+$("playClip").addEventListener("click",playClip);
+$("stopClip").addEventListener("click",stopClip);
+$("mainAudio").addEventListener("ended",()=>{clipActive=false});
+$("mainAudio").addEventListener("error",()=>{
+ $("audioStatus").textContent="Không đọc được file âm thanh này. Vui lòng chọn định dạng được trình duyệt hỗ trợ.";
+});
+
+$("showTranscript").addEventListener("click",()=>{
+ $("transcriptBox").classList.toggle("hidden");
+});
+$("showTranslation").addEventListener("click",()=>{
+ $("transcriptBox").classList.remove("hidden");
+ showAllTranslations=!showAllTranslations;
+ renderTranscript();
+ $("showTranslation").textContent=showAllTranslations?
+  "Ẩn bản dịch tiếng Việt":"🇻🇳 Dịch bài nghe sang tiếng Việt";
+});
+$("transcriptBox").addEventListener("click",e=>{
+ const line=e.target.closest("[data-line]");
+ if(line)toggleLine(Number(line.dataset.line));
+});
+$("transcriptBox").addEventListener("keydown",e=>{
+ if(e.key==="Enter"||e.key===" "){
+  const line=e.target.closest("[data-line]");
+  if(line){e.preventDefault();toggleLine(Number(line.dataset.line))}
+ }
+});
+
+function handleMatchEvent(e){
+ const left=e.target.closest("[data-match-left]");
+ const right=e.target.closest("[data-match-right]");
+ if(left)matchClick("left",Number(left.dataset.matchLeft));
+ if(right)matchClick("right",Number(right.dataset.matchRight));
+}
+$("matchLeft").addEventListener("click",handleMatchEvent);
+$("matchRight").addEventListener("click",handleMatchEvent);
+for(const id of ["matchLeft","matchRight"]){
+ $(id).addEventListener("keydown",e=>{
+  if(e.key==="Enter"||e.key===" "){
+   e.preventDefault();handleMatchEvent(e);
+  }
+ });
+}
+$("resetMatching").addEventListener("click",renderMatching);
+
+$("flashcard").addEventListener("click",flipCard);
+$("flashcard").addEventListener("keydown",e=>{
+ if(e.key==="Enter"||e.key===" "){e.preventDefault();flipCard()}
+});
+$("prevCard").addEventListener("click",()=>moveCard(-1));
+$("nextCard").addEventListener("click",()=>moveCard(1));
+
+/* Prevent accidental navigation during an active test */
+window.addEventListener("beforeunload",e=>{
+ if(started&&!finished){
+  e.preventDefault();
+  e.returnValue="";
+ }
+});
+</script>
+  <script src="../assets/js/shared-nav.js"></script>
+</body>
+</html>
+

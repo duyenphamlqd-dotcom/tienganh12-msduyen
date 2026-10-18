@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test 03 – Reading Q11-15 | Ms.Duyen</title>
+<style>
+:root{
+  --bg:#eef4ff;--panel:#ffffff;--text:#17233d;
+  --muted:#52617a;--primary:#3159cf;--soft:#e7edff;
+  --border:#cbd5e8;--good:#146c43;--bad:#ad2634;
+  --goodbg:#e3f6eb;--badbg:#ffebed;
+}
+body[data-theme="mint"]{
+  --bg:#e7f6ef;--panel:#fff;--text:#14382b;
+  --muted:#426858;--primary:#16734e;--soft:#d7f1e4;
+  --border:#b5d7c5;
+}
+body[data-theme="rose"]{
+  --bg:#fff0f3;--panel:#fff;--text:#44213a;
+  --muted:#76516a;--primary:#a42f68;--soft:#ffe0ed;
+  --border:#e7bbce;
+}
+body[data-theme="gold"]{
+  --bg:#fff6df;--panel:#fffefa;--text:#443315;
+  --muted:#76623b;--primary:#855512;--soft:#ffebbc;
+  --border:#dfc78e;
+}
+body[data-theme="dark"]{
+  --bg:#101827;--panel:#1d293c;--text:#f3f7ff;
+  --muted:#c1cee0;--primary:#9bb8ff;--soft:#303f5a;
+  --border:#50617a;--good:#8ce7ae;--bad:#ff9ca7;
+  --goodbg:#173c30;--badbg:#492932;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--text);
+  font-family:Arial,"Segoe UI",sans-serif;
+  line-height:1.65;transition:background .25s,color .25s;
+}
+button,input,select{font:inherit}
+button{cursor:pointer}
+button:disabled{cursor:not-allowed;opacity:.48}
+button:focus-visible,input:focus-visible,select:focus-visible{
+  outline:3px solid var(--primary);outline-offset:3px;
+}
+.hidden{display:none!important}
+.container{max-width:1350px;margin:auto;padding:18px}
+.panel{
+  background:var(--panel);border:1px solid var(--border);
+  border-radius:20px;padding:23px;
+  box-shadow:0 5px 20px #0000000a;
+}
+.script{
+  font-family:"Brush Script MT","Segoe Script",
+  "Palatino Linotype",Georgia,serif;
+  font-style:italic;letter-spacing:.5px;
+}
+h1{font-size:clamp(32px,5vw,57px);line-height:1.25}
+h2{line-height:1.3}
+.subtitle{color:var(--muted)}
+.center{text-align:center}
+.hero{
+  padding:55px 22px;text-align:center;
+  background:linear-gradient(145deg,var(--soft),var(--panel));
+  border-radius:26px;border:1px solid var(--border);
+}
+.hero h1{color:var(--primary);margin:15px 0}
+.pill{
+  display:inline-block;background:var(--soft);color:var(--text);
+  border:1px solid var(--border);padding:7px 15px;
+  border-radius:50px;font-size:14px;font-weight:bold;
+}
+.btn{
+  border:0;border-radius:12px;padding:12px 18px;
+  background:var(--primary);color:white;
+  font-weight:700;min-height:45px;
+}
+body[data-theme="dark"] .btn{color:#101827}
+.btn.secondary{
+  background:var(--soft);color:var(--text);
+  border:1px solid var(--border);
+}
+.btn.danger{background:#a42e42;color:#fff}
+.btn.good{background:#176c48;color:white}
+.btn:hover:not(:disabled){filter:brightness(.92)}
+.controls{
+  display:flex;gap:10px;align-items:center;
+  justify-content:center;flex-wrap:wrap;margin:18px 0;
+}
+input,select{
+  width:100%;padding:12px;border-radius:12px;
+  border:1px solid var(--border);background:var(--panel);
+  color:var(--text);min-height:46px;
+}
+.formbox{max-width:480px;margin:24px auto}
+.formbox label{display:block;text-align:left;margin:14px 0 5px;font-weight:bold}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:12px;flex-wrap:wrap;margin-bottom:14px;
+}
+.timer{
+  font-size:23px;font-weight:bold;
+  background:var(--soft);padding:7px 16px;border-radius:12px;
+  font-variant-numeric:tabular-nums;
+}
+.timer.urgent{color:var(--bad)}
+.progress{
+  width:100%;height:11px;background:var(--soft);
+  border-radius:20px;overflow:hidden;margin:12px 0 18px;
+}
+.progress>div{
+  width:0;height:100%;background:var(--primary);
+  transition:width .25s;
+}
+.layout{
+  display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+  gap:18px;align-items:start;
+}
+.passage{
+  white-space:pre-line;font-size:16px;line-height:1.95;
+  border-left:4px solid var(--primary);padding-left:15px;
+}
+.blank{
+  background:var(--soft);color:var(--primary);
+  border-radius:5px;padding:2px 5px;font-weight:bold;
+}
+.question-title{font-size:23px;color:var(--primary);font-weight:bold}
+.option{
+  display:block;width:100%;text-align:left;
+  background:var(--panel);color:var(--text);
+  border:2px solid var(--border);border-radius:13px;
+  padding:14px;margin:10px 0;transition:.15s;
+  overflow-wrap:anywhere;
+}
+.option:hover:not(:disabled){border-color:var(--primary);background:var(--soft)}
+.option.selected{border-color:var(--primary);background:var(--soft)}
+.option.correct{border-color:var(--good);background:var(--goodbg)}
+.option.incorrect{border-color:var(--bad);background:var(--badbg)}
+.option strong{margin-right:7px}
+.meaning{
+  margin:5px 0 10px 10px;padding:9px 12px;
+  border-left:3px solid var(--primary);
+  background:var(--soft);border-radius:7px;
+  font-size:14px;
+}
+.feedback{
+  padding:13px;border-radius:12px;margin:13px 0;
+  font-weight:bold;
+}
+.feedback.ok{background:var(--goodbg);color:var(--good)}
+.feedback.no{background:var(--badbg);color:var(--bad)}
+.explain{
+  margin-top:15px;padding:17px;background:var(--soft);
+  border:1px solid var(--border);border-radius:13px;
+}
+.explain p{margin:8px 0}
+.small{font-size:14px;color:var(--muted)}
+.section-title{color:var(--primary);font-size:22px}
+.study-grid{display:grid;grid-template-columns:1fr 1fr;gap:17px}
+.match-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.match-item{
+  width:100%;padding:12px;text-align:left;
+  border:2px solid var(--border);border-radius:11px;
+  background:var(--panel);color:var(--text);
+  min-height:58px;
+}
+.match-item.active{background:var(--soft);border-color:var(--primary)}
+.match-item.matched{
+  background:var(--goodbg);border-color:var(--good);
+}
+.flashcard{
+  max-width:540px;min-height:245px;margin:15px auto;
+  border:2px solid var(--primary);border-radius:20px;
+  background:var(--soft);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;padding:25px;cursor:pointer;
+}
+.flashcard .term{font-size:26px;font-weight:bold}
+.flashcard .ipa{font-size:18px;margin-top:10px;color:var(--muted)}
+.flashcard .definition{font-size:20px;margin-top:12px}
+.certificate{
+  border:8px double #b68b3e;padding:28px;
+  text-align:center;background:#fffdf5;color:#332813;
+  border-radius:15px;max-width:800px;margin:25px auto;
+}
+.certificate h2{font-size:38px;color:#8a6120}
+.certificate .signature{
+  font-family:"Brush Script MT","Segoe Script",Georgia,serif;
+  font-style:italic;font-size:30px;color:#7d4e19;
+}
+.score{
+  font-size:48px;font-weight:800;color:var(--primary);
+}
+footer{text-align:center;padding:25px;color:var(--muted)}
+@media(max-width:800px){
+  .layout,.study-grid{grid-template-columns:1fr}
+  .container{padding:10px}
+  .panel{padding:16px}
+  .hero{padding:32px 15px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*:before,*:after{
+    animation:none!important;transition:none!important;
+    scroll-behavior:auto!important;
+  }
+}
+@media print{
+  body{background:white;color:black}
+  body *{visibility:hidden!important}
+  #certificate,#certificate *{visibility:visible!important}
+  #certificate{
+    display:block!important;position:absolute;left:0;top:0;
+    width:100%;max-width:none;margin:0;
+    box-shadow:none;break-inside:avoid;
+  }
+  @page{size:A4 landscape;margin:12mm}
+}
+</style>
+</head>
+<body data-theme="blue">
+
+<div class="container">
+
+<div class="controls" id="globalControls">
+  <label for="themeSelect"><strong>🎨 Màu nền:</strong></label>
+  <select id="themeSelect" style="width:auto" aria-label="Chọn màu nền">
+    <option value="blue">Xanh dương</option>
+    <option value="mint">Xanh lá</option>
+    <option value="rose">Hồng</option>
+    <option value="gold">Vàng kem</option>
+    <option value="dark">Tối tương phản</option>
+  </select>
+  <button class="btn secondary" id="soundBtn" type="button">🔊 Âm thanh: Bật</button>
+</div>
+
+<!-- START -->
+<section id="startScreen">
+  <div class="hero">
+    <span class="pill">GRADE 12 • MIDTERM I REVIEW</span>
+    <h1 class="script">Test 03 – Reading Q11–15</h1>
+    <h2>Read • Think • Learn • Shine</h2>
+    <p>Ôn tập đề cương giữa học kỳ I – Lớp 12A1, 12A4</p>
+    <p><strong>Giáo viên thiết kế: Ms.Duyen</strong></p>
+    <p>✨ Kiểm tra mà như chơi – chơi mà vẫn học được ✨</p>
+
+    <div class="formbox">
+      <label for="studentName">Họ và tên học sinh</label>
+      <input id="studentName" maxlength="100" placeholder="Nhập họ và tên" autocomplete="name">
+      <label for="studentClass">Lớp</label>
+      <select id="studentClass">
+        <option value="">-- Chọn lớp --</option>
+        <option value="12A1">12A1</option>
+        <option value="12A4">12A4</option>
+      </select>
+      <div class="controls">
+        <button class="btn" id="startBtn">🚀 Bắt đầu thử thách</button>
+      </div>
+      <p id="startError" role="alert" style="color:var(--bad)"></p>
+    </div>
+    <span class="pill">5 câu hỏi • 50 phút • Thang điểm 10</span>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quizScreen" class="hidden">
+  <div class="panel">
+    <div class="topbar">
+      <div>
+        <strong id="studentInfo"></strong>
+        <div class="small">Test 03 – Reading Q11–15</div>
+      </div>
+      <div class="timer" id="timer" aria-live="off">⏱ 50:00</div>
+    </div>
+    <div class="topbar">
+      <strong id="progressText">Đã trả lời: 0/5</strong>
+      <strong id="scoreText">Số câu đúng: 0</strong>
+    </div>
+    <div class="progress"><div id="progressFill"></div></div>
+  </div>
+
+  <div class="layout" style="margin-top:18px">
+    <div class="panel">
+      <h2 class="section-title">📖 Reading Passage</h2>
+      <p class="small"><strong>Instructions:</strong> Read the following text and mark the letter A, B, C or D on your answer sheet to indicate the option that best fits each of the numbered blanks.</p>
+      <div class="passage" id="passage"></div>
+      <div class="controls">
+        <button class="btn secondary" id="translateBtn">🌐 Dịch bài đọc sang tiếng Việt</button>
+      </div>
+      <div class="explain hidden" id="translation"></div>
+    </div>
+
+    <div class="panel">
+      <div class="topbar">
+        <span class="pill" id="questionCounter">Question 11 / 15</span>
+        <span class="small">Chọn A, B, C hoặc D</span>
+      </div>
+      <div class="question-title" id="questionTitle"></div>
+      <p class="small" id="encouragement"></p>
+      <div id="options"></div>
+      <p class="small">💡 Nhấp một phương án để xem nghĩa tiếng Việt. Chọn phương án đó lần nữa để xác nhận câu trả lời.</p>
+      <div id="feedbackArea" aria-live="polite"></div>
+      <div class="controls">
+        <button class="btn secondary" id="correctAnswerBtn" disabled>📘 Correct Answer</button>
+        <button class="btn" id="nextBtn" disabled>Câu tiếp theo →</button>
+      </div>
+      <div id="explanation" class="explain hidden"></div>
+      <div class="controls">
+        <button class="btn secondary" id="checkBtn">✔ Check My Answers</button>
+        <button class="btn danger" id="resetBtn">↻ Reset Test</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="resultScreen" class="hidden">
+  <div class="hero">
+    <span class="pill">MISSION COMPLETED</span>
+    <h1 class="script">You Did It!</h1>
+    <h2 id="resultName"></h2>
+    <div class="score" id="finalScore"></div>
+    <p id="resultDetails"></p>
+    <h3 id="resultComment"></h3>
+    <p>Every question is a chance to learn something new!</p>
+    <div class="controls">
+      <button class="btn" id="reviewBtn">📖 Xem đáp án và giải thích</button>
+      <button class="btn secondary" id="studyBtn">🧠 Ôn từ vựng</button>
+      <button class="btn danger" id="resultResetBtn">↻ Làm lại bài</button>
+    </div>
+  </div>
+
+  <div id="certificate" class="certificate hidden">
+    <div style="font-size:35px">🏆</div>
+    <h2 class="script">Certificate of Achievement</h2>
+    <h3>GIẤY CHỨNG NHẬN HOÀN THÀNH</h3>
+    <p>This certificate is proudly presented to</p>
+    <h2 id="certName"></h2>
+    <p id="certClass"></p>
+    <p>For successfully completing</p>
+    <h3>Test 03 – Reading Q11–15</h3>
+    <p id="certScore"></p>
+    <p>Grade 12 • Midterm I English Review</p>
+    <p id="certDate"></p>
+    <p><strong>Giáo viên thiết kế: Ms.Duyen</strong></p>
+    <p>Teacher's Signature</p>
+    <div class="signature">Ms.Duyên</div>
+    <p style="font-size:12px" id="certId"></p>
+  </div>
+
+  <div class="controls">
+    <button id="printCertBtn" class="btn good hidden">🖨 In / Lưu giấy chứng nhận PDF</button>
+  </div>
+
+  <div class="panel">
+    <h2 class="section-title">📋 Kết quả từng câu</h2>
+    <div id="reviewList"></div>
+  </div>
+</section>
+
+<!-- VOCABULARY -->
+<section id="studyScreen" class="hidden">
+  <div class="panel">
+    <h1 class="script center">Vocabulary Challenge</h1>
+    <p class="center">10 cụm từ được trích từ bài đọc – ôn luyện trình độ B1</p>
+    <div class="controls">
+      <button class="btn secondary" id="backStudyBtn">← Quay lại kết quả</button>
+    </div>
+  </div>
+
+  <div class="study-grid" style="margin-top:18px">
+    <div class="panel">
+      <h2 class="section-title">🧩 Matching Game</h2>
+      <p>Chọn một cụm từ tiếng Anh ở cột trái, sau đó chọn nghĩa tương ứng ở cột phải.</p>
+      <div class="topbar">
+        <strong id="matchProgress">0/10 cặp đúng</strong>
+        <button class="btn secondary" id="resetMatchBtn">↻ Chơi lại</button>
+      </div>
+      <div class="match-grid">
+        <div id="englishMatches"></div>
+        <div id="vietnameseMatches"></div>
+      </div>
+      <p id="matchFeedback" aria-live="polite"></p>
+    </div>
+
+    <div class="panel">
+      <h2 class="section-title">🃏 Flashcards</h2>
+      <p class="center">Nhấp thẻ để lật và học nghĩa, IPA, từ đồng nghĩa hoặc trái nghĩa.</p>
+      <p class="center" id="flashCount"></p>
+      <div id="flashcard" class="flashcard" tabindex="0" role="button" aria-label="Lật thẻ từ vựng"></div>
+      <div class="controls">
+        <button class="btn secondary" id="prevFlashBtn">← Trước</button>
+        <button class="btn secondary" id="flipFlashBtn">🔄 Lật thẻ</button>
+        <button class="btn" id="nextFlashBtn">Tiếp →</button>
+      </div>
+      <div class="controls">
+        <button class="btn secondary" id="shuffleFlashBtn">🔀 Trộn thẻ</button>
+        <button class="btn good" id="finishStudyBtn">✓ Hoàn thành ôn tập</button>
+      </div>
+      <p id="studyFeedback" class="center"></p>
+    </div>
+  </div>
+</section>
+
+<footer>© Test 03 – Reading Q11–15 • Giáo viên thiết kế: Ms.Duyen • Offline Learning App</footer>
+</div>
+
+<script>
+"use strict";
+
+/* ==========================================================
+   ORIGINAL READING TEXT
+   The source wording is preserved, including "music TRUON
+   projects", which appears in the supplied material.
+   ========================================================== */
+
+const passageOriginal = `Fast food chains and international restaurants have become popular, offering a wide range of dishes and more food choices to local people. For example, here in Viet Nam, (11) ______. Moreover, some international dishes use local ingredients, which make them unique and more suitable to local tastes. On the other hand, Vietnamese specialties, such as pho and banh mi, (12) ______.
+
+Thanks to globalisation, (13) ______. People nowadays enjoy listening to music from different countries and cultures, and in different languages. For example, American teens are captivated by K-pop music and dance. There are also many music festivals around the globe (14) ______. In today's connected world, it is very common for musicians across the world to work on music TRUON projects and share ideas together.
+
+Globalisation has also impacted fashion by opening it up to a variety of styles and influences from around the world. (15) ______. This presents opportunities for fashion designers to be creative and reflect the cultural richness of the world. It is now easier for people to keep up with fashion trends from different cultures and regions, and express their identities in new and exciting ways.`;
+
+const questions = [
+{
+  number:11,
+  options:[
+    "we can enjoy Italian pizza or Japanese sushi, in addition, our traditional food",
+    "in addition, we can enjoy Italian pizza or Japanese sushi and our traditional food",
+    "in addition to our traditional food that we can enjoy Italian pizza or Japanese sushi",
+    "we can enjoy Italian pizza or Japanese sushi, in addition to our traditional food"
+  ],
+  answer:3,
+  meanings:[
+    "Chúng ta có thể thưởng thức pizza Ý hoặc sushi Nhật, ngoài ra, món ăn truyền thống của chúng ta. (Cách nối câu không đúng.)",
+    "Ngoài ra, chúng ta có thể thưởng thức pizza Ý hoặc sushi Nhật và món ăn truyền thống của mình. (Chưa thể hiện chính xác quan hệ bổ sung trong ngữ cảnh.)",
+    "Ngoài món ăn truyền thống của chúng ta mà chúng ta có thể thưởng thức pizza Ý hoặc sushi Nhật. (Cấu trúc sai.)",
+    "Chúng ta có thể thưởng thức pizza Ý hoặc sushi Nhật, bên cạnh những món ăn truyền thống của mình."
+  ],
+  reason:"Đáp án D hoàn thành câu bằng một mệnh đề đầy đủ: chủ ngữ 'we', động từ khuyết thiếu 'can' và động từ chính 'enjoy'. Cụm 'in addition to our traditional food' bổ sung đối tượng được thưởng thức và phù hợp với nội dung đa dạng hóa lựa chọn ẩm thực.",
+  analysis:[
+    "A: 'in addition' là trạng từ nối ý; cách đặt giữa các cụm ở đây tạo cấu trúc thiếu mạch lạc.",
+    "B: Có cấu trúc câu cơ bản nhưng 'in addition' đứng đầu câu chưa diễn đạt rõ ý 'ngoài các món ăn truyền thống' như D.",
+    "C: 'in addition to' cần đi với danh từ/cụm danh từ; phần 'that we can enjoy...' tạo cấu trúc không hoàn chỉnh.",
+    "D: Đúng ngữ pháp, logic và cách dùng 'in addition to + noun phrase'."
+  ],
+  phrases:["a wide range of dishes","in addition to","local ingredients"],
+  grammar:"in addition to + noun / noun phrase / V-ing; can + V nguyên mẫu.",
+  encouragement:"Bạn làm được! Hãy chú ý cấu trúc nối ý."
+},
+{
+  number:12,
+  options:[
+    "are also gaining popularity worldwide.",
+    "which are also gaining popularity worldwide.",
+    "also gaining popularity worldwide.",
+    "which is also gaining popularity worldwide."
+  ],
+  answer:0,
+  meanings:[
+    "Cũng đang ngày càng trở nên phổ biến trên toàn thế giới.",
+    "Mà cũng đang ngày càng trở nên phổ biến trên toàn thế giới.",
+    "Cũng đang ngày càng trở nên phổ biến trên toàn thế giới. (Thiếu trợ động từ.)",
+    "Mà cũng đang ngày càng trở nên phổ biến trên toàn thế giới. (Sai hòa hợp chủ ngữ – động từ.)"
+  ],
+  reason:"Chủ ngữ là 'Vietnamese specialties', số nhiều, được bổ nghĩa bởi 'such as pho and banh mi'. Câu cần vị ngữ chính 'are also gaining popularity worldwide'.",
+  analysis:[
+    "A: Đúng. 'are gaining' là thì hiện tại tiếp diễn, phù hợp với chủ ngữ số nhiều.",
+    "B: 'which' biến phần sau thành mệnh đề quan hệ, khiến câu thiếu vị ngữ chính.",
+    "C: Thiếu 'are' trong cấu trúc hiện tại tiếp diễn.",
+    "D: Có 'which' không cần thiết và 'is' không hòa hợp với chủ ngữ số nhiều."
+  ],
+  phrases:["Vietnamese specialties","gain popularity","worldwide"],
+  grammar:"Present continuous: S + am/is/are + V-ing. Chủ ngữ số nhiều dùng 'are'.",
+  encouragement:"Rất tốt! Hãy xác định chủ ngữ và động từ chính."
+},
+{
+  number:13,
+  options:[
+    "people who can quickly discover new music from all over the world",
+    "new music from all over the world that people can quickly discover",
+    "new music people can quickly discover from all over the world",
+    "people can quickly discover new music from all over the world"
+  ],
+  answer:3,
+  meanings:[
+    "Những người có thể nhanh chóng khám phá âm nhạc mới từ khắp thế giới.",
+    "Âm nhạc mới từ khắp thế giới mà mọi người có thể nhanh chóng khám phá.",
+    "Âm nhạc mới mà mọi người có thể nhanh chóng khám phá từ khắp thế giới.",
+    "Mọi người có thể nhanh chóng khám phá âm nhạc mới từ khắp nơi trên thế giới."
+  ],
+  reason:"Sau 'Thanks to globalisation,' cần một mệnh đề chính hoàn chỉnh. Đáp án D có chủ ngữ 'people', động từ 'can discover' và tân ngữ 'new music'.",
+  analysis:[
+    "A: 'people who...' là cụm danh từ có mệnh đề quan hệ, chưa có vị ngữ chính.",
+    "B: Là cụm danh từ có mệnh đề quan hệ, không tạo thành câu hoàn chỉnh.",
+    "C: Là cụm danh từ có mệnh đề quan hệ rút gọn đại từ quan hệ, thiếu động từ chính của câu.",
+    "D: Đúng. S + can + V + O."
+  ],
+  phrases:["thanks to globalisation","discover new music","from all over the world"],
+  grammar:"Thanks to + noun/noun phrase, S + V + O. Can + động từ nguyên mẫu.",
+  encouragement:"Tiến bộ rồi! Tìm mệnh đề chính trước khi chọn."
+},
+{
+  number:14,
+  options:[
+    "that bring artists and music fans together",
+    "bring artists and music fans together",
+    "whose artists and music fans are brought together",
+    "which artists and music fans being brought together"
+  ],
+  answer:0,
+  meanings:[
+    "Mà kết nối các nghệ sĩ và người hâm mộ âm nhạc lại với nhau.",
+    "Kết nối các nghệ sĩ và người hâm mộ âm nhạc lại với nhau.",
+    "Mà các nghệ sĩ và người hâm mộ âm nhạc của chúng được kết nối với nhau.",
+    "Mà các nghệ sĩ và người hâm mộ âm nhạc đang được kết nối với nhau. (Cấu trúc không đúng.)"
+  ],
+  reason:"Mệnh đề chính 'There are also many music festivals around the globe' đã hoàn chỉnh. Cần mệnh đề quan hệ 'that bring artists and music fans together' bổ nghĩa cho 'music festivals'.",
+  analysis:[
+    "A: Đúng. 'that' là đại từ quan hệ làm chủ ngữ; 'bring' hòa hợp với 'festivals' số nhiều.",
+    "B: Thiếu đại từ quan hệ để nối phần bổ nghĩa với danh từ 'festivals'.",
+    "C: 'whose' diễn tả sở hữu, không phù hợp với ý nghĩa và cách diễn đạt mong muốn.",
+    "D: 'which ... being brought' thiếu cấu trúc động từ hữu hạn thích hợp."
+  ],
+  phrases:["music festivals","around the globe","bring ... together"],
+  grammar:"Relative clause: plural noun + that/which + plural verb.",
+  encouragement:"Xuất sắc! Chú ý mệnh đề quan hệ bổ nghĩa cho danh từ."
+},
+{
+  number:15,
+  options:[
+    "Cross-cultural styles, both traditional and modern elements’ blending, are on the rise",
+    "Cross-cultural styles that blend both traditional and modern elements are on the rise",
+    "Cross-cultural styles to blend both traditional and modern elements are on the rise",
+    "Whose cross-cultural styles, blend both traditional and modern elements, are on the rise"
+  ],
+  answer:1,
+  meanings:[
+    "Các phong cách giao thoa văn hóa, sự pha trộn của cả yếu tố truyền thống và hiện đại, đang gia tăng. (Diễn đạt không tự nhiên.)",
+    "Các phong cách giao thoa văn hóa kết hợp cả yếu tố truyền thống lẫn hiện đại đang ngày càng phổ biến.",
+    "Các phong cách giao thoa văn hóa để kết hợp cả yếu tố truyền thống và hiện đại đang gia tăng. (Quan hệ ý nghĩa chưa phù hợp.)",
+    "Những phong cách giao thoa văn hóa của ai đó, kết hợp cả yếu tố truyền thống và hiện đại, đang gia tăng. (Cấu trúc sai.)"
+  ],
+  reason:"Đáp án B có chủ ngữ 'Cross-cultural styles', mệnh đề quan hệ xác định 'that blend both traditional and modern elements' và vị ngữ 'are on the rise'.",
+  analysis:[
+    "A: Cụm 'both traditional and modern elements’ blending' diễn đạt vụng và không tạo mệnh đề quan hệ phù hợp.",
+    "B: Đúng. 'that blend...' xác định loại phong cách đang ngày càng phổ biến.",
+    "C: 'to blend' diễn tả mục đích, không diễn đạt chính xác đặc điểm của các phong cách như ngữ cảnh yêu cầu.",
+    "D: 'Whose' không thể đứng đầu câu theo cấu trúc này; dấu phẩy và cách nối các thành phần cũng không đúng."
+  ],
+  phrases:["cross-cultural styles","traditional and modern elements","on the rise"],
+  grammar:"Defining relative clause: N + that + V. Both A and B; be on the rise.",
+  encouragement:"Câu cuối rồi! Hãy chú ý cấu trúc và ý nghĩa."
+}
+];
+
+/* ==========================================================
+   VIETNAMESE TRANSLATION
+   Original "TRUON" is retained and explicitly noted.
+   ========================================================== */
+const translationHTML = `
+<h3>🇻🇳 Bản dịch bài đọc hoàn chỉnh</h3>
+<p>Các chuỗi cửa hàng thức ăn nhanh và nhà hàng quốc tế đã trở nên phổ biến, cung cấp nhiều món ăn đa dạng và mang đến nhiều lựa chọn ẩm thực hơn cho người dân địa phương. Ví dụ, ở Việt Nam, chúng ta có thể thưởng thức pizza Ý hoặc sushi Nhật Bản, bên cạnh những món ăn truyền thống của mình. Hơn nữa, một số món ăn quốc tế sử dụng nguyên liệu địa phương, khiến chúng trở nên độc đáo và phù hợp hơn với khẩu vị của người dân bản địa. Mặt khác, các món đặc sản Việt Nam như phở và bánh mì cũng đang ngày càng được yêu thích trên toàn thế giới.</p>
+<p>Nhờ toàn cầu hóa, mọi người có thể nhanh chóng khám phá âm nhạc mới từ khắp nơi trên thế giới. Ngày nay, mọi người thích nghe nhạc từ nhiều quốc gia, nền văn hóa và bằng nhiều ngôn ngữ khác nhau. Ví dụ, thanh thiếu niên Mỹ bị cuốn hút bởi âm nhạc và vũ đạo K-pop. Ngoài ra, trên khắp thế giới còn có nhiều lễ hội âm nhạc kết nối các nghệ sĩ và người hâm mộ lại với nhau. Trong thế giới kết nối ngày nay, việc các nhạc sĩ trên toàn thế giới cùng thực hiện các dự án âm nhạc và chia sẻ ý tưởng với nhau là điều rất phổ biến.</p>
+<p>Toàn cầu hóa cũng tác động đến thời trang bằng cách mở ra nhiều phong cách và ảnh hưởng đa dạng từ khắp thế giới. Những phong cách giao thoa văn hóa kết hợp cả yếu tố truyền thống lẫn hiện đại đang ngày càng phổ biến. Điều này tạo cơ hội cho các nhà thiết kế thời trang sáng tạo và phản ánh sự phong phú về văn hóa của thế giới. Giờ đây, mọi người dễ dàng cập nhật các xu hướng thời trang từ nhiều nền văn hóa và khu vực khác nhau, đồng thời thể hiện bản sắc của mình theo những cách mới mẻ và thú vị.</p>
+<p class="small"><strong>Lưu ý về tài liệu gốc:</strong> Cụm "music TRUON projects" xuất hiện nguyên văn trong đề được cung cấp. Bản dịch diễn đạt theo ý nghĩa chung của ngữ cảnh, không xem "TRUON" là một từ vựng tiếng Anh cần học.</p>`;
+
+/* ==========================================================
+   VOCABULARY: 10 PHRASES FROM THE READING PASSAGE
+   ========================================================== */
+const vocabulary = [
+ {en:"fast food chains",ipa:"/ˌfɑːst ˈfuːd tʃeɪnz/",vi:"các chuỗi cửa hàng thức ăn nhanh",syn:"fast-food restaurant chains",ant:""},
+ {en:"a wide range of dishes",ipa:"/ə waɪd reɪndʒ əv ˈdɪʃɪz/",vi:"nhiều món ăn đa dạng",syn:"a variety of dishes",ant:"a limited selection"},
+ {en:"local ingredients",ipa:"/ˈləʊkəl ɪnˈɡriːdiənts/",vi:"nguyên liệu địa phương",syn:"ingredients from the local area",ant:"imported ingredients"},
+ {en:"local tastes",ipa:"/ˈləʊkəl teɪsts/",vi:"khẩu vị địa phương",syn:"local preferences",ant:""},
+ {en:"gain popularity",ipa:"/ɡeɪn ˌpɒpjʊˈlærəti/",vi:"trở nên phổ biến hơn",syn:"become more popular",ant:"lose popularity"},
+ {en:"discover new music",ipa:"/dɪˈskʌvə njuː ˈmjuːzɪk/",vi:"khám phá âm nhạc mới",syn:"find new music",ant:""},
+ {en:"music festivals",ipa:"/ˈmjuːzɪk ˈfestɪvəlz/",vi:"các lễ hội âm nhạc",syn:"music events",ant:""},
+ {en:"share ideas",ipa:"/ʃeər aɪˈdɪəz/",vi:"chia sẻ ý tưởng",syn:"exchange ideas",ant:"keep ideas to oneself"},
+ {en:"fashion trends",ipa:"/ˈfæʃən trendz/",vi:"các xu hướng thời trang",syn:"popular fashion styles",ant:""},
+ {en:"express their identities",ipa:"/ɪkˈspres ðeər aɪˈdentətiz/",vi:"thể hiện bản sắc của họ",syn:"show who they are",ant:"hide their identities"}
+];
+
+/* ==========================================================
+   STATE
+   ========================================================== */
+const $ = id => document.getElementById(id);
+const LETTERS = ["A","B","C","D"];
+const TOTAL_SECONDS = 50*60;
+const STORAGE_KEY = "msduyen_test03_reading_11_15_v1";
+
+let state = {
+  name:"",className:"",answers:Array(5).fill(null),
+  index:0,remaining:TOTAL_SECONDS,finished:false,
+  startedAt:null,deadline:null
+};
+let timerInterval = null;
+let soundEnabled = true;
+let audioContext = null;
+let selectedOption = null;
+let translationOpen = false;
+let explanationOpen = false;
+let flashIndex = 0;
+let flashFlipped = false;
+let flashOrder = [...Array(10).keys()];
+let matchLeft = null;
+let matchRight = null;
+let matched = new Set();
+let matchingOrder = [];
+
+/* ==========================================================
+   UTILITIES
+   ========================================================== */
+function escapeHTML(s){
+  return String(s).replace(/[&<>"']/g,c=>({
+    "&":"&amp;","<":"&lt;",">":"&gt;",
+    '"':"&quot;","'":"&#39;"
+  })[c]);
+}
+
+function showScreen(id){
+  ["startScreen","quizScreen","resultScreen","studyScreen"]
+    .forEach(x=>$(x).classList.toggle("hidden",x!==id));
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function save(){
+  try{
+    localStorage.setItem(STORAGE_KEY,JSON.stringify(state));
+  }catch(e){}
+}
+
+function clearSaved(){
+  try{localStorage.removeItem(STORAGE_KEY)}catch(e){}
+}
+
+function playSound(success=true){
+  if(!soundEnabled)return;
+  try{
+    const AudioCtx=window.AudioContext||window.webkitAudioContext;
+    if(!AudioCtx)return;
+    if(!audioContext)audioContext=new AudioCtx();
+    if(audioContext.state==="suspended")audioContext.resume();
+    const now=audioContext.currentTime;
+    const tones=success?[523.25,659.25,783.99]:[330,277.18];
+    tones.forEach((frequency,i)=>{
+      const oscillator=audioContext.createOscillator();
+      const gain=audioContext.createGain();
+      oscillator.type="sine";
+      oscillator.frequency.value=frequency;
+      const t=now+i*.11;
+      gain.gain.setValueAtTime(.0001,t);
+      gain.gain.exponentialRampToValueAtTime(.065,t+.015);
+      gain.gain.exponentialRampToValueAtTime(.0001,t+.18);
+      oscillator.connect(gain);
+      gain.connect(audioContext.destination);
+      oscillator.start(t);
+      oscillator.stop(t+.19);
+    });
+  }catch(e){}
+}
+
+function correctCount(){
+  return state.answers.reduce(
+    (sum,a,i)=>sum+(a===questions[i].answer?1:0),0
+  );
+}
+
+function answeredCount(){
+  return state.answers.filter(x=>x!==null).length;
+}
+
+function formatTime(seconds){
+  const m=Math.floor(Math.max(0,seconds)/60);
+  const s=Math.max(0,seconds)%60;
+  return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+function renderTimer(){
+  $("timer").textContent="⏱ "+formatTime(state.remaining);
+  $("timer").classList.toggle("urgent",state.remaining<=300);
+}
+
+function updateProgress(){
+  const done=answeredCount();
+  $("progressText").textContent="Đã trả lời: "+done+"/5";
+  $("scoreText").textContent="Số câu đúng: "+correctCount();
+  $("progressFill").style.width=(done/5*100)+"%";
+}
+
+function renderPassage(){
+  const filled=passageOriginal.replace(
+    /\((11|12|13|14|15)\) ______/g,
+    (full,n)=>{
+      const i=Number(n)-11;
+      const a=state.answers[i];
+      const content=a===null
+        ?"______"
+        :questions[i].options[a];
+      return `<span class="blank">(${n}) ${escapeHTML(content)}</span>`;
+    }
+  );
+  $("passage").innerHTML=filled
+    .split("\n\n")
+    .map(p=>"<p>"+p+"</p>").join("");
+}
+
+function renderQuestion(){
+  const i=state.index;
+  const q=questions[i];
+  const answered=state.answers[i]!==null;
+  selectedOption=null;
+  explanationOpen=false;
+
+  $("questionCounter").textContent="Question "+q.number+" / 15";
+  $("questionTitle").textContent="Question "+q.number+".";
+  $("encouragement").textContent="🌟 "+q.encouragement;
+  $("options").innerHTML="";
+  $("feedbackArea").innerHTML="";
+  $("explanation").classList.add("hidden");
+
+  q.options.forEach((option,j)=>{
+    const button=document.createElement("button");
+    button.type="button";
+    button.className="option";
+    button.innerHTML="<strong>"+LETTERS[j]+".</strong> "+
+      escapeHTML(option);
+
+    if(answered){
+      button.disabled=true;
+      if(j===q.answer)button.classList.add("correct");
+      if(j===state.answers[i]&&j!==q.answer)
+        button.classList.add("incorrect");
+    }else{
+      button.addEventListener("click",()=>selectAnswer(j));
+    }
+
+    $("options").appendChild(button);
+
+    const meaning=document.createElement("div");
+    meaning.className="meaning hidden";
+    meaning.id="meaning"+j;
+    meaning.textContent="🇻🇳 "+q.meanings[j];
+    $("options").appendChild(meaning);
+
+    if(answered)meaning.classList.remove("hidden");
+  });
+
+  if(answered){
+    const right=state.answers[i]===q.answer;
+    $("feedbackArea").innerHTML=`
+      <div class="feedback ${right?"ok":"no"}">
+      ${right
+        ?"✅ Chính xác! Bạn đã chọn đáp án đúng."
+        :"❌ Chưa chính xác. Đáp án đúng là "+LETTERS[q.answer]+"."}
+      </div>`;
+  }
+
+  $("correctAnswerBtn").disabled=!answered;
+  $("nextBtn").disabled=!answered;
+  $("nextBtn").textContent=i===4?"🏁 Hoàn thành":"Câu tiếp theo →";
+  renderPassage();
+  updateProgress();
+}
+
+function selectAnswer(j){
+  const i=state.index;
+  if(state.answers[i]!==null||state.finished)return;
+
+  if(selectedOption!==j){
+    selectedOption=j;
+    document.querySelectorAll("#options .option")
+      .forEach((el,k)=>el.classList.toggle("selected",k===j));
+    for(let k=0;k<4;k++){
+      $("meaning"+k).classList.toggle("hidden",k!==j);
+    }
+    return;
+  }
+
+  state.answers[i]=j;
+  save();
+  playSound(j===questions[i].answer);
+  renderQuestion();
+}
+
+function buildExplanation(q,chosen){
+  return `
+    <h3>📘 Correct Answer: ${LETTERS[q.answer]}</h3>
+    <p><strong>Giải thích:</strong> ${escapeHTML(q.reason)}</p>
+    <h4>Phân tích từng phương án</h4>
+    ${q.analysis.map((a,i)=>`
+      <p><strong>${LETTERS[i]}.</strong> ${escapeHTML(a)}
+      ${chosen===i?" <strong>← Bạn đã chọn</strong>":""}</p>
+      <p class="small">🇻🇳 ${escapeHTML(q.meanings[i])}</p>
+    `).join("")}
+    <h4>📚 Cụm từ cần học</h4>
+    <p>${q.phrases.map(escapeHTML).join(" • ")}</p>
+    <h4>📝 Ngữ pháp cần nhớ</h4>
+    <p>${escapeHTML(q.grammar)}</p>
+  `;
+}
+
+function nextQuestion(){
+  if(state.answers[state.index]===null)return;
+  if(state.index===4){
+    finishTest();
+  }else{
+    state.index++;
+    save();
+    renderQuestion();
+    window.scrollTo({top:0,behavior:"smooth"});
+  }
+}
+
+function checkAnswers(){
+  const missing=[];
+  for(let i=0;i<5;i++){
+    if(state.answers[i]===null)missing.push(i+11);
+  }
+  if(missing.length){
+    alert("Bạn chưa hoàn thành câu: "+missing.join(", ")+
+      ". Hãy trả lời tất cả trước khi nộp bài.");
+    const first=missing[0]-11;
+    state.index=first;
+    save();
+    renderQuestion();
+    return;
+  }
+  finishTest();
+}
+
+/* ==========================================================
+   TIMER
+   ========================================================== */
+function startTimer(){
+  stopTimer();
+  if(!state.deadline){
+    state.deadline=Date.now()+state.remaining*1000;
+  }
+  renderTimer();
+
+  timerInterval=setInterval(()=>{
+    if(state.finished){stopTimer();return}
+    state.remaining=Math.max(
+      0,Math.ceil((state.deadline-Date.now())/1000)
+    );
+    renderTimer();
+    if(state.remaining<=0){
+      stopTimer();
+      finishTest(true);
+    }
+  },500);
+}
+
+function stopTimer(){
+  if(timerInterval!==null){
+    clearInterval(timerInterval);
+    timerInterval=null;
+  }
+}
+
+/* ==========================================================
+   START, FINISH, RESET
+   ========================================================== */
+function startTest(){
+  const name=$("studentName").value.trim();
+  const className=$("studentClass").value;
+  if(!name||!className){
+    $("startError").textContent=
+      "Vui lòng nhập họ tên và chọn lớp trước khi bắt đầu.";
+    return;
+  }
+  $("startError").textContent="";
+  state={
+    name,className,answers:Array(5).fill(null),
+    index:0,remaining:TOTAL_SECONDS,
+    finished:false,startedAt:Date.now(),
+    deadline:Date.now()+TOTAL_SECONDS*1000
+  };
+  translationOpen=false;
+  $("translation").classList.add("hidden");
+  $("studentInfo").textContent=name+" • "+className;
+  save();
+  showScreen("quizScreen");
+  renderQuestion();
+  startTimer();
+  playSound(true);
+}
+
+function finishTest(timedOut=false){
+  if(state.finished)return;
+  stopTimer();
+  if(state.deadline){
+    state.remaining=Math.max(
+      0,Math.ceil((state.deadline-Date.now())/1000)
+    );
+  }
+  if(timedOut)state.remaining=0;
+  state.finished=true;
+  state.deadline=null;
+  save();
+  renderResults();
+  showScreen("resultScreen");
+  playSound(correctCount()>=4);
+}
+
+function renderResults(){
+  const correct=correctCount();
+  const score=(correct/5*10).toFixed(2);
+  const passed=correct/5>.70;
+
+  $("resultName").textContent=state.name+" – "+state.className;
+  $("finalScore").textContent=score+"/10";
+  $("resultDetails").textContent=
+    "Đúng "+correct+"/5 câu • "+(correct*20)+"% • "+
+    "Thời gian còn lại: "+formatTime(state.remaining);
+
+  $("resultComment").textContent=
+    correct===5?"🌟 Excellent! Hoàn thành xuất sắc!":
+    correct===4?"🎉 Very good! Bạn đã đạt yêu cầu!":
+    correct===3?"💪 Good effort! Hãy ôn lại những câu còn sai.":
+    correct>=1?"🌱 Keep going! Mỗi lần luyện tập là một bước tiến.":
+    "📚 Đừng bỏ cuộc! Hãy xem lại lời giải và thử lần nữa.";
+
+  $("reviewList").innerHTML=questions.map((q,i)=>{
+    const a=state.answers[i];
+    const right=a===q.answer;
+    return `
+      <details style="border-bottom:1px solid var(--border);padding:12px 0">
+        <summary style="cursor:pointer;font-weight:bold">
+          Question ${q.number} –
+          ${a===null?"Chưa trả lời":
+            "Bạn chọn "+LETTERS[a]} –
+          ${right?"✅ Đúng":"❌ Sai"}
+        </summary>
+        ${buildExplanation(q,a)}
+      </details>`;
+  }).join("");
+
+  $("certificate").classList.toggle("hidden",!passed);
+  $("printCertBtn").classList.toggle("hidden",!passed);
+
+  if(passed){
+    $("certName").textContent=state.name;
+    $("certClass").textContent="Class: "+state.className;
+    $("certScore").textContent=
+      "Achievement: "+correct+"/5 correct answers • Score: "+score+"/10";
+    const d=new Date();
+    $("certDate").textContent=
+      "Date: "+d.toLocaleDateString("vi-VN");
+    $("certId").textContent=
+      "Certificate ID: RD03-"+state.startedAt;
+  }
+}
+
+function resetTest(){
+  if(!confirm("Bạn có chắc muốn làm lại? Kết quả hiện tại sẽ bị xóa."))return;
+  stopTimer();
+  clearSaved();
+  state={
+    name:"",className:"",answers:Array(5).fill(null),
+    index:0,remaining:TOTAL_SECONDS,finished:false,
+    startedAt:null,deadline:null
+  };
+  $("studentName").value="";
+  $("studentClass").value="";
+  $("startError").textContent="";
+  showScreen("startScreen");
+}
+
+/* ==========================================================
+   MATCHING GAME
+   ========================================================== */
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function startMatching(){
+  matched=new Set();
+  matchLeft=null;
+  matchRight=null;
+  matchingOrder=shuffle([...Array(10).keys()]);
+  renderMatching();
+}
+
+function renderMatching(){
+  $("matchProgress").textContent=matched.size+"/10 cặp đúng";
+  $("englishMatches").innerHTML="";
+  $("vietnameseMatches").innerHTML="";
+
+  vocabulary.forEach((v,i)=>{
+    const b=document.createElement("button");
+    b.className="match-item";
+    b.textContent=(i+1)+". "+v.en;
+    b.disabled=matched.has(i);
+    if(matched.has(i))b.classList.add("matched");
+    if(matchLeft===i)b.classList.add("active");
+    b.addEventListener("click",()=>{
+      matchLeft=i;
+      tryMatch();
+      renderMatching();
+    });
+    $("englishMatches").appendChild(b);
+  });
+
+  matchingOrder.forEach((i,pos)=>{
+    const b=document.createElement("button");
+    b.className="match-item";
+    b.textContent=String.fromCharCode(65+pos)+". "+vocabulary[i].vi;
+    b.disabled=matched.has(i);
+    if(matched.has(i))b.classList.add("matched");
+    if(matchRight===i)b.classList.add("active");
+    b.addEventListener("click",()=>{
+      matchRight=i;
+      tryMatch();
+      renderMatching();
+    });
+    $("vietnameseMatches").appendChild(b);
+  });
+}
+
+function tryMatch(){
+  if(matchLeft===null||matchRight===null)return;
+
+  if(matchLeft===matchRight){
+    matched.add(matchLeft);
+    $("matchFeedback").textContent=
+      matched.size===10
+      ?"🏆 Tuyệt vời! Bạn đã nối đúng cả 10 cụm từ!"
+      :"✅ Chính xác! Tiếp tục nhé!";
+    playSound(true);
+  }else{
+    $("matchFeedback").textContent=
+      "💡 Chưa khớp. Hãy thử lại một cặp khác.";
+    playSound(false);
+  }
+  matchLeft=null;
+  matchRight=null;
+}
+
+/* ==========================================================
+   FLASHCARDS
+   ========================================================== */
+function renderFlashcard(){
+  const v=vocabulary[flashOrder[flashIndex]];
+  $("flashCount").textContent=
+    "Thẻ "+(flashIndex+1)+"/10";
+
+  if(!flashFlipped){
+    $("flashcard").innerHTML=`
+      <div class="term">${escapeHTML(v.en)}</div>
+      <div class="ipa">${escapeHTML(v.ipa)}</div>
+      <p class="small">Nhấp để xem nghĩa và cách dùng</p>`;
+  }else{
+    $("flashcard").innerHTML=`
+      <div class="term">${escapeHTML(v.en)}</div>
+      <div class="ipa">${escapeHTML(v.ipa)}</div>
+      <div class="definition">🇻🇳 ${escapeHTML(v.vi)}</div>
+      <p><strong>Synonym / Equivalent:</strong>
+      ${escapeHTML(v.syn||"Không có trong bộ ôn tập")}</p>
+      ${v.ant?`<p><strong>Antonym / Contrast:</strong>
+      ${escapeHTML(v.ant)}</p>`:""}`;
+  }
+}
+
+function flipFlash(){
+  flashFlipped=!flashFlipped;
+  renderFlashcard();
+}
+
+function moveFlash(direction){
+  flashIndex=(flashIndex+direction+10)%10;
+  flashFlipped=false;
+  renderFlashcard();
+}
+
+function openStudy(){
+  showScreen("studyScreen");
+  startMatching();
+  flashIndex=0;
+  flashFlipped=false;
+  flashOrder=[...Array(10).keys()];
+  $("studyFeedback").textContent="";
+  $("matchFeedback").textContent="";
+  renderFlashcard();
+}
+
+/* ==========================================================
+   EVENTS
+   ========================================================== */
+$("startBtn").addEventListener("click",startTest);
+$("nextBtn").addEventListener("click",nextQuestion);
+$("checkBtn").addEventListener("click",checkAnswers);
+$("resetBtn").addEventListener("click",resetTest);
+$("resultResetBtn").addEventListener("click",resetTest);
+
+$("correctAnswerBtn").addEventListener("click",()=>{
+  if(state.answers[state.index]===null)return;
+  explanationOpen=!explanationOpen;
+  $("explanation").classList.toggle("hidden",!explanationOpen);
+  if(explanationOpen){
+    $("explanation").innerHTML=buildExplanation(
+      questions[state.index],state.answers[state.index]
+    );
+    $("explanation").scrollIntoView({
+      behavior:"smooth",block:"nearest"
+    });
+  }
+});
+
+$("translateBtn").addEventListener("click",()=>{
+  translationOpen=!translationOpen;
+  $("translation").classList.toggle("hidden",!translationOpen);
+  if(translationOpen){
+    $("translation").innerHTML=translationHTML;
+    $("translateBtn").textContent="📕 Ẩn bản dịch tiếng Việt";
+  }else{
+    $("translateBtn").textContent="🌐 Dịch bài đọc sang tiếng Việt";
+  }
+});
+
+$("reviewBtn").addEventListener("click",()=>{
+  $("reviewList").scrollIntoView({behavior:"smooth"});
+  $("reviewList").querySelectorAll("details").forEach(d=>d.open=true);
+});
+
+$("studyBtn").addEventListener("click",openStudy);
+$("backStudyBtn").addEventListener("click",()=>{
+  showScreen("resultScreen");
+});
+$("resetMatchBtn").addEventListener("click",()=>{
+  $("matchFeedback").textContent="";
+  startMatching();
+});
+
+$("flashcard").addEventListener("click",flipFlash);
+$("flashcard").addEventListener("keydown",e=>{
+  if(e.key==="Enter"||e.key===" "){
+    e.preventDefault();flipFlash();
+  }
+});
+$("flipFlashBtn").addEventListener("click",flipFlash);
+$("prevFlashBtn").addEventListener("click",()=>moveFlash(-1));
+$("nextFlashBtn").addEventListener("click",()=>moveFlash(1));
+$("shuffleFlashBtn").addEventListener("click",()=>{
+  flashOrder=shuffle(flashOrder);
+  flashIndex=0;
+  flashFlipped=false;
+  renderFlashcard();
+});
+$("finishStudyBtn").addEventListener("click",()=>{
+  $("studyFeedback").textContent=
+    "🎉 Hoàn thành phần ôn tập! Hãy tiếp tục luyện tập để ghi nhớ lâu hơn.";
+  playSound(true);
+});
+$("printCertBtn").addEventListener("click",()=>window.print());
+
+$("themeSelect").addEventListener("change",e=>{
+  const theme=e.target.value;
+  document.body.dataset.theme=theme;
+  try{localStorage.setItem("msduyen_theme",theme)}catch(e){}
+});
+
+$("soundBtn").addEventListener("click",()=>{
+  soundEnabled=!soundEnabled;
+  $("soundBtn").textContent=
+    soundEnabled?"🔊 Âm thanh: Bật":"🔇 Âm thanh: Tắt";
+});
+
+/* ==========================================================
+   KEYBOARD SUPPORT
+   A/B/C/D: reveal meaning first, second press confirms.
+   ========================================================== */
+document.addEventListener("keydown",e=>{
+  if($("quizScreen").classList.contains("hidden"))return;
+  if(["INPUT","SELECT","TEXTAREA","BUTTON"].includes(
+    document.activeElement.tagName
+  ))return;
+  const k=e.key.toUpperCase();
+  if(["A","B","C","D"].includes(k)){
+    selectAnswer(LETTERS.indexOf(k));
+  }else if(k==="ENTER"){
+    if(state.answers[state.index]!==null)nextQuestion();
+  }
+});
+
+/* ==========================================================
+   RESTORE PROGRESS
+   ========================================================== */
+function init(){
+  try{
+    const theme=localStorage.getItem("msduyen_theme");
+    if(["blue","mint","rose","gold","dark"].includes(theme)){
+      document.body.dataset.theme=theme;
+      $("themeSelect").value=theme;
+    }
+  }catch(e){}
+
+  try{
+    const saved=JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if(saved&&saved.name&&saved.className&&
+       Array.isArray(saved.answers)&&saved.answers.length===5){
+      state=saved;
+      $("studentName").value=state.name;
+      $("studentClass").value=state.className;
+      $("studentInfo").textContent=
+        state.name+" • "+state.className;
+
+      if(state.finished){
+        renderResults();
+        showScreen("resultScreen");
+      }else{
+        if(state.deadline){
+          state.remaining=Math.max(
+            0,Math.ceil((state.deadline-Date.now())/1000)
+          );
+        }
+        if(state.remaining<=0){
+          finishTest(true);
+        }else{
+          state.index=Math.max(0,Math.min(4,state.index||0));
+          showScreen("quizScreen");
+          renderQuestion();
+          startTimer();
+        }
+      }
+    }
+  }catch(e){
+    console.warn("Could not restore progress",e);
+  }
+}
+
+init();
+</script>
+</body>
+</html>

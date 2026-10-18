@@ -1,0 +1,459 @@
+﻿
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Test 01 – Reading Q19-24 | Ms.Duyen</title>
+<style>
+:root{--bg:#edf3ff;--panel:#fff;--ink:#17243e;--muted:#52617b;--accent:#315bc8;--soft:#e8efff;--line:#d5deef;--good:#126a45;--bad:#a32e3c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,"Segoe UI",sans-serif;transition:background .3s}
+button,input,select{font:inherit}
+button{cursor:pointer;border:0;border-radius:12px;padding:11px 17px;font-weight:700;background:var(--accent);color:white}
+button:hover:not(:disabled){filter:brightness(1.08)}
+button:disabled{opacity:.55;cursor:not-allowed}
+button:focus-visible,input:focus-visible{outline:3px solid #f5ad35;outline-offset:2px}
+.secondary{background:var(--soft);color:var(--ink);border:1px solid var(--line)}
+.danger{background:#a32e3c}
+.shell{max-width:1250px;margin:auto;padding:20px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:24px;box-shadow:0 8px 25px #152c6010}
+.hidden{display:none!important}
+.script{font-family:"Brush Script MT","Segoe Script",Georgia,serif;font-style:italic;letter-spacing:.4px}
+h1{font-size:clamp(34px,5vw,65px);line-height:1.2;color:var(--accent);margin:12px 0}
+h2{font-size:25px;line-height:1.3}
+h3{margin:14px 0 8px}
+p{margin:10px 0}
+.center{text-align:center}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+.hero{max-width:800px;margin:45px auto;text-align:center;padding:42px}
+.eyebrow{font-size:13px;letter-spacing:2px;text-transform:uppercase;font-weight:800;color:var(--accent)}
+input{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;background:var(--panel);color:var(--ink)}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:25px 0;text-align:left}
+label{display:block;font-weight:700;margin-bottom:6px}
+.topbar{display:flex;gap:12px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:15px}
+.controls{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.theme{width:31px;height:31px;border-radius:50%;border:2px solid #71809b;padding:0}
+.timer{font-weight:900;font-size:20px;font-variant-numeric:tabular-nums}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:15px 0}
+.tabs button{font-size:14px}
+.layout{display:grid;grid-template-columns:1.12fr 1fr;gap:18px;align-items:start}
+.passage{max-height:75vh;overflow:auto}
+.passage p{text-align:justify;margin-bottom:17px}
+mark{background:#fff0a7;color:#17243e;border-radius:3px}
+.option{display:block;width:100%;text-align:left;background:var(--panel);color:var(--ink);border:2px solid var(--line);padding:13px;margin:9px 0;line-height:1.5}
+.option.selected{border-color:var(--accent);background:var(--soft)}
+.option.correct{border-color:var(--good);background:#e2f7eb;color:#104e34}
+.option.wrong{border-color:var(--bad);background:#ffebed;color:#842332}
+.feedback{padding:15px;border-radius:12px;background:var(--soft);margin:15px 0}
+.explanation{border-left:4px solid var(--accent);padding:12px 16px;background:var(--soft);border-radius:8px;margin-top:12px}
+.nav{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:18px}
+.progress{height:9px;background:var(--line);border-radius:20px;overflow:hidden;margin:12px 0}
+.progress span{display:block;height:100%;background:var(--accent);transition:width .3s}
+.vocab{border-bottom:1px dotted var(--accent);cursor:pointer}
+.vocab:focus{outline:2px solid var(--accent)}
+.note{padding:13px;border-radius:12px;background:var(--soft)}
+.matchrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:center;margin:9px 0}
+.matchrow select{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:var(--panel);color:var(--ink)}
+.flash{min-height:240px;border:2px dashed var(--accent);border-radius:20px;display:flex;align-items:center;justify-content:center;text-align:center;padding:25px;cursor:pointer;background:var(--soft);flex-direction:column}
+.flash strong{font-size:25px}
+.certificate{border:7px double #b69248;background:#fffdf5;color:#283147;padding:32px;text-align:center;margin-top:20px}
+.certificate h2{font-size:38px;color:#85621e}
+.certificate .signature{font-family:"Brush Script MT",Georgia,serif;font-size:29px;font-style:italic}
+.resultnum{font-size:60px;font-weight:900;color:var(--accent)}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#17243e;color:white;padding:12px 20px;border-radius:12px;z-index:100;max-width:90%;text-align:center}
+.confetti{position:fixed;top:-20px;width:9px;height:15px;pointer-events:none;z-index:90;animation:fall 2.5s linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(700deg);opacity:0}}
+@media(max-width:800px){.layout,.fields{grid-template-columns:1fr}.passage{max-height:none}.shell{padding:10px}.panel{padding:17px}.hero{margin:15px auto;padding:25px}.matchrow{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+@media print{body{background:white}body *{visibility:hidden!important}#certificate,#certificate *{visibility:visible!important}#certificate{position:absolute;left:0;top:0;width:100%;margin:0}button{display:none!important}}
+</style>
+  <link rel="stylesheet" href="../assets/css/shared-nav.css">
+</head>
+<body>
+<div class="shell">
+<section id="start" class="panel hero">
+<div class="eyebrow">Grade 12 • Midterm I Revision</div>
+<h1 class="script">Test 01<br>Reading Q19–24</h1>
+<h2>Steve Jobs – A Creative Genius</h2>
+<p>Kiểm tra mà như chơi – chơi mà vẫn học được!</p>
+<p class="muted">6 câu hỏi • 50 phút • Giải thích song ngữ • Flashcards • Nối nghĩa</p>
+<div class="fields">
+<div><label for="student">Họ và tên</label><input id="student" placeholder="Nhập họ và tên" maxlength="80"></div>
+<div><label for="studentClass">Lớp</label><input id="studentClass" value="12A1" maxlength="20"></div>
+</div>
+<button onclick="startGame()">Bắt đầu khám phá →</button>
+<p class="small muted">Giáo viên thiết kế: Ms.Duyen</p>
+</section>
+
+<section id="game" class="hidden">
+<div class="topbar panel">
+<div><strong>Test 01 – Reading Q19–24</strong><div class="small" id="identity"></div></div>
+<div class="controls">
+<span class="timer" id="timer">50:00</span>
+<button class="secondary" onclick="toggleSound()" id="soundBtn">🔊 Âm thanh</button>
+<span class="small">Màu nền:</span>
+<button class="theme" style="background:#edf3ff" aria-label="Xanh sáng" onclick="setTheme(0)"></button>
+<button class="theme" style="background:#fff2e6" aria-label="Kem" onclick="setTheme(1)"></button>
+<button class="theme" style="background:#e9f6ee" aria-label="Xanh lá" onclick="setTheme(2)"></button>
+<button class="theme" style="background:#17243e" aria-label="Tối" onclick="setTheme(3)"></button>
+</div>
+</div>
+<div class="tabs">
+<button onclick="showTab('quiz')">📖 Reading Test</button>
+<button class="secondary" onclick="showTab('matching')">🧩 Nối nghĩa</button>
+<button class="secondary" onclick="showTab('flashcards')">🃏 Flashcards</button>
+<button class="secondary" onclick="showTab('results')">🏆 Kết quả</button>
+</div>
+<div id="quiz" class="tab">
+<div class="layout">
+<article class="panel passage">
+<div class="eyebrow">Reading passage</div>
+<h2>Steve Jobs</h2>
+<div id="passageText"></div>
+<button class="secondary" onclick="toggleTranslation()">🌏 Dịch bài đọc sang tiếng Việt</button>
+<div id="translation" class="hidden note" style="margin-top:15px"></div>
+</article>
+<article class="panel">
+<div class="topbar"><strong id="qNumber"></strong><span id="answeredCount" class="small"></span></div>
+<div class="progress"><span id="progressBar"></span></div>
+<p class="muted small" id="motivation"></p>
+<h3 id="question"></h3>
+<div id="options"></div>
+<div id="feedback" aria-live="polite"></div>
+<div class="controls">
+<button class="secondary" id="correctBtn" onclick="showExplanation()">💡 Correct Answer</button>
+</div>
+<div id="explanation" class="hidden explanation"></div>
+<div class="nav">
+<button class="secondary" onclick="move(-1)">← Câu trước</button>
+<button onclick="move(1)" id="nextBtn">Câu tiếp →</button>
+</div>
+<div class="nav">
+<button onclick="finish(false)">✓ Check My Answers</button>
+<button class="danger" onclick="resetTest()">↻ Reset Test</button>
+</div>
+</article>
+</div>
+</div>
+<div id="matching" class="tab hidden panel">
+<h2>🧩 Match the Meanings</h2>
+<p>Nối 10 cụm từ trong bài đọc với nghĩa tiếng Việt. Hoạt động tự luyện, không ảnh hưởng điểm bài kiểm tra.</p>
+<div id="matchRows"></div>
+<div class="controls">
+<button onclick="checkMatching()">Kiểm tra nối nghĩa</button>
+<button class="secondary" onclick="renderMatching()">Làm lại</button>
+</div>
+<div id="matchFeedback" aria-live="polite"></div>
+</div>
+<div id="flashcards" class="tab hidden panel">
+<h2>🃏 Vocabulary Flashcards</h2>
+<p>10 cụm từ từ bài đọc • IPA • Nghĩa tiếng Việt • Từ gần nghĩa hoặc trái nghĩa B1.</p>
+<p id="flashIndex" class="center"></p>
+<div class="flash" id="flashCard" onclick="flipCard()" role="button" tabindex="0" aria-label="Lật thẻ từ vựng">
+</div>
+<div class="nav">
+<button class="secondary" onclick="changeCard(-1)">← Thẻ trước</button>
+<button onclick="flipCard()">Lật thẻ</button>
+<button class="secondary" onclick="changeCard(1)">Thẻ tiếp →</button>
+</div>
+</div>
+<div id="results" class="tab hidden panel center">
+<h1 class="script">Your Learning Journey</h1>
+<div id="resultContent"></div>
+<div id="certificate" class="hidden certificate"></div>
+<div class="controls" style="justify-content:center;margin-top:20px">
+<button onclick="showTab('quiz')">Xem lại bài</button>
+<button class="secondary" onclick="showTab('flashcards')">Ôn flashcards</button>
+<button class="secondary" id="printBtn" onclick="window.print()">In giấy chứng nhận</button>
+<button class="danger" onclick="resetTest()">Làm lại bài</button>
+</div>
+</div>
+<footer class="center small muted" style="padding:20px">Giáo viên thiết kế: Ms.Duyen • Learning with joy</footer>
+</section>
+</div>
+<div id="toast" class="hidden" role="status"></div>
+<script>
+"use strict";
+const passage=[
+`Steve Jobs' childhood did not begin the way most people imagine a future genius would start out. Shortly after his birth in 1955, his biological parents decided he should go up for adoption, and he was adopted by a working-class couple in California who had promised to send him to college one day. The family bonded over weekend trips to the garage, where his adoptive father taught him how electronics worked.`,
+`Jobs did attend college, but he dropped out of Reed College after only one semester, unable to see how the standard curriculum would help him. While he was sitting in on classes that <mark>fascinated</mark> him, he discovered a course on calligraphy that would later shape the elegant typography of his products.`,
+`In 1976, Jobs co-founded Apple in his family's garage, aiming to make computers accessible to ordinary people rather than only to large corporations. Over the following decades, the company released one cutting-edge product after another, from personal computers to the iPhone. Not every idea succeeded immediately, but Jobs insisted on refining each product until it felt effortless to use.`,
+`Each of <mark>these</mark> devices contributed to a genuine change in the way people worked, communicated, and were entertained. Several became instant blockbusters, selling millions of units within days of release.`,
+`Behind these impressive achievements, however, Jobs' life was not without hardship. His marriage gave him a <mark>steady</mark> personal foundation from which to lead a demanding company, but in 2003 he was diagnosed with pancreatic cancer, a disease he battled for years while continuing to run Apple. He passed away in 2011, but <u><strong>the products he helped create remain in daily use around the world, a lasting testament to a man widely regarded as a genius.</strong></u>`
+];
+const translations=[
+`Tuổi thơ của Steve Jobs không bắt đầu theo cách mà phần lớn mọi người hình dung về sự khởi đầu của một thiên tài tương lai. Không lâu sau khi ông chào đời vào năm 1955, cha mẹ ruột quyết định cho ông làm con nuôi. Ông được một cặp vợ chồng thuộc tầng lớp lao động ở California nhận nuôi; họ đã hứa sẽ cho ông học đại học vào một ngày nào đó. Gia đình trở nên gắn bó qua những chuyến vào gara vào cuối tuần, nơi cha nuôi dạy ông cách các thiết bị điện tử hoạt động.`,
+`Jobs thực sự đã vào đại học, nhưng ông bỏ học tại Reed College chỉ sau một học kỳ vì không thấy chương trình học thông thường có thể giúp ích gì cho mình. Trong khi dự thính những lớp học khiến ông say mê, ông khám phá ra một khóa học về nghệ thuật viết chữ đẹp, điều sau này định hình kiểu chữ thanh lịch trên các sản phẩm của ông.`,
+`Năm 1976, Jobs đồng sáng lập Apple trong gara của gia đình, với mục tiêu giúp máy tính trở nên dễ tiếp cận đối với người bình thường thay vì chỉ dành cho các tập đoàn lớn. Trong những thập kỷ tiếp theo, công ty liên tục tung ra những sản phẩm tiên tiến, từ máy tính cá nhân đến iPhone. Không phải ý tưởng nào cũng thành công ngay lập tức, nhưng Jobs kiên trì hoàn thiện từng sản phẩm cho đến khi người dùng cảm thấy việc sử dụng thật dễ dàng.`,
+`Mỗi thiết bị trong số này đều góp phần tạo ra sự thay đổi thực sự trong cách mọi người làm việc, giao tiếp và giải trí. Một số sản phẩm ngay lập tức trở thành những thành công vang dội, bán được hàng triệu chiếc chỉ trong vài ngày sau khi ra mắt.`,
+`Tuy nhiên, đằng sau những thành tựu ấn tượng ấy, cuộc đời Jobs không phải không có khó khăn. Cuộc hôn nhân mang lại cho ông một nền tảng cá nhân vững chắc để lãnh đạo một công ty đòi hỏi rất cao. Nhưng năm 2003, ông được chẩn đoán mắc ung thư tuyến tụy, căn bệnh mà ông đã chiến đấu trong nhiều năm trong khi vẫn tiếp tục điều hành Apple. Ông qua đời năm 2011, nhưng những sản phẩm ông góp phần tạo ra vẫn được sử dụng hằng ngày trên khắp thế giới, một minh chứng lâu dài cho một con người được nhiều người xem là thiên tài.`
+];
+const questions=[
+{n:19,q:`In paragraph 1, the writer's purpose is to __________.`,
+opts:[`criticise the couple who adopted Jobs as a child`,`compare Jobs' childhood with that of other geniuses`,`describe how ordinary Jobs' early family life actually was`,`explain why Jobs never felt close to his adoptive family`],
+vi:[`chỉ trích cặp vợ chồng đã nhận Jobs làm con nuôi`,`so sánh tuổi thơ của Jobs với tuổi thơ của các thiên tài khác`,`mô tả cuộc sống gia đình thuở nhỏ thực ra rất bình dị của Jobs`,`giải thích vì sao Jobs chưa bao giờ cảm thấy gần gũi với gia đình nuôi`],
+key:2,why:`Đoạn 1 nhấn mạnh hoàn cảnh được nhận nuôi bởi một gia đình lao động và những buổi cuối tuần học về điện tử cùng cha nuôi. Đây là cuộc sống gia đình bình dị, không phải sự khởi đầu hào nhoáng thường được tưởng tượng về thiên tài.`,evidence:`a working-class couple ... The family bonded over weekend trips to the garage.`,vocab:`working-class couple: cặp vợ chồng thuộc tầng lớp lao động; bond over: gắn bó nhờ cùng làm một việc.`,grammar:`Purpose question: xác định mục đích bao quát của toàn đoạn, không suy diễn từ một chi tiết.`},
+{n:20,q:`The word fascinated in paragraph 2 is closest in meaning to __________.`,
+opts:[`bored`,`captivated`,`confused`,`worried`],
+vi:[`chán nản`,`bị cuốn hút, say mê`,`bối rối`,`lo lắng`],
+key:1,why:`Fascinated = captivated: bị hấp dẫn, say mê. Jobs tự nguyện dự thính các lớp học khiến ông thích thú.`,evidence:`classes that fascinated him`,vocab:`fascinated /ˈfæsɪneɪtɪd/; captivated /ˈkæptɪveɪtɪd/. bored mang nghĩa trái ngược.`,grammar:`Closest in meaning: chọn từ đồng nghĩa phù hợp với ngữ cảnh.`},
+{n:21,q:`The word steady in paragraph 5 is OPPOSITE in meaning to __________.`,
+opts:[`stable`,`gentle`,`private`,`shaky`],
+vi:[`ổn định, vững chắc`,`dịu dàng, nhẹ nhàng`,`riêng tư`,`không vững, bấp bênh`],
+key:3,why:`Steady = stable (vững chắc, ổn định), trái nghĩa với shaky (không vững, thiếu ổn định).`,evidence:`a steady personal foundation`,vocab:`steady /ˈstedi/ ↔ shaky /ˈʃeɪki/; personal foundation: nền tảng cá nhân.`,grammar:`OPPOSITE in meaning: phải chọn từ trái nghĩa, không chọn từ đồng nghĩa stable.`},
+{n:22,q:`Which of the following best paraphrases the underlined sentence in paragraph 5?`,
+opts:[`The continued use of his products worldwide still reflects his lasting influence.`,`Jobs became widely regarded as a genius because his products continued to sell well after his death.`,`Jobs' products remained popular worldwide mainly because people wished to honour his achievements.`,`Every product he personally designed is still commonly used around the world.`],
+vi:[`Việc các sản phẩm của ông tiếp tục được sử dụng trên toàn thế giới vẫn phản ánh ảnh hưởng lâu dài của ông.`,`Jobs được xem là thiên tài vì sản phẩm của ông tiếp tục bán chạy sau khi ông qua đời.`,`Sản phẩm của Jobs vẫn phổ biến chủ yếu vì mọi người muốn tôn vinh thành tựu của ông.`,`Mọi sản phẩm do chính ông thiết kế vẫn được sử dụng phổ biến trên toàn thế giới.`],
+key:0,why:`Câu gốc nói rằng những sản phẩm Jobs góp phần tạo ra vẫn được dùng rộng rãi và là minh chứng cho di sản của ông. A giữ nguyên ý này, không thêm nguyên nhân hay tuyệt đối hóa.`,evidence:`remain in daily use around the world, a lasting testament`,vocab:`lasting testament: minh chứng lâu dài; influence: ảnh hưởng.`,grammar:`Paraphrase: giữ nguyên nghĩa, tránh thêm thông tin không có trong bài như continued to sell well, mainly because hoặc every product.`},
+{n:23,q:`In which paragraph does the writer give examples of products to illustrate Apple's technological development?`,
+opts:[`Paragraph 2`,`Paragraph 4`,`Paragraph 3`,`Paragraph 1`],
+vi:[`Đoạn 2`,`Đoạn 4`,`Đoạn 3`,`Đoạn 1`],
+key:2,why:`Đoạn 3 nêu rõ các ví dụ từ personal computers đến iPhone để minh họa quá trình phát triển sản phẩm công nghệ của Apple.`,evidence:`from personal computers to the iPhone`,vocab:`cutting-edge product: sản phẩm tiên tiến; technological development: sự phát triển công nghệ.`,grammar:`Scanning: tìm ví dụ cụ thể và xác định đúng vị trí đoạn văn.`},
+{n:24,q:`Which of the following statements would the writer most likely agree with?`,
+opts:[`Jobs' early setbacks had no real influence on his later success.`,`Formal education mattered more to Jobs than hands-on curiosity.`,`Apple's success depended entirely on luck rather than persistence.`,`Jobs' unconventional choices ultimately shaped his creative achievements.`],
+vi:[`Những trở ngại ban đầu không thực sự ảnh hưởng đến thành công về sau của Jobs.`,`Giáo dục chính quy quan trọng với Jobs hơn sự tò mò và trải nghiệm thực tế.`,`Thành công của Apple hoàn toàn phụ thuộc vào may mắn chứ không phải sự kiên trì.`,`Những lựa chọn khác thường của Jobs cuối cùng đã định hình các thành tựu sáng tạo của ông.`],
+key:3,why:`Việc bỏ học, dự thính lớp thư pháp và kiên trì cải tiến sản phẩm cho thấy những lựa chọn khác thường đã góp phần tạo nên thành tựu sáng tạo.`,evidence:`dropped out ... a course on calligraphy ... insisted on refining each product`,vocab:`unconventional choices: lựa chọn khác thường; persistence: sự kiên trì; creative achievements: thành tựu sáng tạo.`,grammar:`Inference: kết hợp bằng chứng từ nhiều đoạn, tránh các từ tuyệt đối như no real influence, more than, entirely.`}
+];
+const vocab=[
+[`go up for adoption`,`/ɡəʊ ʌp fər əˈdɒpʃən/`,`được đưa ra để nhận làm con nuôi`,`be put up for adoption (tương đương)`],
+[`working-class couple`,`/ˌwɜːkɪŋ ˈklɑːs ˈkʌpəl/`,`cặp vợ chồng thuộc tầng lớp lao động`,`working-class family (cụm liên quan)`],
+[`bond over`,`/bɒnd ˈəʊvə/`,`trở nên gắn bó nhờ cùng trải nghiệm`,`connect through (gần nghĩa)`],
+[`drop out of`,`/drɒp aʊt əv/`,`bỏ học, ngừng theo học`,`leave school (gần nghĩa)`],
+[`sit in on classes`,`/sɪt ɪn ɒn ˈklɑːsɪz/`,`dự thính các lớp học`,`attend as an observer (gần nghĩa)`],
+[`cutting-edge product`,`/ˌkʌtɪŋ ˈedʒ ˈprɒdʌkt/`,`sản phẩm tiên tiến`,`advanced product (gần nghĩa)`],
+[`large corporations`,`/lɑːdʒ ˌkɔːpəˈreɪʃənz/`,`các tập đoàn lớn`,`big companies (gần nghĩa)`],
+[`instant blockbusters`,`/ˈɪnstənt ˈblɒkbʌstəz/`,`những sản phẩm thành công vang dội ngay lập tức`,`immediate big hits (gần nghĩa)`],
+[`personal foundation`,`/ˈpɜːsənəl faʊnˈdeɪʃən/`,`nền tảng cá nhân`,`personal support base (gần nghĩa)`],
+[`lasting testament`,`/ˈlɑːstɪŋ ˈtestəmənt/`,`minh chứng lâu dài`,`enduring proof (gần nghĩa)`]
+];
+let index=0,answers=Array(6).fill(null),revealed=Array(6).fill(false);
+let finished=false,seconds=3000,timerId=null,sound=true,audioCtx=null;
+let flashIndex=0,flipped=false,matchOrder=[];
+const $=id=>document.getElementById(id);
+const letters="ABCD";
+const encouragement=[
+"Bạn đang tiến bộ qua từng câu hỏi!",
+"Mỗi câu trả lời là một cơ hội học thêm.",
+"Hãy tìm bằng chứng ngay trong bài đọc nhé!",
+"Tập trung vào từ khóa và ngữ cảnh.",
+"Bạn có thể học được nhiều điều từ mỗi lựa chọn.",
+"Tiếp tục khám phá – bạn đang làm rất tốt!"
+];
+function safe(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function notify(message){
+const el=$("toast");el.textContent=message;el.classList.remove("hidden");
+clearTimeout(notify.t);notify.t=setTimeout(()=>el.classList.add("hidden"),2600);
+}
+function beep(ok=true){
+if(!sound)return;
+try{
+audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();
+const o=audioCtx.createOscillator(),g=audioCtx.createGain();
+o.connect(g);g.connect(audioCtx.destination);
+o.frequency.value=ok?660:310;
+g.gain.setValueAtTime(.045,audioCtx.currentTime);
+g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+.17);
+o.start();o.stop(audioCtx.currentTime+.18);
+}catch(e){}
+}
+function toggleSound(){
+sound=!sound;$("soundBtn").textContent=sound?"🔊 Âm thanh":"🔇 Tắt tiếng";
+}
+const themes=[
+["#edf3ff","#fff","#17243e","#52617b","#315bc8","#e8efff","#d5deef"],
+["#fff2e6","#fffdf9","#443021","#70533f","#995019","#ffead6","#e8d4c3"],
+["#e9f6ee","#fff","#163c2b","#4a6658","#19754e","#dff3e6","#c9e4d4"],
+["#17243e","#243450","#f4f7ff","#cbd7ed","#9fbaff","#33466b","#526585"]
+];
+function setTheme(i){
+const t=themes[i];["--bg","--panel","--ink","--muted","--accent","--soft","--line"].forEach((v,j)=>document.documentElement.style.setProperty(v,t[j]));
+try{localStorage.setItem("readingTheme",i)}catch(e){}
+}
+function startGame(){
+const name=$("student").value.trim(),cls=$("studentClass").value.trim();
+if(!name||!cls){notify("Vui lòng nhập họ tên và lớp nhé!");return}
+$("identity").textContent=name+" • "+cls;
+$("start").classList.add("hidden");$("game").classList.remove("hidden");
+$("passageText").innerHTML=passage.map((p,i)=>`<p><strong>[${i+1}]</strong> ${p}</p>`).join("");
+$("translation").innerHTML=translations.map((p,i)=>`<p><strong>Đoạn ${i+1}.</strong> ${p}</p>`).join("");
+renderQuestion();renderMatching();renderFlash();updateTimer();
+timerId=setInterval(()=>{
+if(finished)return;
+seconds=Math.max(0,seconds-1);updateTimer();
+if(seconds===0){notify("Đã hết 50 phút. Bài làm được chấm tự động.");finish(true)}
+},1000);
+}
+function updateTimer(){
+const m=String(Math.floor(seconds/60)).padStart(2,"0"),s=String(seconds%60).padStart(2,"0");
+$("timer").textContent=m+":"+s;
+$("timer").style.color=seconds<=300?"#d35438":"var(--ink)";
+}
+function renderQuestion(){
+const q=questions[index];
+$("qNumber").textContent="Question "+q.n+" / 24";
+$("answeredCount").textContent=answers.filter(a=>a!==null).length+"/6 đã trả lời";
+$("progressBar").style.width=(answers.filter(a=>a!==null).length/6*100)+"%";
+$("motivation").textContent=encouragement[index];
+$("question").textContent=q.q;
+$("options").innerHTML=q.opts.map((o,i)=>{
+const chosen=answers[index]===i;
+const status=(revealed[index]||finished)?(i===q.key?" correct":chosen?" wrong":""):"";
+return `<button class="option${chosen?" selected":""}${status}" onclick="choose(${i})" ${finished?"disabled":""}><strong>${letters[i]}.</strong> ${safe(o)}${chosen?" ✓":""}</button>`;
+}).join("");
+const fb=$("feedback");fb.innerHTML="";
+if(revealed[index]||finished){
+const right=answers[index]===q.key;
+fb.innerHTML=`<div class="feedback"><strong>${answers[index]===null?"Chưa trả lời":right?"✓ Chính xác!":"✦ Cùng xem lại nhé!"}</strong><p>Đáp án đúng: ${letters[q.key]}. ${safe(q.opts[q.key])}</p><p class="small">${safe(q.vi[q.key])}</p></div>`;
+}else if(answers[index]!==null){
+fb.innerHTML=`<div class="feedback">Đã chọn ${letters[answers[index]]}. Nhấn “Correct Answer” để kiểm tra và tự học.</div>`;
+}
+$("correctBtn").disabled=answers[index]===null&&!finished;
+$("explanation").classList.add("hidden");
+$("nextBtn").textContent=index===5?"Xem kết quả →":"Câu tiếp →";
+if(revealed[index]||finished)buildExplanation();
+}
+function choose(i){
+if(finished)return;
+answers[index]=i;
+revealed[index]=true;
+beep(i===questions[index].key);
+renderQuestion();
+notify(i===questions[index].key?"Tuyệt vời! Bạn đã tìm đúng đáp án.":"Một cơ hội để học thêm! Hãy xem giải thích nhé.");
+}
+function buildExplanation(){
+const q=questions[index];
+$("explanation").innerHTML=`
+<h3>💡 Correct Answer: ${letters[q.key]}</h3>
+<p><strong>Giải thích:</strong> ${safe(q.why)}</p>
+<p><strong>Bằng chứng:</strong> <em>${safe(q.evidence)}</em></p>
+<h3>Dịch nghĩa 4 phương án</h3>
+${q.opts.map((o,i)=>`<p><strong>${letters[i]}.</strong> ${safe(q.vi[i])} ${i===q.key?"✓":""}</p>`).join("")}
+<p><strong>📚 Từ/cụm từ cần học:</strong> ${safe(q.vocab)}</p>
+<p><strong>📝 Kỹ năng/ngữ pháp cần nhớ:</strong> ${safe(q.grammar)}</p>`;
+}
+function showExplanation(){
+if(answers[index]===null&&!finished){notify("Hãy chọn một phương án trước nhé!");return}
+revealed[index]=true;renderQuestion();
+$("explanation").classList.remove("hidden");
+}
+function move(step){
+if(index===5&&step===1){finish(false);return}
+index=Math.max(0,Math.min(5,index+step));renderQuestion();
+}
+function toggleTranslation(){
+$("translation").classList.toggle("hidden");
+}
+function showTab(tab){
+if(tab==="results"&&!finished){notify("Hãy hoàn thành bài hoặc chọn Check My Answers trước nhé.");return}
+document.querySelectorAll(".tab").forEach(e=>e.classList.add("hidden"));
+$(tab).classList.remove("hidden");
+window.scrollTo({top:0,behavior:"smooth"});
+}
+function finish(force){
+if(finished){showTab("results");return}
+const count=answers.filter(a=>a!==null).length;
+if(!force&&count<6&&!confirm(`Bạn mới trả lời ${count}/6 câu. Những câu chưa làm sẽ tính là chưa đúng. Bạn muốn nộp bài?`))return;
+finished=true;clearInterval(timerId);
+const correct=answers.filter((a,i)=>a===questions[i].key).length;
+const score=(correct/6*10).toFixed(2);
+const passed=correct/6>.70;
+$("resultContent").innerHTML=`
+<p class="eyebrow">Completed • ${safe($("student").value.trim())}</p>
+<div class="resultnum">${correct}/6</div>
+<h2>Điểm: ${score}/10</h2>
+<p>${correct===6?"Xuất sắc! Bạn đã nắm vững nội dung bài đọc.":correct>=5?"Rất tốt! Bạn đã hoàn thành mục tiêu.":correct>=3?"Bạn đã có nền tảng tốt. Hãy xem lại những câu còn nhầm nhé.":"Mỗi lần luyện tập là một bước tiến. Hãy ôn lại từ khóa và thử sức lần nữa!"}</p>
+<p>Thời gian sử dụng: ${Math.floor((3000-seconds)/60)} phút ${((3000-seconds)%60)} giây.</p>
+<p class="muted">Đáp án: 19C • 20B • 21D • 22A • 23C • 24D</p>`;
+$("certificate").classList.toggle("hidden",!passed);
+$("printBtn").classList.toggle("hidden",!passed);
+if(passed){
+const date=new Date().toLocaleDateString("vi-VN");
+$("certificate").innerHTML=`
+<div style="font-size:28px">✦ ★ ✦</div>
+<p>ENGLISH LEARNING ACHIEVEMENT</p>
+<h2 class="script">Certificate of Completion</h2>
+<p>GIẤY CHỨNG NHẬN HOÀN THÀNH</p>
+<p>Trân trọng trao tặng học sinh</p>
+<h2>${safe($("student").value.trim())}</h2>
+<p>Lớp: ${safe($("studentClass").value.trim())}</p>
+<p>Đã hoàn thành xuất sắc</p>
+<h3>Test 01 – Reading Q19–24</h3>
+<p>Kết quả: ${correct}/6 câu đúng • ${score}/10 điểm</p>
+<p>Ngày: ${date}</p>
+<hr>
+<p>Giáo viên thiết kế</p>
+<div class="signature">Ms.Duyên</div>
+<p><strong>Ms.Duyen</strong></p>
+<p class="small">Keep learning, keep growing!</p>`;
+confetti();
+}
+beep(true);showTab("results");
+}
+function confetti(){
+if(window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+for(let i=0;i<35;i++){
+const d=document.createElement("div");d.className="confetti";
+d.style.left=Math.random()*100+"vw";
+d.style.background=["#e8b75a","#5479dc","#6dbb91","#ef829b"][i%4];
+d.style.animationDelay=Math.random()*1.3+"s";
+document.body.appendChild(d);setTimeout(()=>d.remove(),4000);
+}
+}
+function resetTest(){
+if(!confirm("Bạn muốn làm lại từ đầu? Kết quả hiện tại sẽ được xóa."))return;
+clearInterval(timerId);index=0;answers=Array(6).fill(null);revealed=Array(6).fill(false);
+finished=false;seconds=3000;flashIndex=0;flipped=false;
+$("game").classList.add("hidden");$("start").classList.remove("hidden");
+$("translation").classList.add("hidden");
+$("certificate").innerHTML="";
+window.scrollTo(0,0);
+}
+function renderMatching(){
+matchOrder=[...Array(10).keys()];
+for(let i=9;i>0;i--){let j=Math.floor(Math.random()*(i+1));[matchOrder[i],matchOrder[j]]=[matchOrder[j],matchOrder[i]]}
+$("matchRows").innerHTML=vocab.map((v,i)=>`
+<div class="matchrow"><strong>${i+1}. ${safe(v[0])}</strong>
+<select id="match${i}" aria-label="Nghĩa của ${safe(v[0])}">
+<option value="">-- Chọn nghĩa --</option>
+${matchOrder.map((j,k)=>`<option value="${j}">${letters[k]||k+1}. ${safe(vocab[j][2])}</option>`).join("")}
+</select></div>`).join("");
+$("matchFeedback").innerHTML="";
+}
+function checkMatching(){
+let correct=0,done=0;
+vocab.forEach((v,i)=>{
+const el=$("match"+i);const value=el.value;
+if(value!==""){done++;if(Number(value)===i)correct++}
+el.style.borderColor=value===""?"var(--line)":Number(value)===i?"#15945d":"#d14b57";
+});
+$("matchFeedback").innerHTML=`<div class="feedback"><strong>${correct}/10 cụm từ chính xác.</strong><p>${done<10?"Hãy thử hoàn thành cả 10 cụm nhé.":correct===10?"Tuyệt vời! Bạn đã ghi nhớ tất cả.":"Hãy xem lại những ô viền đỏ và thử tiếp nhé!"}</p></div>`;
+beep(correct===10);
+}
+function renderFlash(){
+const v=vocab[flashIndex];
+$("flashIndex").textContent=`Thẻ ${flashIndex+1}/10`;
+$("flashCard").innerHTML=flipped?
+`<strong>${safe(v[2])}</strong><p>${safe(v[3])}</p><span class="small muted">Nhấn để xem lại tiếng Anh</span>`:
+`<strong>${safe(v[0])}</strong><p>${safe(v[1])}</p><span class="small muted">Nhấn để xem nghĩa và từ liên quan</span>`;
+}
+function flipCard(){flipped=!flipped;renderFlash();beep(true)}
+function changeCard(d){flashIndex=(flashIndex+d+10)%10;flipped=false;renderFlash()}
+$("flashCard").addEventListener("keydown",e=>{
+if(e.key==="Enter"||e.key===" "){e.preventDefault();flipCard()}
+});
+document.addEventListener("keydown",e=>{
+if($("game").classList.contains("hidden")||$("quiz").classList.contains("hidden")||finished)return;
+if(["INPUT","SELECT","TEXTAREA"].includes(document.activeElement.tagName))return;
+const k=e.key.toUpperCase(),i=letters.indexOf(k);
+if(i>=0&&i<4)choose(i);
+if(e.key==="ArrowRight")move(1);
+if(e.key==="ArrowLeft")move(-1);
+});
+try{setTheme(Number(localStorage.getItem("readingTheme")||0))}catch(e){setTheme(0)}
+</script>
+  <script src="../assets/js/shared-nav.js"></script>
+</body>
+</html>
+
